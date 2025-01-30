@@ -1,27 +1,49 @@
 name: PR Checks
 
-on:
-  pull_request
+on: pull_request
 
 jobs:
+  Formatting:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Check Formatting
+        uses: actions/setup-node@v4
+        with:
+          node-version: 23
+          cache: 'npm'
+      - run: npm install
+      - run: npx prettier -c src/
+
   ESLint:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Run lint
+        uses: actions/setup-node@v4
         with:
           node-version: 23
           cache: 'npm'
+      - run: npm install
       - run: npm run lint
 
   Build:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Build
+        uses: actions/setup-node@v4
         with:
           node-version: 23
           cache: 'npm'
+      - run: npm install
       - run: npm run build

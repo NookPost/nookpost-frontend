@@ -38,7 +38,7 @@ const items = ref([
   </Menubar>
 </template>
 
-<style>
+<style scoped>
 .logo {
   margin: 0 12px 0 0;
 }
@@ -47,5 +47,13 @@ div.toolbar-inline {
   display: flex;
   gap: 10px;
   align-items: center;
+}
+
+a:not(.router-link-exact-active) {
+  color: var(--color-text);
+}
+
+a:hover {
+  background-color: transparent;
 }
 </style>

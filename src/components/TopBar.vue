@@ -1,26 +1,37 @@
 <script setup lang="ts">
 import { Menubar, InputIcon, IconField, InputText, Avatar } from 'primevue'
-import { ref } from 'vue'
-const items = ref([
+interface Page {
+  display_name: string
+  path: string
+  icon?: string | undefined
+}
+const pages: Page[] = [
   {
-    name: 'Home',
+    display_name: 'Home',
     path: '/',
+    icon: 'pi pi-home'
   },
   {
-    name: 'About',
+    display_name: 'About',
     path: '/about',
+    icon: 'pi pi-info-circle',
   },
-])
+]
 </script>
 
 <template>
-  <Menubar :model="items">
+  <Menubar :model="pages">
     <template #start>
       <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" />
     </template>
 
     <template #item="{ item }">
-      <RouterLink v-bind:to="item.path">{{ item.name }}</RouterLink>
+        <span class="nav-item">
+            <RouterLink v-bind:to.="item.path">
+              <i v-if="item.icon" v-bind:class="item.icon"></i>
+              {{ item.display_name }}
+          </RouterLink>
+        </span>
     </template>
 
     <template #end>
@@ -41,6 +52,12 @@ const items = ref([
 <style scoped>
 .logo {
   margin: 0 12px 0 0;
+}
+
+span.nav-item a {
+    display: flex;
+    align-items: center;
+    gap: 4px;
 }
 
 div.toolbar-inline {

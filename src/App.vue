@@ -2,11 +2,11 @@
 import { RouterView } from 'vue-router'
 import HelloWorld from './components/HelloWorld.vue'
 import 'primeicons/primeicons.css'
-import TopBar from './components/TopBar.vue';
+import TopBar from './components/TopBar.vue'
 </script>
 
 <template>
-  <TopBar/>
+  <TopBar />
   <header>
     <div class="wrapper">
       <HelloWorld msg="You did it!" />

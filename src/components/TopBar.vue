@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { Menubar, InputIcon, IconField, InputText, Avatar } from 'primevue'
+import { Menubar, Avatar } from 'primevue'
+import SearchBar from './SearchBar.vue';
 interface Page {
   display_name: string
   path: string
@@ -36,12 +37,7 @@ const pages: Page[] = [
 
     <template #end>
       <div class="toolbar-inline">
-        <IconField>
-          <InputText placeholder="Search" type="text" />
-          <InputIcon>
-            <i class="pi pi-search" />
-          </InputIcon>
-        </IconField>
+        <SearchBar></SearchBar>
 
         <Avatar></Avatar>
       </div>

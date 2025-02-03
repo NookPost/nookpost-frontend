@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Menubar, Button, TieredMenu } from 'primevue'
-import { type MenuItem } from 'primevue/menuitem'
+import type { MenuItem } from 'primevue/menuitem'
 import SearchBar from './SearchBar.vue'
 import { authStore } from '@/store/auth'
 import { ref } from 'vue'

@@ -1,6 +1,9 @@
 <script setup lang="ts">
-import { Menubar, Avatar } from 'primevue'
-import SearchBar from './SearchBar.vue'
+import { Menubar, Button, TieredMenu } from 'primevue';
+import { type MenuItem } from 'primevue/menuitem';
+import SearchBar from './SearchBar.vue';
+import { authStore } from '@/store/auth';
+import { ref } from 'vue';
 interface Page {
   display_name: string
   path: string
@@ -18,6 +21,27 @@ const pages: Page[] = [
     icon: 'pi pi-info-circle',
   },
 ]
+
+const auth = authStore();
+
+const menu = ref();
+const toggle = (event: MouseEvent) => {
+  menu.value.toggle(event);
+};
+
+const avatarMenu = ref(<MenuItem[]>[
+  {
+    label: "1"
+  },
+  {
+    label: "2"
+  },
+  {
+    label: "Logout",
+    icon: "pi pi-sign-out",
+    command: () => {auth.logout()},
+  },
+]);
 </script>
 
 <template>
@@ -38,8 +62,11 @@ const pages: Page[] = [
     <template #end>
       <div class="toolbar-inline">
         <SearchBar></SearchBar>
-
-        <Avatar></Avatar>
+        <Button v-if="!auth.isLoggedIn" v-on:click="auth.login()">Login</Button>
+        <span v-else>
+          <Button icon="pi pi-user" @click="toggle" variant="outlined"></Button>
+          <TieredMenu ref="menu" id="overlay_tmenu" :model="avatarMenu" popup />
+        </span>
       </div>
     </template>
   </Menubar>

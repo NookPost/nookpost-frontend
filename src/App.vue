@@ -6,7 +6,7 @@ import TopBar from './components/TopBar.vue'
 </script>
 
 <template>
-  <TopBar />
+  <TopBar v-if="!$route.meta.hideNavbar" />
   <header>
     <div class="wrapper">
       <HelloWorld msg="You did it!" />

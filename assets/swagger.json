@@ -1,0 +1,166 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "nookpost-backend",
+    "version": "1.0"
+  },
+  "paths": {
+    "/authentication/login": {
+      "post": {
+        "tags": [
+          "Authentication"
+        ],
+        "summary": "Authenticates the user and returns an access token.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AuthenticationLoginRequestBody"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthenticationLoginResponseBody"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/users/create": {
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Creates a new user.u",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UsersCreateRequestBody"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UsersCreateResponseBody"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AuthenticationLoginRequestBody": {
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string",
+            "description": "The name of the user to log in.",
+            "nullable": true
+          },
+          "password": {
+            "type": "string",
+            "description": "The users password",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "The body of a login request."
+      },
+      "AuthenticationLoginResponseBody": {
+        "type": "object",
+        "properties": {
+          "token": {
+            "type": "string",
+            "description": "The token that can be used for authentication.",
+            "nullable": true
+          },
+          "expiryTimestamp": {
+            "type": "integer",
+            "description": "The time in seconds the token expires on.",
+            "format": "int64"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Represents a token object in the response to a Login request"
+      },
+      "UsersCreateRequestBody": {
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string",
+            "description": "The name of the user to log in.",
+            "nullable": true
+          },
+          "password": {
+            "type": "string",
+            "description": "The users password",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "The request body of a user create request"
+      },
+      "UsersCreateResponseBody": {
+        "type": "object",
+        "properties": {
+          "token": {
+            "type": "string",
+            "description": "The token that can be used for authentication.",
+            "nullable": true
+          },
+          "expiryTimestamp": {
+            "type": "integer",
+            "description": "The time in seconds the token expires on.",
+            "format": "int64"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Represents a token object in the response to a user create request"
+      }
+    },
+    "securitySchemes": {
+      "Bearer": {
+        "type": "apiKey",
+        "description": "JWT Authorization header using the Bearer scheme.",
+        "name": "Authorization",
+        "in": "header"
+      }
+    }
+  },
+  "security": [
+    {
+      "Bearer": [ ]
+    }
+  ]
+}

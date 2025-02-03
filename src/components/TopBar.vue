@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { Menubar, Button, TieredMenu } from 'primevue';
-import { type MenuItem } from 'primevue/menuitem';
-import SearchBar from './SearchBar.vue';
-import { authStore } from '@/store/auth';
-import { ref } from 'vue';
+import { Menubar, Button, TieredMenu } from 'primevue'
+import { type MenuItem } from 'primevue/menuitem'
+import SearchBar from './SearchBar.vue'
+import { authStore } from '@/store/auth'
+import { ref } from 'vue'
 interface Page {
   display_name: string
   path: string
@@ -22,26 +22,28 @@ const pages: Page[] = [
   },
 ]
 
-const auth = authStore();
+const auth = authStore()
 
-const menu = ref();
+const menu = ref()
 const toggle = (event: MouseEvent) => {
-  menu.value.toggle(event);
-};
+  menu.value.toggle(event)
+}
 
 const avatarMenu = ref(<MenuItem[]>[
   {
-    label: "1"
+    label: '1',
   },
   {
-    label: "2"
+    label: '2',
   },
   {
-    label: "Logout",
-    icon: "pi pi-sign-out",
-    command: () => {auth.logout()},
+    label: 'Logout',
+    icon: 'pi pi-sign-out',
+    command: () => {
+      auth.logout()
+    },
   },
-]);
+])
 </script>
 
 <template>

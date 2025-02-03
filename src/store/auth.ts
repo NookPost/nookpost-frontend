@@ -5,8 +5,8 @@ import { computed, ref, type Ref } from 'vue'
 const authData = defineStore('authData', () => {
   const loggedIn: Ref<boolean, boolean> = ref(false)
 
-  if (localStorage.getItem("loggedIn")) {
-    loggedIn.value = (localStorage.getItem("loggedIn") === 'true');
+  if (localStorage.getItem('loggedIn')) {
+    loggedIn.value = localStorage.getItem('loggedIn') === 'true'
   }
 
   return { loggedIn }
@@ -34,5 +34,4 @@ export const authStore = defineStore('authStore', {
       data.loggedIn = false
     },
   },
-
 })

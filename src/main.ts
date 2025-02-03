@@ -1,6 +1,7 @@
 import './assets/main.css'
 
 import { createApp } from 'vue'
+import { createPinia } from 'pinia'
 import PrimeVue from 'primevue/config'
 import Aura from '@primevue/themes/aura'
 import App from './App.vue'
@@ -11,6 +12,9 @@ import { definePreset } from '@primevue/themes'
 const app = createApp(App)
 
 app.use(router)
+
+const pinia = createPinia()
+app.use(pinia)
 
 const PrimeVueTheme = definePreset(Aura, {
   primitive: {

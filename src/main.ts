@@ -8,7 +8,7 @@ import App from './App.vue'
 import router from './router'
 import '@primevue/icons'
 import { definePreset } from '@primevue/themes'
-import ToastService from 'primevue/toastservice';
+import ToastService from 'primevue/toastservice'
 
 const app = createApp(App)
 
@@ -17,7 +17,7 @@ app.use(router)
 const pinia = createPinia()
 app.use(pinia)
 
-app.use(ToastService);
+app.use(ToastService)
 
 const PrimeVueTheme = definePreset(Aura, {
   primitive: {

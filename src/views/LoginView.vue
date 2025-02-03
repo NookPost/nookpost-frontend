@@ -5,25 +5,31 @@ import { toRaw, ref } from 'vue'
 import { authStore } from '@/store/auth'
 import { useRouter } from 'vue-router'
 
-const isLoading = ref(false);
+const isLoading = ref(false)
 
-const router = useRouter();
+const router = useRouter()
 
-const toast = useToast();
+const toast = useToast()
 
 async function onFormSubmit(event: FormSubmitEvent) {
-  isLoading.value = true;
+  isLoading.value = true
   const formData = toRaw(event.states)
   const auth = authStore()
   const success: boolean = await auth.login({
     username: formData.username.value,
     password: formData.password.value,
   })
-  if(success) {
-    router.push('/');
+  if (success) {
+    router.push('/')
   } else {
-    isLoading.value = false;
-    toast.add({ severity: 'error', summary: 'Error', detail: 'Login failed', life: 3000, group: 'bottom-center' });
+    isLoading.value = false
+    toast.add({
+      severity: 'error',
+      summary: 'Error',
+      detail: 'Login failed',
+      life: 3000,
+      group: 'bottom-center',
+    })
   }
 }
 </script>

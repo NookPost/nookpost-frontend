@@ -44,14 +44,14 @@ export const authStore = defineStore('authStore', {
       const data = authData()
       const configuration = getAPIConfig(false)
       const authAPI = new AuthenticationApi(configuration)
-      let response;
+      let response
       try {
         response = await authAPI.authenticationLoginPost(<AuthenticationLoginRequestBody>{
           username: username,
           password: password,
         })
       } catch (err) {
-        if(err instanceof AxiosError) {
+        if (err instanceof AxiosError) {
           response = err.response
         } else {
           throw err

@@ -6,7 +6,7 @@ import { authStore } from '@/store/auth'
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 const router = useRouter()
-const toast = useToast();
+const toast = useToast()
 
 interface Page {
   display_name: string
@@ -46,7 +46,13 @@ const avatarMenu = ref(<MenuItem[]>[
     icon: 'pi pi-sign-out',
     command: () => {
       auth.logout()
-      toast.add({ severity: 'info', summary: 'Info', detail: 'Logout successful', life: 3000, group: 'top-right' });
+      toast.add({
+        severity: 'info',
+        summary: 'Info',
+        detail: 'Logout successful',
+        life: 3000,
+        group: 'top-right',
+      })
     },
   },
 ])

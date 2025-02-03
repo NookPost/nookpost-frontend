@@ -681,6 +681,10 @@ app.use(PrimeVue, {
   theme: {
     preset: PrimeVueTheme,
   },
+  // uncomment the following and set <html> tag class to 'app-dark' to disable light mode
+  // options: {
+  //   darkModeSelector: '.app-dark'
+  // }
 })
 
 app.mount('#app')

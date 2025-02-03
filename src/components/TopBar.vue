@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Menubar, Avatar } from 'primevue'
-import SearchBar from './SearchBar.vue';
+import SearchBar from './SearchBar.vue'
 interface Page {
   display_name: string
   path: string
@@ -10,7 +10,7 @@ const pages: Page[] = [
   {
     display_name: 'Home',
     path: '/',
-    icon: 'pi pi-home'
+    icon: 'pi pi-home',
   },
   {
     display_name: 'About',
@@ -27,12 +27,12 @@ const pages: Page[] = [
     </template>
 
     <template #item="{ item }">
-        <span class="nav-item">
-            <RouterLink v-bind:to.="item.path">
-              <i v-if="item.icon" v-bind:class="item.icon"></i>
-              {{ item.display_name }}
-          </RouterLink>
-        </span>
+      <span class="nav-item">
+        <RouterLink v-bind:to.="item.path">
+          <i v-if="item.icon" v-bind:class="item.icon"></i>
+          {{ item.display_name }}
+        </RouterLink>
+      </span>
     </template>
 
     <template #end>
@@ -51,9 +51,9 @@ const pages: Page[] = [
 }
 
 span.nav-item a {
-    display: flex;
-    align-items: center;
-    gap: 4px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
 }
 
 div.toolbar-inline {

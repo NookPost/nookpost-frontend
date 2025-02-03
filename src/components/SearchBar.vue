@@ -24,5 +24,3 @@ function onFormSubmit(event: KeyboardEvent) {
     </InputIcon>
   </IconField>
 </template>
-
-<script lang="ts"></script>

@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { Form, type FormSubmitEvent } from '@primevue/forms'
-import { InputText, Password, Button, useToast } from 'primevue'
+import { Form, type FormResolverOptions, type FormSubmitEvent } from '@primevue/forms'
+import { InputText, Password, Button, useToast, Message } from 'primevue'
 import { toRaw, ref } from 'vue'
 import { authStore } from '@/store/auth'
 import { useRouter } from 'vue-router'
@@ -12,24 +12,50 @@ const router = useRouter()
 const toast = useToast()
 
 async function onFormSubmit(event: FormSubmitEvent) {
-  isLoading.value = true
-  const formData = toRaw(event.states)
-  const auth = authStore()
-  const success: boolean = await auth.login({
-    username: formData.username.value,
-    password: formData.password.value,
-  })
-  if (success) {
-    router.push('/')
-  } else {
-    isLoading.value = false
-    toast.add({
-      severity: 'error',
-      summary: 'Error',
-      detail: 'Login failed',
-      life: 3000,
-      group: 'bottom-center',
+  if(event.valid){
+    isLoading.value = true
+    const formData = toRaw(event.states)
+    const auth = authStore()
+    const success: boolean = await auth.login({
+      username: formData.username.value,
+      password: formData.password.value,
     })
+    if (success) {
+      router.push('/')
+    } else {
+      isLoading.value = false
+      toast.add({
+        severity: 'error',
+        summary: 'Error',
+        detail: 'Login failed',
+        life: 3000,
+        group: 'bottom-center',
+      })
+    }
+  }
+}
+
+const resolver = ({ values }: FormResolverOptions) => {
+  const errors: Promise<Record<string, unknown>> | Record<string, unknown> | undefined = {}
+
+  if (!values.username) {
+    errors.username = [{ message: 'Username is required.' }]
+  }
+
+  if (!values.password) {
+    errors.password = [{ message: 'Password is required.' }]
+  }
+
+  if (!values.repeat_password) {
+    errors.repeat_password = [{ message: 'Repeat password is required.' }]
+  }
+
+  if (values.repeat_password !== values.password) {
+    errors.repeat_password = [{ message: 'Repeat password needs to match.' }]
+  }
+
+  return {
+    errors,
   }
 }
 </script>
@@ -37,43 +63,34 @@ async function onFormSubmit(event: FormSubmitEvent) {
 <template>
   <div class="form-center outer">
     <div class="form-center inner">
-      <Form class="flex flex-col gap-4 fit" @submit="onFormSubmit">
+      <Form class="flex flex-col gap-4 fit" v-slot="$form" :resolver @submit="onFormSubmit">
         <img src="/src/assets/logo.svg" />
-        <InputText name="username" placeholder="Username" />
-        <Password name="password" placeholder="Password" :feedback="false" />
-        <Button type="submit" :is-loading="isLoading" :loading="isLoading" label="Submit" />
+        <div class="flex flex-col gap-1">
+          <InputText name="username" placeholder="Username" />
+          <Message v-if="$form.username?.invalid" severity="error" size="small" variant="simple">{{
+            $form.username.error.message
+          }}</Message>
+        </div>
+        <div class="flex flex-col gap-1 form-password">
+          <Password
+            name="password"
+            placeholder="Password"
+            :feedback="false"
+          />
+          <Message v-if="$form.password?.invalid" severity="error" size="small" variant="simple">{{
+            $form.password.error.message
+          }}</Message>
+        </div>
+        <Button type="submit" :is-loading="isLoading" :loading="isLoading" label="Login" />
       </Form>
     </div>
     <RouterLink to="/register">Register</RouterLink>
   </div>
 </template>
 
+<style src="/src/assets/form-center.css"></style>
+
 <style scoped>
-.flex {
-  display: flex;
-}
-.flex-col {
-  flex-direction: column;
-}
-.gap-1 {
-  gap: 0.25rem;
-}
-.gap-4 {
-  gap: 1rem;
-}
-.form-center.outer {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-.form-center.inner {
-  border: 1px solid var(--p-inputtext-border-color);
-  border-radius: var(--p-inputtext-border-radius);
-  padding: 25px;
-  background-color: var(--vt-c-divider-dark-2);
-}
 a:hover {
   background-color: transparent;
 }

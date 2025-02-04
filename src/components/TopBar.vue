@@ -39,7 +39,7 @@ const avatarMenu = ref(<MenuItem[]>[
   {
     label: 'Profile',
     icon: PrimeIcons.USER,
-    route: '/my-profile',
+    route: '/myprofile',
   },
   {
     label: 'Settings',
@@ -97,7 +97,6 @@ const avatarMenu = ref(<MenuItem[]>[
               </RouterLink>
               <a
                 v-else
-                v-ripple
                 :href="item.url"
                 :target="item.target"
                 v-bind="props.action"

@@ -36,10 +36,14 @@ const toggle = (event: MouseEvent) => {
 
 const avatarMenu = ref(<MenuItem[]>[
   {
-    label: '1',
+    label: 'Profile',
+    icon: 'pi pi-user',
+    route: '/my-profile'
   },
   {
-    label: '2',
+    label: 'Settings',
+    icon: 'pi pi-cog',
+    route: '/settings'
   },
   {
     label: 'Logout',
@@ -79,7 +83,18 @@ const avatarMenu = ref(<MenuItem[]>[
         <Button v-if="!auth.isLoggedIn" v-on:click="router.push('/login')">Login</Button>
         <span v-else>
           <Button icon="pi pi-user" @click="toggle" variant="outlined"></Button>
-          <TieredMenu ref="menu" id="overlay_tmenu" :model="avatarMenu" popup />
+          <TieredMenu ref="menu" id="overlay_tmenu" :model="avatarMenu" popup>
+            <template #item="{ item, props }">
+                <RouterLink v-if="item.route" v-bind:to.="item.route" class="p-tieredmenu-item-link" tabindex="-1">
+                  <span class="p-tieredmenu-item-icon" :class="item.icon" />
+                  <span class="p-tieredmenu-item-label">{{ item.label }}</span>
+                </RouterLink>
+                <a v-else v-ripple :href="item.url" :target="item.target" v-bind="props.action" class="p-tieredmenu-item-link" tabindex="-1">
+                    <span class="p-tieredmenu-item-icon" :class="item.icon" />
+                    <span class="p-tieredmenu-item-label">{{ item.label }}</span>
+                </a>
+            </template>
+          </TieredMenu>
         </span>
       </div>
     </template>
@@ -103,7 +118,7 @@ div.toolbar-inline {
   align-items: center;
 }
 
-a:not(.router-link-exact-active) {
+a:not(.router-link-exact-active):not(.p-tieredmenu-item-link) {
   color: var(--color-text);
 }
 

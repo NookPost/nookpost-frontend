@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { Tag } from 'primevue'
 import { ref } from 'vue'
+import { RouterLink } from 'vue-router'
 
 const readMore = ref(false)
 
@@ -17,32 +18,38 @@ function getShortenedBody(input: string): string {
 <style scoped src="/src/assets/post.css" />
 
 <template>
-  <div class="post-border">
-    <h1 class="post-title">{{ title }}</h1>
-    <div class="post-meta">
-      <h2>
-        created&nbsp;by
-        <span class="post-author">{{ author.replace(' ', '&nbsp;') }}</span> on&nbsp;<span
-          class="post-created"
-          >{{ new Date(created * 1000).toLocaleDateString() }}</span
-        >
-      </h2>
-      <div class="post-tags">
-        <Tag class="post-category">{{ category }}</Tag>
+  <RouterLink :to="'/post/' + uuid" class="post-preview-router">
+    <div class="post-border preview">
+      <h1 class="post-title">{{ title }}</h1>
+      <div class="post-meta">
+        <h2>
+          created&nbsp;by
+          <span class="post-author">{{ author.replace(' ', '&nbsp;') }}</span> on&nbsp;<span
+            class="post-created"
+            >{{ new Date(created * 1000).toLocaleDateString() }}</span
+          >
+        </h2>
+        <div class="post-tags">
+          <Tag class="post-category">{{ category }}</Tag>
+        </div>
+      </div>
+      <div class="post-body">
+        <p>
+          {{ getShortenedBody(body) }}
+          <span v-if="readMore" class="post-readmore">[...]</span>
+        </p>
       </div>
     </div>
-    <div class="post-body">
-      <p>
-        {{ getShortenedBody(body) }}
-        <span v-if="readMore" class="post-readmore">[...]</span>
-      </p>
-    </div>
-  </div>
+  </RouterLink>
 </template>
 
 <script lang="ts">
 export default {
   props: {
+    uuid: {
+      type: String,
+      required: true,
+    },
     title: {
       type: String,
       required: true,

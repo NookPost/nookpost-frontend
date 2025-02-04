@@ -5,6 +5,14 @@ div.post-border {
   background-color: var(--vt-c-divider-dark-2);
 }
 
+.post-preview-router {
+  /*
+    Post preview width set to 400px min and 800px max,
+    between it is set to 50% - gap/2 so that 2 posts fit side by side before max is reached
+  */
+  width: clamp(400px, calc(50% - (var(--post-preview-gap) / 2)), 800px);
+}
+
 .post-title {
   margin-bottom: 3px;
   font-size: 35px;
@@ -18,6 +26,7 @@ div.post-border {
   display: flex;
   flex-direction: row;
   align-items: center;
+  color: var(--color-text);
 }
 
 .post-meta h2 {

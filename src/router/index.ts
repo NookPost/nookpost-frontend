@@ -28,7 +28,7 @@ const router = createRouter({
       component: () => import('../views/ImpressumView.vue'),
     },
     {
-      path: '/post',
+      path: '/post/:id',
       name: 'post',
       component: () => import('../views/PostDetailView.vue'),
     },

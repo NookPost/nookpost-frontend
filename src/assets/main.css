@@ -1,5 +1,9 @@
 @import './base.css';
 
+:root {
+  --post-preview-gap: 20px;
+}
+
 #app {
   margin: 0 auto;
   padding: 0.5rem;
@@ -13,6 +17,16 @@ a,
   color: #5092c0;
   transition: 0.4s;
   padding: 3px;
+}
+
+.post-flex {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--post-preview-gap);
+  justify-content: center;
+  margin: auto;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 @media (hover: hover) {

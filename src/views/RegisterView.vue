@@ -11,11 +11,16 @@ const router = useRouter()
 
 const toast = useToast()
 
+const auth = authStore()
+
+if (auth.isLoggedIn) {
+  router.push('/')
+}
+
 async function onFormSubmit(event: FormSubmitEvent) {
   if (event.valid) {
     isLoading.value = true
     const formData = toRaw(event.states)
-    const auth = authStore()
     const success: boolean = await auth.register({
       username: formData.username.value,
       password: formData.password.value,

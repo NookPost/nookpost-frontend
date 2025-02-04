@@ -72,10 +72,7 @@ const resolver = ({ values }: FormResolverOptions) => {
           }}</Message>
         </div>
         <div class="flex flex-col gap-1 form-password">
-          <Password
-            name="password"
-            placeholder="Password"
-          />
+          <Password name="password" placeholder="Password" />
           <Message v-if="$form.password?.invalid" severity="error" size="small" variant="simple">{{
             $form.password.error.message
           }}</Message>

@@ -12,7 +12,7 @@ const router = useRouter()
 const toast = useToast()
 
 async function onFormSubmit(event: FormSubmitEvent) {
-  if(event.valid){
+  if (event.valid) {
     isLoading.value = true
     const formData = toRaw(event.states)
     const auth = authStore()
@@ -72,11 +72,7 @@ const resolver = ({ values }: FormResolverOptions) => {
           }}</Message>
         </div>
         <div class="flex flex-col gap-1 form-password">
-          <Password
-            name="password"
-            placeholder="Password"
-            :feedback="false"
-          />
+          <Password name="password" placeholder="Password" :feedback="false" />
           <Message v-if="$form.password?.invalid" severity="error" size="small" variant="simple">{{
             $form.password.error.message
           }}</Message>

@@ -20,13 +20,14 @@ a,
 }
 
 .post-flex {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--post-preview-gap);
+  padding: 0 20px;
+  display: grid;
+  grid-gap: var(--post-preview-gap);
   justify-content: center;
-  margin: auto;
-  margin-left: auto;
-  margin-right: auto;
+  grid-template-columns: repeat(
+    auto-fit,
+    clamp(400px, calc(50% - (var(--post-preview-gap) / 2)), 800px)
+  );
 }
 
 @media (hover: hover) {

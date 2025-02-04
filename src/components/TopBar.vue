@@ -38,12 +38,12 @@ const avatarMenu = ref(<MenuItem[]>[
   {
     label: 'Profile',
     icon: 'pi pi-user',
-    route: '/my-profile'
+    route: '/my-profile',
   },
   {
     label: 'Settings',
     icon: 'pi pi-cog',
-    route: '/settings'
+    route: '/settings',
   },
   {
     label: 'Logout',
@@ -85,14 +85,27 @@ const avatarMenu = ref(<MenuItem[]>[
           <Button icon="pi pi-user" @click="toggle" variant="outlined"></Button>
           <TieredMenu ref="menu" id="overlay_tmenu" :model="avatarMenu" popup>
             <template #item="{ item, props }">
-                <RouterLink v-if="item.route" v-bind:to.="item.route" class="p-tieredmenu-item-link" tabindex="-1">
-                  <span class="p-tieredmenu-item-icon" :class="item.icon" />
-                  <span class="p-tieredmenu-item-label">{{ item.label }}</span>
-                </RouterLink>
-                <a v-else v-ripple :href="item.url" :target="item.target" v-bind="props.action" class="p-tieredmenu-item-link" tabindex="-1">
-                    <span class="p-tieredmenu-item-icon" :class="item.icon" />
-                    <span class="p-tieredmenu-item-label">{{ item.label }}</span>
-                </a>
+              <RouterLink
+                v-if="item.route"
+                v-bind:to.="item.route"
+                class="p-tieredmenu-item-link"
+                tabindex="-1"
+              >
+                <span class="p-tieredmenu-item-icon" :class="item.icon" />
+                <span class="p-tieredmenu-item-label">{{ item.label }}</span>
+              </RouterLink>
+              <a
+                v-else
+                v-ripple
+                :href="item.url"
+                :target="item.target"
+                v-bind="props.action"
+                class="p-tieredmenu-item-link"
+                tabindex="-1"
+              >
+                <span class="p-tieredmenu-item-icon" :class="item.icon" />
+                <span class="p-tieredmenu-item-label">{{ item.label }}</span>
+              </a>
             </template>
           </TieredMenu>
         </span>

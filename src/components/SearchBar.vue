@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { InputIcon, IconField, InputText } from 'primevue'
+import { PrimeIcons } from '@primevue/core/api'
 import { useRouter } from 'vue-router'
 let searchstring: string | undefined
 const router = useRouter()
@@ -20,7 +21,7 @@ function onFormSubmit(event: KeyboardEvent) {
       @keyup="onFormSubmit"
     />
     <InputIcon>
-      <i class="pi pi-search" />
+      <i :class="PrimeIcons.SEARCH" />
     </InputIcon>
   </IconField>
 </template>

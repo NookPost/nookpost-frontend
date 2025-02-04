@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { Menubar, Button, TieredMenu, useToast } from 'primevue'
+import { PrimeIcons } from '@primevue/core/api'
 import type { MenuItem } from 'primevue/menuitem'
 import SearchBar from './SearchBar.vue'
 import { authStore } from '@/store/auth'
@@ -18,12 +19,12 @@ const pages: Page[] = [
   {
     display_name: 'Home',
     path: '/',
-    icon: 'pi pi-home',
+    icon: PrimeIcons.HOME,
   },
   {
     display_name: 'About',
     path: '/about',
-    icon: 'pi pi-info-circle',
+    icon: PrimeIcons.INFO_CIRCLE,
   },
 ]
 
@@ -37,17 +38,17 @@ const toggle = (event: MouseEvent) => {
 const avatarMenu = ref(<MenuItem[]>[
   {
     label: 'Profile',
-    icon: 'pi pi-user',
+    icon: PrimeIcons.USER,
     route: '/my-profile',
   },
   {
     label: 'Settings',
-    icon: 'pi pi-cog',
+    icon: PrimeIcons.COG,
     route: '/settings',
   },
   {
     label: 'Logout',
-    icon: 'pi pi-sign-out',
+    icon: PrimeIcons.SIGN_OUT,
     command: () => {
       auth.logout()
       toast.add({
@@ -82,7 +83,7 @@ const avatarMenu = ref(<MenuItem[]>[
         <SearchBar></SearchBar>
         <Button v-if="!auth.isLoggedIn" v-on:click="router.push('/login')">Login</Button>
         <span v-else>
-          <Button icon="pi pi-user" @click="toggle" variant="outlined"></Button>
+          <Button :icon="PrimeIcons.USER" @click="toggle" variant="outlined"></Button>
           <TieredMenu ref="menu" id="overlay_tmenu" :model="avatarMenu" popup>
             <template #item="{ item, props }">
               <RouterLink

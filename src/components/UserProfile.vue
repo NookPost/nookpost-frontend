@@ -39,25 +39,29 @@ const posts: Post[] = [
 <template>
   <span class="profile-grid">
     <div class="profile-border">
-      <div class="profile-avatar">
-        <Avatar :image="profile.profilePictureBase64" shape="circle" size="xlarge" />
-      </div>
-      <div class="profile-head">
-        <h1 class="profile-username">
-          {{ profile.displayname }}
-        </h1>
-        <Button
-          :icon="PrimeIcons.ENVELOPE"
-          variant="link"
-          as="a"
-          :href="'mailto:' + profile.email"
-          rounded
-          severity="secondary"
-        />
-      </div>
-      <h2>{{ profile.username }}</h2>
-      <Fieldset legend="Tagline">{{ profile.tagline }}</Fieldset>
-      <Fieldset legend="Bio">{{ profile.bio }}</Fieldset>
+      <span class="profile-metadata">
+        <div class="profile-avatar">
+          <Avatar :image="profile.profilePictureBase64" shape="circle" size="xlarge" />
+        </div>
+        <div class="profile-head">
+          <div>
+            <h1 class="profile-username">
+              {{ profile.displayname }}
+            </h1>
+            <h2>{{ profile.username }}</h2>
+          </div>
+          <Button
+            :icon="PrimeIcons.ENVELOPE"
+            variant="link"
+            as="a"
+            :href="'mailto:' + profile.email"
+            rounded
+            severity="secondary"
+          />
+        </div>
+        <Fieldset legend="Tagline">{{ profile.tagline }}</Fieldset>
+        <Fieldset legend="Bio">{{ profile.bio }}</Fieldset>
+      </span>
     </div>
     <div class="profile-post-preview profile-border">
       <!-- Display last 3 Posts -->

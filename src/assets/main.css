@@ -19,17 +19,6 @@ a,
   padding: 3px;
 }
 
-.post-flex {
-  padding: 0 20px;
-  display: grid;
-  grid-gap: var(--post-preview-gap);
-  justify-content: center;
-  grid-template-columns: repeat(
-    auto-fit,
-    clamp(400px, calc(50% - (var(--post-preview-gap) / 2)), 800px)
-  );
-}
-
 @media (hover: hover) {
   a:hover {
     background-color: hsla(160, 100%, 37%, 0.2);

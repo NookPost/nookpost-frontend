@@ -22,9 +22,23 @@ const pages: Page[] = [
     icon: PrimeIcons.HOME,
   },
   {
+    display_name: 'Categories',
+    path: '/categories',
+    icon: PrimeIcons.TH_LARGE,
+  },
+  {
     display_name: 'About',
     path: '/about',
     icon: PrimeIcons.INFO_CIRCLE,
+  },
+  {
+    display_name: 'Privacy',
+    path: '/privacy-policy',
+    icon: PrimeIcons.KEY,
+  },
+  {
+    display_name: 'Impressum',
+    path: '/impressum',
   },
 ]
 

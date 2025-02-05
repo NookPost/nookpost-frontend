@@ -25,6 +25,10 @@ div.post-border {
   color: var(--color-text);
 }
 
+.post-meta.detail {
+  margin-bottom: 10px;
+}
+
 .post-meta h2 {
   font-weight: bold;
 }
@@ -40,4 +44,9 @@ div.post-border {
 
 .post-readmore {
   color: var(--color-text);
+}
+
+.post-banner, .post-banner * {
+  width: 100%;
+  border-radius: var(--p-inputtext-border-radius);
 }

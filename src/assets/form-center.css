@@ -1,0 +1,17 @@
+.form-center.outer {
+  height: calc(100vh - 2 * var(--app-padding));
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.form-center.inner {
+  min-width: 300px;
+  border: 1px solid var(--p-inputtext-border-color);
+  border-radius: var(--p-inputtext-border-radius);
+  padding: 25px;
+  background-color: var(--vt-c-divider-dark-2);
+}
+.form-password input {
+  width: 100%;
+}

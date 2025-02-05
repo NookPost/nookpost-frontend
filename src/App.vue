@@ -1,19 +1,18 @@
 <script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router'
+import { RouterView } from 'vue-router'
 import HelloWorld from './components/HelloWorld.vue'
+import 'primeicons/primeicons.css'
+import TopBar from './components/TopBar.vue'
+import { Toast } from 'primevue'
 </script>
 
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
-
+  <Toast position="top-right" group="top-right" />
+  <Toast position="bottom-center" group="bottom-center" />
+  <TopBar v-if="!$route.meta.hideNavbar" />
+  <header v-if="!$route.meta.hideNavbar">
     <div class="wrapper">
       <HelloWorld msg="You did it!" />
-
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
     </div>
   </header>
 
@@ -22,6 +21,7 @@ import HelloWorld from './components/HelloWorld.vue'
 
 <style scoped>
 header {
+  margin-top: 20px;
   line-height: 1.5;
   max-height: 100vh;
 }

@@ -1,0 +1,41 @@
+div.profile-border {
+  border: 1px solid var(--p-inputtext-border-color);
+  border-radius: var(--p-inputtext-border-radius);
+  padding: 25px;
+  background-color: var(--card-background);
+  --p-avatar-xl-width: 200px;
+  margin: auto;
+  min-width: 300px;
+  width: fit-content;
+  max-width: 600px;
+}
+
+.profile-username {
+  margin-bottom: 3px;
+  font-size: 35px;
+  line-height: 1;
+  color: var(--color-heading);
+  font-weight: bold;
+}
+
+.post-displayname {
+  font-size: 0.75em;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  color: var(--color-text);
+}
+
+.profile-avatar {
+  display: flex;
+  justify-content: center;
+}
+
+.profile-head {
+  display: flex;
+  justify-content: space-between;
+}
+
+.p-button-link {
+  background-color: var(--p-button-secondary-background);
+}

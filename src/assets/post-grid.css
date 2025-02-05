@@ -1,0 +1,10 @@
+.post-grid {
+  padding: 0 20px;
+  display: grid;
+  grid-gap: var(--post-preview-gap);
+  justify-content: center;
+  grid-template-columns: repeat(
+    auto-fit,
+    clamp(400px, calc(50% - (var(--post-preview-gap) / 2)), 800px)
+  );
+}

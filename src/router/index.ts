@@ -28,7 +28,7 @@ const router = createRouter({
       component: () => import('../views/ImpressumView.vue'),
     },
     {
-      path: '/post',
+      path: '/post/:id',
       name: 'post',
       component: () => import('../views/PostDetailView.vue'),
     },
@@ -46,11 +46,17 @@ const router = createRouter({
       path: '/login',
       name: 'login',
       component: () => import('../views/LoginView.vue'),
+      meta: {
+        hideNavbar: true,
+      },
     },
     {
       path: '/register',
       name: 'register',
       component: () => import('../views/RegisterView.vue'),
+      meta: {
+        hideNavbar: true,
+      },
     },
     {
       path: '/myprofile',
@@ -58,7 +64,7 @@ const router = createRouter({
       component: () => import('../views/PersonalProfileView.vue'),
     },
     {
-      path: '/profile',
+      path: '/profile/:username',
       name: 'profile',
       component: () => import('../views/UserProfile.vue'),
     },

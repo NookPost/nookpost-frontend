@@ -54,7 +54,8 @@ export const authStore = defineStore('authStore', {
   state: () => {
     const data = authData()
     const isLoggedIn = computed(() => data.loggedIn)
-    const expireTime = computed(() => // convert timestamp in seconds to milliseconds
+    const expireTime = computed(() =>
+      // convert timestamp in seconds to milliseconds
       data.expiryTimestamp != null ? new Date(data.expiryTimestamp * 1000) : null,
     )
 

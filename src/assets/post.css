@@ -5,6 +5,10 @@ div.post-border {
   background-color: var(--vt-c-divider-dark-2);
 }
 
+.post-border.preview:hover {
+  opacity: 0.8;
+}
+
 .post-title {
   margin-bottom: 3px;
   font-size: 35px;

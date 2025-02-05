@@ -3,11 +3,21 @@ div.profile-border {
   border-radius: var(--p-inputtext-border-radius);
   padding: 25px;
   background-color: var(--card-background);
-  --p-avatar-xl-width: 200px;
-  margin: auto;
-  min-width: 300px;
-  width: fit-content;
-  max-width: 600px;
+  --p-avatar-xl-width: 300px;
+}
+
+.profile-grid {
+  gap: var(--post-preview-gap);
+  display: grid;
+  grid-template-columns: repeat(2, clamp(400px, calc(50% - (var(--post-preview-gap) / 2)), 600px));
+  justify-content: center;
+}
+
+.profile-post-preview {
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
 }
 
 .profile-username {
@@ -24,18 +34,38 @@ div.profile-border {
   flex-direction: row;
   align-items: center;
   color: var(--color-text);
+  margin-bottom: 10px;
+}
+
+.profile-metadata {
+  margin-bottom: auto;
+  display: grid;
+  gap: 10px;
 }
 
 .profile-avatar {
   display: flex;
   justify-content: center;
+  margin-bottom: 10px;
 }
 
 .profile-head {
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
-.p-button-link {
+.profile-metadata .p-button-link {
   background-color: var(--p-button-secondary-background);
+  --p-button-icon-only-width: 55px;
+  --p-button-icon-only-height: 55px;
+  --p-icon-size: 22.5px;
+}
+
+a {
+  padding: 0;
+}
+
+a:hover {
+  background-color: transparent;
 }

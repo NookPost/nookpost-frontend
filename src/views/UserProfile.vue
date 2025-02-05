@@ -7,8 +7,8 @@ const id = route.params.username
 
 const profile: Profile = {
   uuid: 'akdjnasjdb',
-  username: 'Test',
-  displayname: 'Teee',
+  username: 'Test_1234',
+  displayname: 'Teee Rock Bottom',
   email: 'test@test.com',
   tagline: 'Wassup',
   bio: 'Insert something creative here. Are you really reading this? Stop it. I said STOP!!! Well, since you are still reading, I give up... Have a nice evening.',

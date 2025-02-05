@@ -18,7 +18,7 @@ const croppedBase64 = ref('')
         <span class="post-author">{{ post.author.replace(' ', '&nbsp;') }}</span> on&nbsp;<span
           class="post-created"
           >{{ new Date(post.created * 1000).toLocaleDateString() }}</span
-        >
+        ><!-- convert timestamp in seconds to milliseconds -->
       </h2>
       <div class="post-tags">
         <Tag class="post-category">{{ post.category }}</Tag>

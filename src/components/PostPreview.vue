@@ -26,9 +26,9 @@ function getShortenedBody(input: string): string {
         <h2>
           created&nbsp;by
           <span class="post-author">{{ post.author.replace(' ', '&nbsp;') }}</span> on&nbsp;<span
-            class="post-created"
+            class="post-created" convert timestamp in seconds to milliseconds
             >{{ new Date(post.created * 1000).toLocaleDateString() }}</span
-          >
+          ><!-- convert timestamp in seconds to milliseconds -->
         </h2>
         <div class="post-tags">
           <Tag class="post-category">{{ post.category }}</Tag>

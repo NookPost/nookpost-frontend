@@ -3,7 +3,6 @@ import { Cropper } from 'vue-advanced-cropper'
 import 'vue-advanced-cropper/dist/style.css'
 
 function onCrop({ canvas }: { canvas: HTMLCanvasElement }): string {
-  console.log(canvas)
   return canvas.toDataURL('image/jpeg')
 }
 </script>

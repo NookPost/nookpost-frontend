@@ -77,7 +77,6 @@ export const authStore = defineStore('authStore', {
           throw err
         }
       }
-      console.log(response)
       if (response != undefined && response.status === 200 && response.statusText === 'OK') {
         saveLoginResponseData({
           accessToken: response.data.token ?? '',
@@ -106,7 +105,6 @@ export const authStore = defineStore('authStore', {
           throw err
         }
       }
-      console.log(response)
       if (response != undefined && response.status === 200 && response.statusText === 'OK') {
         saveLoginResponseData({
           accessToken: response.data.token ?? '',

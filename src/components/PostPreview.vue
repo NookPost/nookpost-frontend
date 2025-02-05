@@ -2,7 +2,7 @@
 import { Tag } from 'primevue'
 import { ref, type PropType } from 'vue'
 import { RouterLink } from 'vue-router'
-import type { Post } from '@/types/post';
+import type { Post } from '@/types/post'
 
 const readMore = ref(false)
 
@@ -50,7 +50,7 @@ export default {
     post: {
       type: Object as PropType<Post>,
       required: true,
-    }
+    },
   },
 }
 </script>

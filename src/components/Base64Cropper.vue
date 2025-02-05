@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { Cropper } from 'vue-advanced-cropper';
-import 'vue-advanced-cropper/dist/style.css';
+import { Cropper } from 'vue-advanced-cropper'
+import 'vue-advanced-cropper/dist/style.css'
 
 function onCrop({ canvas }: { canvas: HTMLCanvasElement }): string {
   console.log(canvas)
-  return canvas.toDataURL("image/jpeg")
+  return canvas.toDataURL('image/jpeg')
 }
 </script>
 
@@ -13,11 +13,11 @@ function onCrop({ canvas }: { canvas: HTMLCanvasElement }): string {
     class="cropper"
     :src="source"
     :stencil-props="{
-      aspectRatio: 32/9
+      aspectRatio: 32 / 9,
     }"
     :resizeImage="false"
     @change="$emit('update:base64Result', onCrop($event))"
-    />
+  />
 </template>
 
 <script lang="ts">
@@ -29,9 +29,9 @@ export default {
     },
     base64Result: {
       required: true,
-    }
+    },
   },
-  emits: ['update:base64Result']
+  emits: ['update:base64Result'],
 }
 </script>
 

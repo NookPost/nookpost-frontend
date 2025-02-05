@@ -46,7 +46,8 @@ div.post-border {
   color: var(--color-text);
 }
 
-.post-banner, .post-banner * {
+.post-banner,
+.post-banner * {
   width: 100%;
   border-radius: var(--p-inputtext-border-radius);
 }

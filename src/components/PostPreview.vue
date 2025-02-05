@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { Tag } from 'primevue'
-import { ref } from 'vue'
+import { ref, type PropType } from 'vue'
 import { RouterLink } from 'vue-router'
+import type { Post } from '@/types/post';
 
 const readMore = ref(false)
 
@@ -18,24 +19,24 @@ function getShortenedBody(input: string): string {
 <style scoped src="/src/assets/post.css" />
 
 <template>
-  <RouterLink :to="'/post/' + uuid" class="post-preview-router">
+  <RouterLink :to="'/post/' + post.uuid" class="post-preview-router">
     <div class="post-border preview">
-      <h1 class="post-title">{{ title }}</h1>
+      <h1 class="post-title">{{ post.title }}</h1>
       <div class="post-meta">
         <h2>
           created&nbsp;by
-          <span class="post-author">{{ author.replace(' ', '&nbsp;') }}</span> on&nbsp;<span
+          <span class="post-author">{{ post.author.replace(' ', '&nbsp;') }}</span> on&nbsp;<span
             class="post-created"
-            >{{ new Date(created * 1000).toLocaleDateString() }}</span
+            >{{ new Date(post.created * 1000).toLocaleDateString() }}</span
           >
         </h2>
         <div class="post-tags">
-          <Tag class="post-category">{{ category }}</Tag>
+          <Tag class="post-category">{{ post.category }}</Tag>
         </div>
       </div>
       <div class="post-body">
         <p>
-          {{ getShortenedBody(body) }}
+          {{ getShortenedBody(post.body) }}
           <span v-if="readMore" class="post-readmore">[...]</span>
         </p>
       </div>
@@ -46,35 +47,10 @@ function getShortenedBody(input: string): string {
 <script lang="ts">
 export default {
   props: {
-    uuid: {
-      type: String,
+    post: {
+      type: Object as PropType<Post>,
       required: true,
-    },
-    title: {
-      type: String,
-      required: true,
-    },
-    body: {
-      type: String,
-      required: true,
-    },
-    author: {
-      type: String,
-      required: true,
-    },
-    category: {
-      type: String,
-      required: true,
-    },
-    created: {
-      type: Number,
-      required: true,
-    },
-    modified: {
-      type: Number,
-      default: 0,
-      required: false,
-    },
+    }
   },
 }
 </script>

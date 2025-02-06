@@ -5,8 +5,8 @@ import {
   type AuthenticationLoginRequestBody,
   type AuthenticationLoginResponseBody,
   UsersApi,
-  type UsersCreateRequestBody,
-  type UsersCreateResponseBody,
+  type UsersPostRequestBody,
+  type UsersPostResponseBody,
 } from '@/api'
 import { getAPIConfig } from '@/util/api'
 import { AxiosError, type AxiosResponse } from 'axios'
@@ -65,15 +65,15 @@ export const authStore = defineStore('authStore', {
     async register({ username, password }: loginData): Promise<boolean> {
       const configuration = getAPIConfig(false)
       const authAPI = new UsersApi(configuration)
-      let response: AxiosResponse<UsersCreateResponseBody, unknown>
+      let response: AxiosResponse<UsersPostResponseBody, unknown>
       try {
-        response = await authAPI.usersCreatePost(<UsersCreateRequestBody>{
+        response = await authAPI.usersPost(<UsersPostRequestBody>{
           username: username,
           password: password,
         })
       } catch (err) {
         if (err instanceof AxiosError) {
-          response = err.response as AxiosResponse<UsersCreateResponseBody, unknown>
+          response = err.response as AxiosResponse<UsersPostResponseBody, unknown>
         } else {
           throw err
         }

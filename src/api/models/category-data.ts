@@ -12,6 +12,22 @@
  * Do not edit the class manually.
  */
 
-export * from './api'
-export * from './configuration'
-export * from './models'
+/**
+ *
+ * @export
+ * @interface CategoryData
+ */
+export interface CategoryData {
+  /**
+   * Name of the category
+   * @type {string}
+   * @memberof CategoryData
+   */
+  name?: string | null
+  /**
+   * Icon of the category
+   * @type {string}
+   * @memberof CategoryData
+   */
+  icon?: string | null
+}

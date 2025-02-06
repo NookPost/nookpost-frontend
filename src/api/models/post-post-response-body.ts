@@ -12,6 +12,16 @@
  * Do not edit the class manually.
  */
 
-export * from './api'
-export * from './configuration'
-export * from './models'
+/**
+ * The response to a post create message
+ * @export
+ * @interface PostPostResponseBody
+ */
+export interface PostPostResponseBody {
+  /**
+   * The UUID of the created post.
+   * @type {string}
+   * @memberof PostPostResponseBody
+   */
+  uuid?: string | null
+}

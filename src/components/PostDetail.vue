@@ -32,7 +32,7 @@ const croppedBase64 = ref('')
     <Image v-bind:src="croppedBase64" alt="Image" class="post-banner" preview />
     <div class="post-body">
       <p>
-        {{ post.body }}
+        <span v-html="post.body"></span>
       </p>
     </div>
   </div>

@@ -37,3 +37,11 @@ npm run build
 ```sh
 npm run lint
 ```
+
+### Update swagger
+
+Copy new `swagger.json` to `assets`
+
+```sh
+npx @openapitools/openapi-generator-cli generate -i assets/swagger.json -g typescript-axios -o src/api -c assets/openapi-config.json
+```

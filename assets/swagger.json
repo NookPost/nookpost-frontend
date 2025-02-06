@@ -41,17 +41,139 @@
         }
       }
     },
-    "/users/create": {
-      "post": {
+    "/authentication/changePassword": {
+      "put": {
         "tags": [
-          "Users"
+          "Authentication"
         ],
-        "summary": "Creates a new user.u",
+        "summary": "Changes the password of a user",
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/UsersCreateRequestBody"
+                "$ref": "#/components/schemas/PutChangePasswordRequestBody"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/category": {
+      "get": {
+        "tags": [
+          "Categories"
+        ],
+        "summary": "Gets a category",
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CategoryData"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/category/all": {
+      "get": {
+        "tags": [
+          "Categories"
+        ],
+        "summary": "Gets all categories",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetAllCategoriesResponseBody"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/posts": {
+      "get": {
+        "tags": [
+          "Posts"
+        ],
+        "summary": "Gets a post",
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetPostResponseBody"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Posts"
+        ],
+        "summary": "Creates a post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PostData"
               }
             }
           },
@@ -63,13 +185,306 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/UsersCreateResponseBody"
+                  "$ref": "#/components/schemas/PostPostResponseBody"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Posts"
+        ],
+        "summary": "Modifies a post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PutPostRequestBody"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Posts"
+        ],
+        "summary": "Deletes a post",
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/posts/filter": {
+      "get": {
+        "tags": [
+          "Posts"
+        ],
+        "summary": "Gets a filtered set of posts",
+        "description": "The list will be ordered by date of creation",
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "query",
+            "description": "The UUID of the post to get",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "categoryUuid",
+            "in": "query",
+            "description": "The uuid of the category the posts are in",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "The page the posts should be on (requires pageItemCount)",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "pageItemCount",
+            "in": "query",
+            "description": "The number of posts per page (requires page)",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetPostFilteredResponseBody"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/users": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Gets a user",
+        "parameters": [
+          {
+            "name": "username",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UsersGetResponseBody"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Creates a new user",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UsersPostRequestBody"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UsersPostResponseBody"
                 }
               }
             }
           },
           "409": {
             "description": "Conflict"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/users/me": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Gets a user",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UsersGetResponseBody"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Modifies a user",
+        "description": "Null values are ignored.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserPutRequestBody"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Deletes a user",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/userSettings": {
+      "get": {
+        "tags": [
+          "UserSettings"
+        ],
+        "summary": "Gets the user's settings",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserSettingsData"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "UserSettings"
+        ],
+        "summary": "Updates the user's settings",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserSettingsData"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
           },
           "400": {
             "description": "Bad Request"
@@ -114,12 +529,361 @@
         "additionalProperties": false,
         "description": "Represents a token object in the response to a Login request"
       },
-      "UsersCreateRequestBody": {
+      "CategoryData": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Name of the category",
+            "nullable": true
+          },
+          "icon": {
+            "type": "string",
+            "description": "Icon of the category",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "GetAllCategoriesCategory": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Name of the category",
+            "nullable": true
+          },
+          "icon": {
+            "type": "string",
+            "description": "Icon of the category",
+            "nullable": true
+          },
+          "uuid": {
+            "type": "string",
+            "description": "UUID of the category object",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "GetAllCategoriesResponseBody": {
+        "type": "object",
+        "properties": {
+          "categories": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GetAllCategoriesCategory"
+            },
+            "description": "The currently present categories",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "The body of a Get request to category/all"
+      },
+      "GetPostFilteredPost": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "description": "Title of the post",
+            "nullable": true
+          },
+          "body": {
+            "type": "string",
+            "description": "Body/content of the post",
+            "nullable": true
+          },
+          "categoryUuid": {
+            "type": "string",
+            "description": "UUID of the category of the post",
+            "nullable": true
+          },
+          "uuid": {
+            "type": "string",
+            "description": "The UUID of the post.",
+            "nullable": true
+          },
+          "authorUsername": {
+            "type": "string",
+            "description": "The username of the author",
+            "nullable": true
+          },
+          "modifiedOn": {
+            "type": "integer",
+            "description": "Timestamp for the last modification of the post",
+            "format": "int64"
+          },
+          "createdOn": {
+            "type": "integer",
+            "description": "Timestamp for the creation of the post",
+            "format": "int64"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Response to a post get request"
+      },
+      "GetPostFilteredResponseBody": {
+        "type": "object",
+        "properties": {
+          "posts": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GetPostFilteredPost"
+            },
+            "description": "The posts remaining after the filter operation",
+            "nullable": true
+          },
+          "totalNumberOfPages": {
+            "type": "integer",
+            "description": "The total number of pages there are.",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false,
+        "description": "The response to a get posts request with filter"
+      },
+      "GetPostResponseBody": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "description": "Title of the post",
+            "nullable": true
+          },
+          "body": {
+            "type": "string",
+            "description": "Body/content of the post",
+            "nullable": true
+          },
+          "categoryUuid": {
+            "type": "string",
+            "description": "UUID of the category of the post",
+            "nullable": true
+          },
+          "uuid": {
+            "type": "string",
+            "description": "The UUID of the post.",
+            "nullable": true
+          },
+          "authorUsername": {
+            "type": "string",
+            "description": "The username of the author",
+            "nullable": true
+          },
+          "modifiedOn": {
+            "type": "integer",
+            "description": "Timestamp for the last modification of the post",
+            "format": "int64"
+          },
+          "createdOn": {
+            "type": "integer",
+            "description": "Timestamp for the creation of the post",
+            "format": "int64"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Response to a post get request"
+      },
+      "PostData": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "description": "Title of the post",
+            "nullable": true
+          },
+          "body": {
+            "type": "string",
+            "description": "Body/content of the post",
+            "nullable": true
+          },
+          "categoryUuid": {
+            "type": "string",
+            "description": "UUID of the category of the post",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Represents a post created by a user"
+      },
+      "PostPostResponseBody": {
+        "type": "object",
+        "properties": {
+          "uuid": {
+            "type": "string",
+            "description": "The UUID of the created post.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "The response to a post create message"
+      },
+      "PutChangePasswordRequestBody": {
+        "type": "object",
+        "properties": {
+          "oldPassword": {
+            "type": "string",
+            "description": "The old password of the user",
+            "nullable": true
+          },
+          "newPassword": {
+            "type": "string",
+            "description": "The new password of the user",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Represents the request body of a change password request"
+      },
+      "PutPostRequestBody": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "description": "Title of the post",
+            "nullable": true
+          },
+          "body": {
+            "type": "string",
+            "description": "Body/content of the post",
+            "nullable": true
+          },
+          "categoryUuid": {
+            "type": "string",
+            "description": "UUID of the category of the post",
+            "nullable": true
+          },
+          "uuid": {
+            "type": "string",
+            "description": "The UUID of the post.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Response to a post get request"
+      },
+      "UserPutRequestBody": {
         "type": "object",
         "properties": {
           "username": {
             "type": "string",
-            "description": "The name of the user to log in.",
+            "description": "The username of the user.",
+            "nullable": true
+          },
+          "displayName": {
+            "type": "string",
+            "description": "User display name",
+            "nullable": true
+          },
+          "tagLine": {
+            "type": "string",
+            "description": "User Tagline/Status",
+            "nullable": true
+          },
+          "bio": {
+            "type": "string",
+            "description": "User Bio",
+            "nullable": true
+          },
+          "profilePictureBase64": {
+            "type": "string",
+            "description": "Profile picture of the user encoded as b64",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "description": "Email of the user (null if user does not provide contact info)",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Request body of a user put request"
+      },
+      "UserSettingsData": {
+        "type": "object",
+        "properties": {
+          "useDarkMode": {
+            "type": "boolean",
+            "description": "Whether to use dark mode for the user",
+            "nullable": true
+          },
+          "displayEmailOnProfile": {
+            "type": "boolean",
+            "description": "Whether to display the user's email on the profile page"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Represents user settings objects"
+      },
+      "UsersGetResponseBody": {
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string",
+            "description": "The username of the user.",
+            "nullable": true
+          },
+          "displayName": {
+            "type": "string",
+            "description": "User display name",
+            "nullable": true
+          },
+          "tagLine": {
+            "type": "string",
+            "description": "User Tagline/Status",
+            "nullable": true
+          },
+          "bio": {
+            "type": "string",
+            "description": "User Bio",
+            "nullable": true
+          },
+          "profilePictureBase64": {
+            "type": "string",
+            "description": "Profile picture of the user encoded as b64",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "description": "Email of the user (null if user does not provide contact info)",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "The response to a user get request if successful"
+      },
+      "UsersPostRequestBody": {
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string",
+            "description": "The username of the user.",
+            "nullable": true
+          },
+          "displayName": {
+            "type": "string",
+            "description": "User display name",
+            "nullable": true
+          },
+          "tagLine": {
+            "type": "string",
+            "description": "User Tagline/Status",
+            "nullable": true
+          },
+          "bio": {
+            "type": "string",
+            "description": "User Bio",
+            "nullable": true
+          },
+          "profilePictureBase64": {
+            "type": "string",
+            "description": "Profile picture of the user encoded as b64",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "description": "Email of the user (null if user does not provide contact info)",
             "nullable": true
           },
           "password": {
@@ -131,7 +895,7 @@
         "additionalProperties": false,
         "description": "The request body of a user create request"
       },
-      "UsersCreateResponseBody": {
+      "UsersPostResponseBody": {
         "type": "object",
         "properties": {
           "token": {

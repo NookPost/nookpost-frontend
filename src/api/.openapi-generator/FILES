@@ -1,11 +1,11 @@
 .gitignore
 .npmignore
 api.ts
-apis/authentication-api.ts
-apis/categories-api.ts
-apis/posts-api.ts
-apis/user-settings-api.ts
-apis/users-api.ts
+api/authentication-api.ts
+api/categories-api.ts
+api/posts-api.ts
+api/user-settings-api.ts
+api/users-api.ts
 base.ts
 common.ts
 configuration.ts

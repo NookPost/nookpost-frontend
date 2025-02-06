@@ -12,11 +12,8 @@
  * Do not edit the class manually.
  */
 
-
-
-export * from './apis/authentication-api';
-export * from './apis/categories-api';
-export * from './apis/posts-api';
-export * from './apis/user-settings-api';
-export * from './apis/users-api';
-
+export * from './api/authentication-api'
+export * from './api/categories-api'
+export * from './api/posts-api'
+export * from './api/user-settings-api'
+export * from './api/users-api'

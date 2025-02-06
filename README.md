@@ -43,5 +43,5 @@ npm run lint
 Copy new `swagger.json` to `assets`
 
 ```sh
-npx @openapitools/openapi-generator-cli generate -i assets/swagger.json -g typescript-axios -o src/api -c assets/openapi-config.json
+npx @openapitools/openapi-generator-cli generate -g typescript-axios -i assets/swagger.json -o src/api --additional-properties="withSeparateModelsAndApi=true,apiPackage=api,modelPackage=models"
 ```

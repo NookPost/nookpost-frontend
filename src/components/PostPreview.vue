@@ -42,8 +42,8 @@ function getShortenedBody(input: string): string {
       </div>
       <div class="post-body">
         <p>
-          {{ getShortenedBody(post.body) }}
-          <span v-if="readMore" class="post-readmore">[...]</span>
+          <span v-html="getShortenedBody(post.body)"></span>
+          <span v-if="readMore" class="post-readmore"> [...]</span>
         </p>
       </div>
     </div>

@@ -23,8 +23,8 @@ const router = createRouter({
       component: () => import('../views/PrivacyPolicy.vue'),
     },
     {
-      path: '/impressum',
-      name: 'impressum',
+      path: '/legal-notice',
+      name: 'legal-notice',
       component: () => import('../views/ImpressumView.vue'),
     },
     {

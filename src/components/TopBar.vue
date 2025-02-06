@@ -37,8 +37,8 @@ const pages: Page[] = [
     icon: PrimeIcons.KEY,
   },
   {
-    display_name: 'Impressum',
-    path: '/impressum',
+    display_name: 'Legal Notice',
+    path: '/legal-notice',
   },
 ]
 

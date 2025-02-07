@@ -55,7 +55,7 @@ div.post-border {
   border-radius: var(--p-inputtext-border-radius);
 }
 
-.edit .p-inputtext, .edit .p-floatlabel, .edit button, .edit .post-category-select {
+.edit .p-inputtext, .edit .p-floatlabel, .edit .post-meta-title, .edit button, .edit .post-category-select {
   width: 100%;
 }
 
@@ -70,4 +70,24 @@ div.post-border {
 form.edit {
   display: grid;
   gap: 10px;
+}
+
+.edit .p-floatlabel {
+  margin: 0;
+}
+
+.edit {
+  --p-editor-content-background: var(--p-form-field-background);
+  --p-editor-toolbar-background: var(--p-form-field-background);
+}
+
+.post-banner-preview * {
+  width: 100%;
+  border-radius: var(--p-inputtext-border-radius);
+}
+
+.post-banner-crop-dialog .dialog-control {
+  margin-top: 10px;
+  display: flex;
+  justify-content: flex-end;
 }

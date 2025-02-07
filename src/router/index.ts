@@ -38,6 +38,11 @@ const router = createRouter({
       component: () => import('../views/CategoriesView.vue'),
     },
     {
+      path: '/category/:categoryID',
+      name: 'categoryPosts',
+      component: () => import('../views/SearchResultsView.vue'),
+    },
+    {
       path: '/create',
       name: 'create',
       component: () => import('../views/CreatePostView.vue'),

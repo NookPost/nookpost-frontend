@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
 import 'primeicons/primeicons.css'
 import TopBar from './components/TopBar.vue'
 import { Toast } from 'primevue'
@@ -10,11 +9,6 @@ import { Toast } from 'primevue'
   <Toast position="top-right" group="top-right" />
   <Toast position="bottom-center" group="bottom-center" />
   <TopBar v-if="!$route.meta.hideNavbar" />
-  <header v-if="!$route.meta.hideNavbar">
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-    </div>
-  </header>
 
   <RouterView />
 </template>

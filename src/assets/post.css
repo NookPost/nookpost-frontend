@@ -18,11 +18,14 @@ div.post-border {
 }
 
 .post-meta {
-  font-size: 0.75em;
   display: flex;
   flex-direction: row;
   align-items: center;
   color: var(--color-text);
+}
+
+.post-meta:not(.edit) {
+  font-size: 0.75em;
 }
 
 .post-meta.detail {
@@ -50,4 +53,21 @@ div.post-border {
 .post-banner * {
   width: 100%;
   border-radius: var(--p-inputtext-border-radius);
+}
+
+.edit .p-inputtext, .edit .p-floatlabel, .edit button, .edit .post-category-select {
+  width: 100%;
+}
+
+.post-category.edit{
+  width: 14rem;
+}
+
+.post-meta.edit {
+  gap: 15px;
+}
+
+form.edit {
+  display: grid;
+  gap: 10px;
 }

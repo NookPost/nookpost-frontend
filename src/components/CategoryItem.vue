@@ -1,15 +1,15 @@
 <script setup lang="ts">
-import { type PropType } from 'vue';
-import type { Category } from '@/types/category';
-import { RouterLink } from 'vue-router';
+import { type PropType } from 'vue'
+import type { Category } from '@/types/category'
+import { RouterLink } from 'vue-router'
 </script>
 
 <template>
-  <RouterLink :to="'/category/'+category.uuid">
+  <RouterLink :to="'/category/' + category.uuid">
     <div class="category frame">
       <h1>
         <div>
-          <span :class="category.icon"/>
+          <span :class="category.icon" />
         </div>
         {{ category.name }}
       </h1>
@@ -23,12 +23,12 @@ export default {
     category: {
       type: Object as PropType<Category>,
       required: true,
-    }
-  }
+    },
+  },
 }
 </script>
 
-<style src="/src/assets/frame.css"/>
+<style src="/src/assets/frame.css" />
 
 <style scoped>
 a {

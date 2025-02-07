@@ -55,11 +55,15 @@ div.post-border {
   border-radius: var(--p-inputtext-border-radius);
 }
 
-.edit .p-inputtext, .edit .p-floatlabel, .edit .post-meta-title, .edit button, .edit .post-category-select {
+.edit .p-inputtext,
+.edit .p-floatlabel,
+.edit .post-meta-title,
+.edit button,
+.edit .post-category-select {
   width: 100%;
 }
 
-.post-category.edit{
+.post-category.edit {
   width: 14rem;
 }
 

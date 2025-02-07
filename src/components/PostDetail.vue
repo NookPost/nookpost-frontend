@@ -1,5 +1,16 @@
 <script setup lang="ts">
-import { Tag, Image, InputText, FloatLabel, Button, Message, Select, FileUpload, type FileUploadSelectEvent, Dialog } from 'primevue'
+import {
+  Tag,
+  Image,
+  InputText,
+  FloatLabel,
+  Button,
+  Message,
+  Select,
+  FileUpload,
+  type FileUploadSelectEvent,
+  Dialog,
+} from 'primevue'
 import { ref, toRaw, type PropType, type Ref } from 'vue'
 import type { Post } from '@/types/post'
 import Base64Cropper from './Base64Cropper.vue'
@@ -11,8 +22,8 @@ const uploadImage: Ref<string | null, string | null> = ref(null)
 const uploadTempCropped: Ref<string | null, string | null> = ref(null)
 const uploadCropped: Ref<string | null, string | null> = ref(null)
 
-const cropVisible: Ref<boolean | boolean> = ref(false);
-const previewVisible: Ref<boolean | boolean> = ref(false);
+const cropVisible: Ref<boolean | boolean> = ref(false)
+const previewVisible: Ref<boolean | boolean> = ref(false)
 
 const isLoading = ref(false)
 
@@ -74,9 +85,10 @@ function onCropApply() {
       <div class="post-meta detail">
         <h2>
           created&nbsp;by
-          <span class="post-author">{{ initValues.author.replace(' ', '&nbsp;') }}</span> on&nbsp;<span
-            class="post-created"
-            >{{ new Date(initValues.created * 1000).toLocaleDateString() }}</span
+          <span class="post-author">{{ initValues.author.replace(' ', '&nbsp;') }}</span>
+          on&nbsp;<span class="post-created">{{
+            new Date(initValues.created * 1000).toLocaleDateString()
+          }}</span
           ><!-- convert timestamp in seconds to milliseconds -->
         </h2>
         <div class="post-tags">
@@ -84,26 +96,48 @@ function onCropApply() {
         </div>
       </div>
       <!-- 32:9 Image ratio seems good -->
-      <Image v-bind:src="'https://images.pexels.com/photos/226746/pexels-photo-226746.jpeg'" alt="Image" class="post-banner" preview />
+      <Image
+        v-bind:src="'https://images.pexels.com/photos/226746/pexels-photo-226746.jpeg'"
+        alt="Image"
+        class="post-banner"
+        preview
+      />
       <div class="post-body">
         <p>
           <span v-html="initValues.body"></span>
         </p>
       </div>
     </span>
-    <Form v-else v-slot="$form" class="edit" :resolver @submit="onFormSubmit" :initial-values="initValues">
+    <Form
+      v-else
+      v-slot="$form"
+      class="edit"
+      :resolver
+      @submit="onFormSubmit"
+      :initial-values="initValues"
+    >
       <!-- TODO: add banner upload + Cropper (in dialog?) -->
       <div class="post-banner-upload">
-        <FileUpload mode="basic" accept="image/*" :multiple="false" :auto="true" @select="onUpload" customUpload>
-          <template #header>
-          </template>
+        <FileUpload
+          mode="basic"
+          accept="image/*"
+          :multiple="false"
+          :auto="true"
+          @select="onUpload"
+          customUpload
+        >
+          <template #header> </template>
         </FileUpload>
       </div>
       <div class="post-banner-preview">
         <Image :src="uploadCropped" />
       </div>
       <Dialog v-model:visible="cropVisible" header="Crop Image" class="post-banner-crop-dialog">
-        <Base64Cropper v-if="uploadImage" :source="uploadImage" v-model:base64-result=uploadTempCropped></Base64Cropper>
+        <Base64Cropper
+          v-if="uploadImage"
+          :source="uploadImage"
+          v-model:base64-result="uploadTempCropped"
+        ></Base64Cropper>
         <div class="dialog-control">
           <Button label="Apply" @click="onCropApply"></Button>
         </div>

@@ -17,6 +17,7 @@ import Base64Cropper from './Base64Cropper.vue'
 import { Form, type FormResolverOptions, type FormSubmitEvent } from '@primevue/forms'
 import Editor from 'primevue/editor'
 import 'quill/dist/quill.core.css'
+import type { Category } from '@/types/category'
 
 const props = defineProps({
   data: {
@@ -27,6 +28,10 @@ const props = defineProps({
     type: Boolean,
     required: false,
     default: false,
+  },
+  categories: {
+    type: Object as PropType<Category[]>,
+    required: true,
   },
 })
 
@@ -40,13 +45,6 @@ const uploadCropped: Ref<string | null, string | null> = ref(null)
 
 const cropVisible: Ref<boolean | boolean> = ref(false)
 const previewVisible: Ref<boolean | boolean> = ref(false)
-
-const categories = [
-  {
-    name: 'Technology',
-    uuid: '35dbaec3-6738-42e5-bfd8-79e5877e3ffd',
-  },
-]
 
 async function onFormSubmit(event: FormSubmitEvent) {
   if (event.valid) {

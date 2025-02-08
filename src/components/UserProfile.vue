@@ -49,19 +49,19 @@ const posts: Post[] = [
 
 const props = defineProps({
   profile: {
-      type: Object as PropType<Profile>,
-      required: true,
-    },
-    editable: {
-      type: Boolean,
-      required: false,
-      default: false,
-    },
+    type: Object as PropType<Profile>,
+    required: true,
+  },
+  editable: {
+    type: Boolean,
+    required: false,
+    default: false,
+  },
 })
 
 const emit = defineEmits<{
-   (e: 'update:profile', val: Profile): Profile
- }>()
+  (e: 'update:profile', val: Profile): Profile
+}>()
 
 const edit: Ref<boolean, boolean> = ref(false)
 

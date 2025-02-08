@@ -18,14 +18,28 @@ import { Form, type FormResolverOptions, type FormSubmitEvent } from '@primevue/
 import Editor from 'primevue/editor'
 import 'quill/dist/quill.core.css'
 
+const props = defineProps({
+  data: {
+    type: Object as PropType<Post>,
+    required: true,
+  },
+  edit: {
+    type: Boolean,
+    required: false,
+    default: false,
+  },
+})
+
+const emit = defineEmits<{
+  (e: 'update:post', val: Post): Post
+}>()
+
 const uploadImage: Ref<string | null, string | null> = ref(null)
 const uploadTempCropped: Ref<string | null, string | null> = ref(null)
 const uploadCropped: Ref<string | null, string | null> = ref(null)
 
 const cropVisible: Ref<boolean | boolean> = ref(false)
 const previewVisible: Ref<boolean | boolean> = ref(false)
-
-const isLoading = ref(false)
 
 const categories = [
   {
@@ -36,9 +50,13 @@ const categories = [
 
 async function onFormSubmit(event: FormSubmitEvent) {
   if (event.valid) {
-    isLoading.value = true
     const formData = toRaw(event.states)
-    console.log(formData)
+    const tempPost = props.data
+    tempPost.title = formData.title.value
+    tempPost.body = formData.body.value
+    tempPost.categoryUUID = formData.categoryUUID.value
+    // waiting for image to be added to endpoint
+    emit('update:post', tempPost)
   }
 }
 
@@ -74,6 +92,12 @@ function onCropApply() {
   previewVisible.value = true
   cropVisible.value = false
 }
+
+function onRemoveBanner() {
+  uploadCropped.value = null
+  uploadImage.value = null
+  uploadTempCropped.value = null
+}
 </script>
 
 <style scoped src="/src/assets/post.css" />
@@ -81,18 +105,18 @@ function onCropApply() {
 <template>
   <div class="post-border detail">
     <span v-if="!edit">
-      <h1 class="post-title">{{ initValues.title }}</h1>
+      <h1 class="post-title">{{ data.title }}</h1>
       <div class="post-meta detail">
         <h2>
           created&nbsp;by
-          <span class="post-author">{{ initValues.author.replace(' ', '&nbsp;') }}</span>
+          <span class="post-author">{{ data.author.replace(' ', '&nbsp;') }}</span>
           on&nbsp;<span class="post-created">{{
-            new Date(initValues.created * 1000).toLocaleDateString()
+            new Date(data.created * 1000).toLocaleDateString()
           }}</span
           ><!-- convert timestamp in seconds to milliseconds -->
         </h2>
         <div class="post-tags">
-          <Tag class="post-category">{{ initValues.categoryUUID }}</Tag>
+          <Tag class="post-category">{{ data.categoryUUID }}</Tag>
         </div>
       </div>
       <!-- 32:9 Image ratio seems good -->
@@ -104,7 +128,7 @@ function onCropApply() {
       />
       <div class="post-body">
         <p>
-          <span v-html="initValues.body"></span>
+          <span v-html="data.body"></span>
         </p>
       </div>
     </span>
@@ -114,7 +138,7 @@ function onCropApply() {
       class="edit"
       :resolver
       @submit="onFormSubmit"
-      :initial-values="initValues"
+      :initial-values="data"
     >
       <!-- TODO: add banner upload + Cropper (in dialog?) -->
       <div class="post-banner-upload">
@@ -125,11 +149,13 @@ function onCropApply() {
           :auto="true"
           @select="onUpload"
           customUpload
+          class="p-button-outlined"
+        />
+        <Button v-if="uploadCropped" severity="danger" outlined @click="onRemoveBanner"
+          >Delete</Button
         >
-          <template #header> </template>
-        </FileUpload>
       </div>
-      <div class="post-banner-preview">
+      <div v-if="uploadCropped" class="post-banner-preview">
         <Image :src="uploadCropped" />
       </div>
       <Dialog v-model:visible="cropVisible" header="Crop Image" class="post-banner-crop-dialog">
@@ -137,7 +163,7 @@ function onCropApply() {
           v-if="uploadImage"
           :source="uploadImage"
           v-model:base64-result="uploadTempCropped"
-        ></Base64Cropper>
+        />
         <div class="dialog-control">
           <Button label="Apply" @click="onCropApply"></Button>
         </div>
@@ -233,20 +259,3 @@ function onCropApply() {
   overflow: hidden;
 }
 </style>
-
-<script lang="ts">
-export default {
-  props: {
-    initValues: {
-      type: Object as PropType<Post>,
-      required: true,
-    },
-    edit: {
-      type: Boolean,
-      required: false,
-      default: false,
-    },
-  },
-  emits: ['update:post'],
-}
-</script>

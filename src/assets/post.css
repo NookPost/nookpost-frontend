@@ -58,9 +58,16 @@ div.post-border {
 .edit .p-inputtext,
 .edit .p-floatlabel,
 .edit .post-meta-title,
-.edit button,
+.edit button[type='submit'],
 .edit .post-category-select {
   width: 100%;
+}
+
+.post-banner-upload {
+  display: flex;
+  justify-content: center;
+  flex-wrap: nowrap;
+  gap: 10px;
 }
 
 .post-category.edit {

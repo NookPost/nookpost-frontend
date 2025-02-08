@@ -18,7 +18,7 @@ const post: Post = {
 <template>
   <div class="post-detail-view">
     This will later be the detail page for post {{ id }}
-    <PostDetail :init-values="post" :edit="true" />
+    <PostDetail v-model:data="post" :edit="true" v-on:update:post="console.log" />
   </div>
 </template>
 

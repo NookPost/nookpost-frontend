@@ -102,3 +102,9 @@ form.edit {
   display: flex;
   justify-content: flex-end;
 }
+
+.post-meta-category-select {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--p-tag-gap);
+}

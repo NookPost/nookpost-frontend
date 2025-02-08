@@ -29,6 +29,7 @@ const props = defineProps({
     required: false,
     default: false,
   },
+  // TODO: research wether this can be only required when edit is set to true
   categories: {
     type: Object as PropType<Category[]>,
     required: true,
@@ -52,7 +53,7 @@ async function onFormSubmit(event: FormSubmitEvent) {
     const tempPost = props.data
     tempPost.title = formData.title.value
     tempPost.body = formData.body.value
-    tempPost.categoryUUID = formData.categoryUUID.value
+    tempPost.category = formData.category.value
     // waiting for image to be added to endpoint
     emit('update:post', tempPost)
   }
@@ -114,7 +115,7 @@ function onRemoveBanner() {
           ><!-- convert timestamp in seconds to milliseconds -->
         </h2>
         <div class="post-tags">
-          <Tag class="post-category">{{ data.categoryUUID }}</Tag>
+          <Tag class="post-category"><span :class="data.category.icon" />{{ data.category.name }}</Tag>
         </div>
       </div>
       <!-- 32:9 Image ratio seems good -->
@@ -179,14 +180,27 @@ function onRemoveBanner() {
         <div class="post-meta-category">
           <FloatLabel variant="in" class="post-category edit">
             <Select
-              name="categoryUUID"
+              name="category"
               class="post-category-select edit"
               id="category"
+              placeholder="Select a Category"
               filter
               :options="categories"
-              option-label="name"
-              option-value="uuid"
-            ></Select>
+            >
+              <template #value="slotProps">
+                <div v-if="slotProps.value" class="post-meta-category-select">
+                  <span :class="slotProps.value.icon" />{{ slotProps.value.name }}
+                </div>
+                <span v-else>
+                    {{ slotProps.placeholder }}
+                </span>
+              </template>
+              <template #option="slotProps">
+                <div class="post-meta-category-select">
+                  <span :class="slotProps.option.icon" />{{ slotProps.option.name }}
+                </div>
+              </template>
+            </Select>
             <label for="category">Category</label>
           </FloatLabel>
           <Message v-if="$form.category?.invalid" severity="error" size="small" variant="simple">{{

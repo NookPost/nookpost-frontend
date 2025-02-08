@@ -1,9 +1,11 @@
+import type { Category } from "./category"
+
 export interface Post {
   uuid: string
   title: string
   body: string
   author: string
-  categoryUUID: string
+  category: Category
   created: number
   modified: number | 0
 }

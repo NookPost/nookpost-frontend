@@ -3,7 +3,6 @@ import { Tag } from 'primevue'
 import { ref, type PropType } from 'vue'
 import { RouterLink } from 'vue-router'
 import type { Post } from '@/types/post'
-import type { Category } from '@/types/category'
 
 const readMore = ref(false)
 
@@ -38,7 +37,9 @@ function getShortenedBody(input: string): string {
           ><!-- convert timestamp in seconds to milliseconds -->
         </h2>
         <div class="post-tags">
-          <Tag class="post-category">{{ post.categoryUUID }}</Tag>
+          <Tag class="post-category"
+            ><span :class="post.category.icon" />{{ post.category.name }}</Tag
+          >
         </div>
       </div>
       <div class="post-body">
@@ -56,10 +57,6 @@ export default {
   props: {
     post: {
       type: Object as PropType<Post>,
-      required: true,
-    },
-    categories: {
-      type: Object as PropType<Category[]>,
       required: true,
     },
   },

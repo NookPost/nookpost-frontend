@@ -1,4 +1,4 @@
-import type { Category } from "./category"
+import type { Category } from './category'
 
 export interface Post {
   uuid: string

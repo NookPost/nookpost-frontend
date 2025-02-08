@@ -115,7 +115,9 @@ function onRemoveBanner() {
           ><!-- convert timestamp in seconds to milliseconds -->
         </h2>
         <div class="post-tags">
-          <Tag class="post-category"><span :class="data.category.icon" />{{ data.category.name }}</Tag>
+          <Tag class="post-category"
+            ><span :class="data.category.icon" />{{ data.category.name }}</Tag
+          >
         </div>
       </div>
       <!-- 32:9 Image ratio seems good -->
@@ -192,7 +194,7 @@ function onRemoveBanner() {
                   <span :class="slotProps.value.icon" />{{ slotProps.value.name }}
                 </div>
                 <span v-else>
-                    {{ slotProps.placeholder }}
+                  {{ slotProps.placeholder }}
                 </span>
               </template>
               <template #option="slotProps">

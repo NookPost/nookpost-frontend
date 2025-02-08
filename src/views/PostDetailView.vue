@@ -2,9 +2,10 @@
 import { useRoute } from 'vue-router'
 import PostDetail from '@/components/PostDetail.vue'
 import type { Post } from '@/types/post'
+import { ref, type Ref } from 'vue'
 const route = useRoute()
 const id = route.params.id
-const post: Post = {
+const post: Ref<Post, Post> = ref({
   uuid: 'adadasd',
   title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam',
   author: 'Jack Sparrow',
@@ -12,7 +13,7 @@ const post: Post = {
   categoryUUID: '35dbaec3-6738-42e5-bfd8-79e5877e3ffd',
   created: 1739692463,
   modified: 0,
-}
+})
 </script>
 
 <template>

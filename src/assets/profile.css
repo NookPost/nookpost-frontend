@@ -2,7 +2,7 @@ div.profile-border {
   border: 1px solid var(--p-inputtext-border-color);
   border-radius: 6px;
   padding: 25px;
-  background-color: var(--card-background);
+  background-color: var(--color-background);
   --p-avatar-xl-width: 300px;
 }
 
@@ -41,6 +41,13 @@ div.profile-border {
   margin-bottom: auto;
   display: grid;
   gap: 10px;
+  --p-textarea-background: var(--p-fieldset-background);
+  --p-inputtext-background: var(--p-fieldset-background);
+  --p-floatlabel-on-active-background: var(--color-background);
+}
+
+.profile-metadata.edit {
+  gap: 20px;
 }
 
 .profile-avatar {
@@ -55,11 +62,23 @@ div.profile-border {
   align-items: center;
 }
 
-.profile-metadata .p-button-link {
+.profile-metadata .p-button {
   background-color: var(--p-button-secondary-background);
   --p-button-icon-only-width: 55px;
   --p-button-icon-only-height: 55px;
   --p-icon-size: 22.5px;
+  margin-left: 5px;
+}
+
+.profile-metadata textarea {
+  width: 100%;
+  padding: 1.125rem;
+}
+
+.profile-edit-inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
 }
 
 a {

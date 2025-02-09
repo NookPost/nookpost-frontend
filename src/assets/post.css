@@ -63,13 +63,6 @@ div.post-border {
   width: 100%;
 }
 
-.post-banner-upload {
-  display: flex;
-  justify-content: center;
-  flex-wrap: nowrap;
-  gap: 10px;
-}
-
 .post-category.edit {
   width: 14rem;
 }
@@ -90,17 +83,6 @@ form.edit {
 .edit {
   --p-editor-content-background: var(--p-form-field-background);
   --p-editor-toolbar-background: var(--p-form-field-background);
-}
-
-.post-banner-preview * {
-  width: 100%;
-  border-radius: 6px;
-}
-
-.post-banner-crop-dialog .dialog-control {
-  margin-top: 10px;
-  display: flex;
-  justify-content: flex-end;
 }
 
 .post-meta-category-select {

@@ -9,6 +9,7 @@ import router from './router'
 import '@primevue/icons'
 import { definePreset } from '@primevue/themes'
 import ToastService from 'primevue/toastservice'
+import Tooltip from 'primevue/tooltip'
 
 const app = createApp(App)
 
@@ -18,6 +19,8 @@ const pinia = createPinia()
 app.use(pinia)
 
 app.use(ToastService)
+
+app.directive('tooltip', Tooltip)
 
 const PrimeVueTheme = definePreset(Aura, {
   primitive: {

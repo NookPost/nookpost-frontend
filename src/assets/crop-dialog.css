@@ -1,0 +1,12 @@
+.image-upload {
+  display: flex;
+  justify-content: center;
+  flex-wrap: nowrap;
+  gap: 10px;
+}
+
+.crop-dialog .dialog-control {
+  margin-top: 10px;
+  display: flex;
+  justify-content: flex-end;
+}

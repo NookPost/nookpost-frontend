@@ -86,7 +86,7 @@ const resolver = ({ values }: FormResolverOptions) => {
           >
         </div>
       </div>
-      <Image v-bind:src="data.bannerImageBase64" alt="Image" class="post-banner" preview />
+      <Image v-if="data.bannerImageBase64!==''" v-bind:src="data.bannerImageBase64" alt="Image" class="post-banner" preview />
       <div class="post-body">
         <p>
           <span v-html="data.body"></span>

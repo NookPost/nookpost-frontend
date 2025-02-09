@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import { ref, toRaw, type PropType, type Ref } from 'vue'
 import type { Profile } from '@/types/profile'
-import { Avatar, Button, Fieldset, InputText, FloatLabel, Textarea } from 'primevue'
+import { Avatar, Button, Fieldset, InputText, FloatLabel, Textarea, Message } from 'primevue'
 import { PrimeIcons } from '@primevue/core/api'
 import PostPreview from './PostPreview.vue'
 import type { Post } from '@/types/post'
-import { Form, type FormSubmitEvent } from '@primevue/forms'
+import { Form, type FormResolverOptions, type FormSubmitEvent } from '@primevue/forms'
 import CropperDialog from './CropperDialog.vue'
 import { CircleStencil } from 'vue-advanced-cropper'
 
@@ -52,6 +52,18 @@ function onFormSubmit(event: FormSubmitEvent) {
     edit.value = false
   }
 }
+
+const resolver = ({ values }: FormResolverOptions) => {
+  const errors: Promise<Record<string, unknown>> | Record<string, unknown> | undefined = {}
+
+  if (!values.displayname) {
+    errors.displayname = [{ message: 'Displayname is required.' }]
+  }
+
+  return {
+    errors,
+  }
+}
 </script>
 
 <template>
@@ -93,7 +105,14 @@ function onFormSubmit(event: FormSubmitEvent) {
         <Fieldset legend="Tagline">{{ profile.tagline }}</Fieldset>
         <Fieldset legend="Bio">{{ profile.bio }}</Fieldset>
       </span>
-      <Form v-else class="profile-metadata edit" :initial-values="profile" @submit="onFormSubmit">
+      <Form
+        v-else
+        v-slot="$form"
+        class="profile-metadata edit"
+        :initial-values="profile"
+        :resolver
+        @submit="onFormSubmit"
+      >
         <div class="profile-avatar">
           <CropperDialog
             v-model:data="imageBase64"
@@ -107,6 +126,13 @@ function onFormSubmit(event: FormSubmitEvent) {
               <InputText class="profile-username" id="displayname" name="displayname"></InputText>
               <label for="displayname">Displayname</label>
             </FloatLabel>
+            <Message
+              v-if="$form.displayname?.invalid"
+              severity="error"
+              size="small"
+              variant="simple"
+              >{{ $form.displayname.error.message }}</Message
+            >
             <h2>{{ profile.username }}</h2>
           </div>
           <div>

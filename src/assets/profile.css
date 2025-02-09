@@ -1,6 +1,6 @@
 div.profile-border {
   border: 1px solid var(--p-inputtext-border-color);
-  border-radius: var(--p-inputtext-border-radius);
+  border-radius: 6px;
   padding: 25px;
   background-color: var(--card-background);
   --p-avatar-xl-width: 300px;

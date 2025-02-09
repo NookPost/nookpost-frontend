@@ -1,6 +1,6 @@
 div.post-border {
   border: 1px solid var(--p-inputtext-border-color);
-  border-radius: var(--p-inputtext-border-radius);
+  border-radius: 6px;
   padding: 25px;
   background-color: var(--vt-c-divider-dark-2);
 }
@@ -52,7 +52,7 @@ div.post-border {
 .post-banner,
 .post-banner * {
   width: 100%;
-  border-radius: var(--p-inputtext-border-radius);
+  border-radius: 6px;
 }
 
 .edit .p-inputtext,
@@ -94,7 +94,7 @@ form.edit {
 
 .post-banner-preview * {
   width: 100%;
-  border-radius: var(--p-inputtext-border-radius);
+  border-radius: 6px;
 }
 
 .post-banner-crop-dialog .dialog-control {
@@ -106,5 +106,5 @@ form.edit {
 .post-meta-category-select {
   display: inline-flex;
   align-items: center;
-  gap: var(--p-tag-gap);
+  gap: 0.25rem;
 }

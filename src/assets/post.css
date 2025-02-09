@@ -1,6 +1,6 @@
 div.post-border {
   border: 1px solid var(--p-inputtext-border-color);
-  border-radius: var(--p-inputtext-border-radius);
+  border-radius: 6px;
   padding: 25px;
   background-color: var(--vt-c-divider-dark-2);
 }
@@ -18,11 +18,14 @@ div.post-border {
 }
 
 .post-meta {
-  font-size: 0.75em;
   display: flex;
   flex-direction: row;
   align-items: center;
   color: var(--color-text);
+}
+
+.post-meta:not(.edit) {
+  font-size: 0.75em;
 }
 
 .post-meta.detail {
@@ -49,5 +52,59 @@ div.post-border {
 .post-banner,
 .post-banner * {
   width: 100%;
-  border-radius: var(--p-inputtext-border-radius);
+  border-radius: 6px;
+}
+
+.edit .p-inputtext,
+.edit .p-floatlabel,
+.edit .post-meta-title,
+.edit button[type='submit'],
+.edit .post-category-select {
+  width: 100%;
+}
+
+.post-banner-upload {
+  display: flex;
+  justify-content: center;
+  flex-wrap: nowrap;
+  gap: 10px;
+}
+
+.post-category.edit {
+  width: 14rem;
+}
+
+.post-meta.edit {
+  gap: 15px;
+}
+
+form.edit {
+  display: grid;
+  gap: 10px;
+}
+
+.edit .p-floatlabel {
+  margin: 0;
+}
+
+.edit {
+  --p-editor-content-background: var(--p-form-field-background);
+  --p-editor-toolbar-background: var(--p-form-field-background);
+}
+
+.post-banner-preview * {
+  width: 100%;
+  border-radius: 6px;
+}
+
+.post-banner-crop-dialog .dialog-control {
+  margin-top: 10px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.post-meta-category-select {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
 }

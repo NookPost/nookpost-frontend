@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { Cropper } from 'vue-advanced-cropper'
+import { Cropper, RectangleStencil, CircleStencil } from 'vue-advanced-cropper'
 import 'vue-advanced-cropper/dist/style.css'
 import { FileUpload, Dialog, type FileUploadSelectEvent, Button, Image } from 'primevue'
-import { ref, toRaw, type Ref } from 'vue'
+import { ref, toRaw, type PropType, type Ref } from 'vue'
 
 function onCrop({ canvas }: { canvas: HTMLCanvasElement }): string {
   return canvas.toDataURL('image/jpeg')
@@ -22,6 +22,11 @@ const props = defineProps({
     type: Object,
     required: false,
   },
+  stencilComponent: {
+    type: Object as PropType<typeof RectangleStencil | typeof CircleStencil>,
+    required: false,
+    default: RectangleStencil,
+  }
 })
 
 const emit = defineEmits<{
@@ -79,7 +84,8 @@ function onRemoveImage() {
         class="cropper"
         :src="uploadImage"
         :stencil-props="stencilProps"
-        :resizeImage="false"
+        :resize-image="false"
+        :stencil-component="stencilComponent"
         @change="uploadTempCropped = onCrop($event)"
       />
       <div class="dialog-control">

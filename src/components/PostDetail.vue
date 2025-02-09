@@ -206,11 +206,11 @@ const resolver = ({ values }: FormResolverOptions) => {
 
 <style scoped>
 /* Fix Quill Editor Bullet */
-.edit >>> .ql-editor ol li:before {
+.edit:deep(.ql-editor ol li:before) {
   content: none;
 }
 
-.edit >>> .post-banner-preview * {
+.edit:deep(.post-banner-preview *) {
   width: 100%;
   border-radius: 6px;
 }

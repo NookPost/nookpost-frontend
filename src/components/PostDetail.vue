@@ -1,19 +1,8 @@
 <script setup lang="ts">
-import {
-  Tag,
-  Image,
-  InputText,
-  FloatLabel,
-  Button,
-  Message,
-  Select,
-  FileUpload,
-  type FileUploadSelectEvent,
-  Dialog,
-} from 'primevue'
+import { Tag, Image, InputText, FloatLabel, Button, Message, Select } from 'primevue'
 import { ref, toRaw, type PropType, type Ref } from 'vue'
 import type { Post } from '@/types/post'
-import Base64Cropper from './Base64Cropper.vue'
+import CropperDialog from './CropperDialog.vue'
 import { Form, type FormResolverOptions, type FormSubmitEvent } from '@primevue/forms'
 import Editor from 'primevue/editor'
 import 'quill/dist/quill.core.css'
@@ -40,11 +29,7 @@ const emit = defineEmits<{
   (e: 'update:post', val: Post): Post
 }>()
 
-const uploadImage: Ref<string | null, string | null> = ref(null)
-const uploadTempCropped: Ref<string | null, string | null> = ref(null)
-const uploadCropped: Ref<string | null, string | null> = ref(props.data.bannerImageBase64)
-
-const cropVisible: Ref<boolean | boolean> = ref(false)
+const imageData: Ref<string, string> = ref(props.data.bannerImageBase64)
 
 async function onFormSubmit(event: FormSubmitEvent) {
   if (event.valid) {
@@ -53,7 +38,7 @@ async function onFormSubmit(event: FormSubmitEvent) {
     tempPost.title = formData.title.value
     tempPost.body = formData.body.value
     tempPost.category = formData.category.value
-    tempPost.bannerImageBase64 = uploadCropped.value ?? ''
+    tempPost.bannerImageBase64 = imageData.value
     // waiting for image to be added to endpoint
     emit('update:post', tempPost)
   }
@@ -77,23 +62,6 @@ const resolver = ({ values }: FormResolverOptions) => {
   return {
     errors,
   }
-}
-
-function onUpload(event: FileUploadSelectEvent) {
-  uploadImage.value = toRaw(event.files)[0].objectURL
-  cropVisible.value = true
-  console.log(toRaw(event.files)[0].objectURL)
-}
-
-function onCropApply() {
-  uploadCropped.value = uploadTempCropped.value
-  cropVisible.value = false
-}
-
-function onRemoveBanner() {
-  uploadCropped.value = null
-  uploadImage.value = null
-  uploadTempCropped.value = null
 }
 </script>
 
@@ -174,34 +142,13 @@ function onRemoveBanner() {
           }}</Message>
         </div>
       </div>
-      <div class="post-banner-upload">
-        <FileUpload
-          mode="basic"
-          accept="image/*"
-          :multiple="false"
-          :auto="true"
-          @select="onUpload"
-          customUpload
-          chooseLabel="Upload Banner"
-          class="p-button-outlined"
-        />
-        <Button v-if="uploadCropped" severity="danger" outlined @click="onRemoveBanner"
-          >Delete Banner</Button
-        >
-      </div>
-      <div v-if="uploadCropped" class="post-banner-preview">
-        <Image :src="uploadCropped" />
-      </div>
-      <Dialog v-model:visible="cropVisible" header="Crop Image" class="post-banner-crop-dialog">
-        <Base64Cropper
-          v-if="uploadImage"
-          :source="uploadImage"
-          v-model:base64-result="uploadTempCropped"
-        />
-        <div class="dialog-control">
-          <Button label="Apply" @click="onCropApply"></Button>
-        </div>
-      </Dialog>
+      <CropperDialog
+        v-model:data="imageData"
+        :stencil-props="{
+          aspectRatio: 32 / 9,
+        }"
+        :preview-class="'post-banner-preview'"
+      />
       <div class="post-body edit">
         <Editor name="body" editorStyle="height: 320px">
           <template v-slot:toolbar>
@@ -251,17 +198,14 @@ function onRemoveBanner() {
   </div>
 </template>
 
-<style>
+<style scoped>
 /* Fix Quill Editor Bullet */
-.edit .ql-editor ol li:before {
+.edit >>> .ql-editor ol li:before {
   content: none;
 }
 
-.post-banner-crop-dialog {
-  width: 90vw;
-}
-
-.post-banner-crop-dialog .p-dialog-content {
-  overflow: hidden;
+.edit >>> .post-banner-preview * {
+  width: 100%;
+  border-radius: 6px;
 }
 </style>

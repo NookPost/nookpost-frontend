@@ -42,7 +42,6 @@ const cropVisible: Ref<boolean | boolean> = ref(false)
 function onUpload(event: FileUploadSelectEvent) {
   uploadImage.value = toRaw(event.files)[0].objectURL
   cropVisible.value = true
-  console.log(toRaw(event.files)[0].objectURL)
 }
 
 function onCropApply() {

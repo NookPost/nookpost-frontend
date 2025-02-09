@@ -29,9 +29,7 @@ const post: Ref<Post, Post> = ref({
   <div class="post-detail-view">
     This will later be the detail page for post {{ id }}
     <!-- View sample -->
-    <PostDetail
-      :data="post"
-    />
+    <PostDetail :data="post" />
     <!-- Edit sample (for creation pass empty object) -->
     <!-- <PostDetail
       v-model:data="post"

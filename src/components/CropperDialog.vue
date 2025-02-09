@@ -95,7 +95,7 @@ function onRemoveImage() {
 }
 </style>
 
-<style scoped src="/src/assets/crop-dialog.css"/>
+<style scoped src="/src/assets/crop-dialog.css" />
 
 <style>
 .crop-dialog {

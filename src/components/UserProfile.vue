@@ -22,6 +22,7 @@ const posts: Post[] = [
     category: categories[0],
     created: 1738692463,
     modified: 0,
+    bannerImageBase64: '',
   },
   {
     uuid: 'adadasd',
@@ -31,6 +32,7 @@ const posts: Post[] = [
     category: categories[0],
     created: 1738792463,
     modified: 0,
+    bannerImageBase64: '',
   },
   {
     uuid: 'adadasd',
@@ -40,6 +42,7 @@ const posts: Post[] = [
     category: categories[0],
     created: 1739692463,
     modified: 0,
+    bannerImageBase64: '',
   },
 ]
 </script>

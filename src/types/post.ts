@@ -6,6 +6,7 @@ export interface Post {
   body: string
   author: string
   category: Category
+  bannerImageBase64: string
   created: number
   modified: number | 0
 }

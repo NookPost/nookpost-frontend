@@ -21,18 +21,24 @@ const post: Ref<Post, Post> = ref({
   category: categories[0],
   created: 1739692463,
   modified: 0,
+  bannerImageBase64: '',
 })
 </script>
 
 <template>
   <div class="post-detail-view">
     This will later be the detail page for post {{ id }}
+    <!-- View sample -->
     <PostDetail
+      :data="post"
+    />
+    <!-- Edit sample (for creation pass empty object) -->
+    <!-- <PostDetail
       v-model:data="post"
       :edit="true"
       v-on:update:post="console.log"
       :categories="categories"
-    />
+    /> -->
   </div>
 </template>
 

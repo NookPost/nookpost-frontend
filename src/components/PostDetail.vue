@@ -32,7 +32,7 @@ const props = defineProps({
   // TODO: research wether this can be only required when edit is set to true
   categories: {
     type: Object as PropType<Category[]>,
-    required: true,
+    required: false,
   },
 })
 
@@ -42,10 +42,9 @@ const emit = defineEmits<{
 
 const uploadImage: Ref<string | null, string | null> = ref(null)
 const uploadTempCropped: Ref<string | null, string | null> = ref(null)
-const uploadCropped: Ref<string | null, string | null> = ref(null)
+const uploadCropped: Ref<string | null, string | null> = ref(props.data.bannerImageBase64)
 
 const cropVisible: Ref<boolean | boolean> = ref(false)
-const previewVisible: Ref<boolean | boolean> = ref(false)
 
 async function onFormSubmit(event: FormSubmitEvent) {
   if (event.valid) {
@@ -54,6 +53,7 @@ async function onFormSubmit(event: FormSubmitEvent) {
     tempPost.title = formData.title.value
     tempPost.body = formData.body.value
     tempPost.category = formData.category.value
+    tempPost.bannerImageBase64 = uploadCropped.value ?? ''
     // waiting for image to be added to endpoint
     emit('update:post', tempPost)
   }
@@ -80,7 +80,6 @@ const resolver = ({ values }: FormResolverOptions) => {
 }
 
 function onUpload(event: FileUploadSelectEvent) {
-  previewVisible.value = false
   uploadImage.value = toRaw(event.files)[0].objectURL
   cropVisible.value = true
   console.log(toRaw(event.files)[0].objectURL)
@@ -88,7 +87,6 @@ function onUpload(event: FileUploadSelectEvent) {
 
 function onCropApply() {
   uploadCropped.value = uploadTempCropped.value
-  previewVisible.value = true
   cropVisible.value = false
 }
 
@@ -120,13 +118,7 @@ function onRemoveBanner() {
           >
         </div>
       </div>
-      <!-- 32:9 Image ratio seems good -->
-      <Image
-        v-bind:src="'https://images.pexels.com/photos/226746/pexels-photo-226746.jpeg'"
-        alt="Image"
-        class="post-banner"
-        preview
-      />
+      <Image v-bind:src="data.bannerImageBase64" alt="Image" class="post-banner" preview />
       <div class="post-body">
         <p>
           <span v-html="data.body"></span>
@@ -141,34 +133,6 @@ function onRemoveBanner() {
       @submit="onFormSubmit"
       :initial-values="data"
     >
-      <!-- TODO: add banner upload + Cropper (in dialog?) -->
-      <div class="post-banner-upload">
-        <FileUpload
-          mode="basic"
-          accept="image/*"
-          :multiple="false"
-          :auto="true"
-          @select="onUpload"
-          customUpload
-          class="p-button-outlined"
-        />
-        <Button v-if="uploadCropped" severity="danger" outlined @click="onRemoveBanner"
-          >Delete</Button
-        >
-      </div>
-      <div v-if="uploadCropped" class="post-banner-preview">
-        <Image :src="uploadCropped" />
-      </div>
-      <Dialog v-model:visible="cropVisible" header="Crop Image" class="post-banner-crop-dialog">
-        <Base64Cropper
-          v-if="uploadImage"
-          :source="uploadImage"
-          v-model:base64-result="uploadTempCropped"
-        />
-        <div class="dialog-control">
-          <Button label="Apply" @click="onCropApply"></Button>
-        </div>
-      </Dialog>
       <div class="post-meta edit">
         <div class="post-meta-title">
           <FloatLabel variant="in" class="post-title edit">
@@ -210,6 +174,34 @@ function onRemoveBanner() {
           }}</Message>
         </div>
       </div>
+      <div class="post-banner-upload">
+        <FileUpload
+          mode="basic"
+          accept="image/*"
+          :multiple="false"
+          :auto="true"
+          @select="onUpload"
+          customUpload
+          chooseLabel="Upload Banner"
+          class="p-button-outlined"
+        />
+        <Button v-if="uploadCropped" severity="danger" outlined @click="onRemoveBanner"
+          >Delete Banner</Button
+        >
+      </div>
+      <div v-if="uploadCropped" class="post-banner-preview">
+        <Image :src="uploadCropped" />
+      </div>
+      <Dialog v-model:visible="cropVisible" header="Crop Image" class="post-banner-crop-dialog">
+        <Base64Cropper
+          v-if="uploadImage"
+          :source="uploadImage"
+          v-model:base64-result="uploadTempCropped"
+        />
+        <div class="dialog-control">
+          <Button label="Apply" @click="onCropApply"></Button>
+        </div>
+      </Dialog>
       <div class="post-body edit">
         <Editor name="body" editorStyle="height: 320px">
           <template v-slot:toolbar>

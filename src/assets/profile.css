@@ -3,7 +3,6 @@ div.profile-border {
   border-radius: 6px;
   padding: 25px;
   background-color: var(--color-background);
-  --p-avatar-xl-width: 300px;
 }
 
 .profile-grid {
@@ -52,8 +51,26 @@ div.profile-border {
 
 .profile-avatar {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
   margin-bottom: 10px;
+}
+
+.profile-avatar:deep(.avatar-preview img) {
+  border-radius: 50%;
+  width: 100%;
+  height: 100%;
+}
+
+.profile-avatar:deep(*) {
+  --p-avatar-xl-width: 300px;
+  --p-avatar-xl-icon-size: 120px;
+}
+
+.profile-avatar:deep(.avatar-preview) {
+  width: var(--p-avatar-xl-width);
+  height: var(--p-avatar-xl-width);
 }
 
 .profile-head {

@@ -6,50 +6,16 @@ import { PrimeIcons } from '@primevue/core/api'
 import PostPreview from './PostPreview.vue'
 import type { Post } from '@/types/post'
 import { Form, type FormSubmitEvent } from '@primevue/forms'
-import type { Category } from '@/types/category'
-const categories: Category[] = [
-  {
-    name: 'Technology',
-    uuid: '35dbaec3-6738-42e5-bfd8-79e5877e3ffd',
-    icon: 'pi pi-microchip',
-  },
-]
-const posts: Post[] = [
-  {
-    uuid: 'adadasd3',
-    title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam',
-    author: 'Jack Sparrow',
-    body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.',
-    category: categories[0],
-    created: 1738692463,
-    modified: 0,
-    bannerImageBase64: '',
-  },
-  {
-    uuid: 'adadasd',
-    title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam',
-    author: 'Jack Sparrow',
-    body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.',
-    category: categories[0],
-    created: 1738792463,
-    modified: 0,
-    bannerImageBase64: '',
-  },
-  {
-    uuid: 'adadasd',
-    title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam',
-    author: 'Jack Sparrow',
-    body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.',
-    category: categories[0],
-    created: 1739692463,
-    modified: 0,
-    bannerImageBase64: '',
-  },
-]
+import CropperDialog from './CropperDialog.vue'
+import { CircleStencil } from 'vue-advanced-cropper'
 
 const props = defineProps({
   profile: {
     type: Object as PropType<Profile>,
+    required: true,
+  },
+  posts: {
+    type: Object as PropType<Post[]>,
     required: true,
   },
   editable: {
@@ -67,19 +33,20 @@ const edit: Ref<boolean, boolean> = ref(false)
 
 const isLoading = ref(false)
 
+const imageBase64 = ref(props.profile.profilePictureBase64)
+
 function onFormSubmit(event: FormSubmitEvent) {
   if (event.valid) {
     isLoading.value = true
     const formData = toRaw(event.states)
     emit('update:profile', {
       uuid: props.profile.uuid,
-      username: formData.username.value,
+      username: props.profile.username,
       displayname: formData.displayname.value,
       email: formData.email.value,
       tagline: formData.tagline.value,
       bio: formData.bio.value,
-      //TODO: Image Upload (copy from Post)
-      profilePictureBase64: props.profile.profilePictureBase64,
+      profilePictureBase64: imageBase64.value,
     })
     isLoading.value = false
     edit.value = false
@@ -92,7 +59,8 @@ function onFormSubmit(event: FormSubmitEvent) {
     <div class="profile-border">
       <span v-if="!edit" class="profile-metadata">
         <div class="profile-avatar">
-          <Avatar :image="profile.profilePictureBase64" shape="circle" size="xlarge" />
+          <Avatar v-if="imageBase64 !== ''" :image="imageBase64" shape="circle" size="xlarge" />
+          <Avatar v-else :icon="PrimeIcons.USER" shape="circle" size="xlarge" />
         </div>
         <div class="profile-head">
           <div>
@@ -103,6 +71,7 @@ function onFormSubmit(event: FormSubmitEvent) {
           </div>
           <div>
             <Button
+              v-if="profile.email !== ''"
               :icon="PrimeIcons.ENVELOPE"
               variant="link"
               as="a"
@@ -126,7 +95,11 @@ function onFormSubmit(event: FormSubmitEvent) {
       </span>
       <Form v-else class="profile-metadata edit" :initial-values="profile" @submit="onFormSubmit">
         <div class="profile-avatar">
-          <Avatar :image="profile.profilePictureBase64" shape="circle" size="xlarge" />
+          <CropperDialog
+            v-model:data="imageBase64"
+            :stencil-component="CircleStencil"
+            preview-class="avatar-preview"
+          />
         </div>
         <div class="profile-head">
           <div class="profile-edit-inputs">
@@ -134,10 +107,7 @@ function onFormSubmit(event: FormSubmitEvent) {
               <InputText class="profile-username" id="displayname" name="displayname"></InputText>
               <label for="displayname">Displayname</label>
             </FloatLabel>
-            <FloatLabel variant="on">
-              <InputText id="username" name="username"></InputText>
-              <label for="username">Username</label>
-            </FloatLabel>
+            <h2>{{ profile.username }}</h2>
           </div>
           <div>
             <Button
@@ -168,7 +138,7 @@ function onFormSubmit(event: FormSubmitEvent) {
     <div class="profile-post-preview profile-border">
       <!-- Display last 3 Posts -->
       <template v-for="post in posts.slice(0, 3)" :key="post.uuid">
-        <PostPreview :post="post" :categories="categories"></PostPreview>
+        <PostPreview :post="post"></PostPreview>
       </template>
       <h3 class="no-posts-yet" v-if="posts.length == 0">This user has not shared any posts yet</h3>
     </div>

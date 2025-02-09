@@ -26,7 +26,7 @@ const props = defineProps({
     type: Object as PropType<typeof RectangleStencil | typeof CircleStencil>,
     required: false,
     default: RectangleStencil,
-  }
+  },
 })
 
 const emit = defineEmits<{

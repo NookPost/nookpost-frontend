@@ -21,10 +21,7 @@ async function onFormSubmit(event: FormSubmitEvent) {
   if (event.valid) {
     isLoading.value = true
     const formData = toRaw(event.states)
-    const success: boolean = await auth.register({
-      username: formData.username.value,
-      password: formData.password.value,
-    })
+    const success: boolean = await auth.register(formData.username.value, formData.password.value)
     if (success) {
       router.push('/')
     } else {

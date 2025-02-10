@@ -6,11 +6,11 @@ export function getAPIConfig(withAPIKey: boolean = true): Configuration {
     const authData = authStore()
     return new Configuration({
       basePath: 'http://localhost:5001',
-      accessToken: authData.getAccessToken() ?? '',
       baseOptions: {
         headers: {
           // override to undefined as by default it is set to 'OpenAPI-Generator/typescript-axios'
           'User-Agent': undefined,
+          Authorization: 'Bearer ' + (authData.getAccessToken() ?? ''),
         },
       },
     })

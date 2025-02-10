@@ -1,19 +1,14 @@
 <script setup lang="ts">
 import CategoryItem from '@/components/CategoryItem.vue'
+import { onMounted, ref } from 'vue'
+import { fetchCategories } from '@/view-api-interaction/CategoriesView'
 import type { Category } from '@/types/category'
 
-const categories: Category[] = [
-  {
-    uuid: '35dbaec3-6738-42e5-bfd8-79e5877e3ffd',
-    name: 'Technology',
-    icon: 'pi pi-microchip',
-  },
-  {
-    uuid: 'b2ad2f84-8a8f-4006-ab62-35b9a09cb6d7',
-    name: 'Food',
-    icon: 'pi pi-face-smile',
-  },
-]
+let categories = ref<Category[]>([])
+
+onMounted(() => {
+  fetchCategories().then((c) => (categories.value = c))
+})
 </script>
 
 <template>
@@ -24,6 +19,8 @@ const categories: Category[] = [
     </template>
   </div>
 </template>
+
+<script lang="ts"></script>
 
 <style scoped>
 h1 {

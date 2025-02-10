@@ -20,8 +20,6 @@ onMounted(() => {
   </div>
 </template>
 
-<script lang="ts"></script>
-
 <style scoped>
 h1 {
   padding: 15px;

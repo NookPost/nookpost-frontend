@@ -4,7 +4,7 @@ import { onMounted, ref } from 'vue'
 import { fetchCategories } from '@/view-api-interaction/CategoriesView'
 import type { Category } from '@/types/category'
 
-let categories = ref<Category[]>([])
+const categories = ref<Category[]>([])
 
 onMounted(() => {
   fetchCategories().then((c) => (categories.value = c))

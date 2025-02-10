@@ -1,9 +1,8 @@
-import type { CategoryData, GetAllCategoriesCategory, GetAllCategoriesResponseBody } from '@/api'
+import type { GetAllCategoriesCategory, GetAllCategoriesResponseBody } from '@/api'
 import { CategoriesApi } from '@/api/apis/categories-api'
-import { authStore } from '@/store/auth'
 import type { Category } from '@/types/category'
 import { getAPIConfig } from '@/util/api'
-import { AxiosError, type AxiosResponse, type CancelToken } from 'axios'
+import { AxiosError, type AxiosResponse } from 'axios'
 
 export async function fetchCategories(): Promise<Category[]> {
   let categories: GetAllCategoriesCategory[] = []
@@ -29,9 +28,9 @@ export async function fetchCategories(): Promise<Category[]> {
 }
 
 function foldCategories(categoryDatas: GetAllCategoriesCategory[]): Category[] {
-  let categories: Category[] = []
+  const categories: Category[] = []
   categoryDatas.forEach((c) => {
-    let category: Category = {
+    const category: Category = {
       uuid: c.uuid ?? '',
       name: c.name ?? '',
       icon: c.icon ?? '',

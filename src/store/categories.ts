@@ -1,10 +1,28 @@
-import type { GetAllCategoriesCategory, GetAllCategoriesResponseBody } from '@/api'
-import { CategoriesApi } from '@/api/apis/categories-api'
-import type { Category } from '@/types/category'
+import { defineStore } from 'pinia'
+import { computed, ref, type Ref } from 'vue'
 import { getAPIConfig } from '@/util/api'
 import { AxiosError, type AxiosResponse } from 'axios'
+import type { Category } from '@/types/category'
+import type { GetAllCategoriesCategory, GetAllCategoriesResponseBody } from '@/api'
+import { CategoriesApi } from '@/api/apis/categories-api'
 
-export async function fetchCategories(): Promise<Category[]> {
+export const categoryData = defineStore('categoryData', () => {
+  const categories: Ref<Category[]> = ref([])
+  const loading: Ref<boolean> = ref(true)
+
+  async function loadCategories() {
+    loading.value = true
+    categories.value = await fetchCategories()
+    loading.value = false
+  }
+
+  loadCategories()
+
+  return { categories, loadCategories, loading }
+})
+
+
+async function fetchCategories(): Promise<Category[]> {
   let categories: GetAllCategoriesCategory[] = []
   const configuration = getAPIConfig(true)
   const categoryApi = new CategoriesApi(configuration)

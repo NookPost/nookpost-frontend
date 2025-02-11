@@ -13,33 +13,27 @@
  */
 
 /**
- * Represents a post created by a user
+ *
  * @export
- * @interface PostData
+ * @interface GetCategoryResponseBody
  */
-export interface PostData {
+export interface GetCategoryResponseBody {
   /**
-   * Title of the post
+   * Name of the category
    * @type {string}
-   * @memberof PostData
+   * @memberof GetCategoryResponseBody
    */
-  title?: string | null
+  name?: string | null
   /**
-   * Body/content of the post
+   * Icon of the category
    * @type {string}
-   * @memberof PostData
+   * @memberof GetCategoryResponseBody
    */
-  body?: string | null
+  icon?: string | null
   /**
-   * The banner image of the post
+   * UUID of the category object
    * @type {string}
-   * @memberof PostData
+   * @memberof GetCategoryResponseBody
    */
-  bannerImageBase64?: string | null
-  /**
-   * UUID of the category of the post
-   * @type {string}
-   * @memberof PostData
-   */
-  categoryUuid?: string | null
+  uuid?: string | null
 }

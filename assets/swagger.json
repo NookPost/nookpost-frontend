@@ -92,7 +92,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/CategoryData"
+                  "$ref": "#/components/schemas/GetCategoryResponseBody"
                 }
               }
             }
@@ -273,6 +273,14 @@
             "name": "categoryUuid",
             "in": "query",
             "description": "The uuid of the category the posts are in",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "textSearch",
+            "in": "query",
+            "description": "Text to search for in articles (body and title)",
             "schema": {
               "type": "string"
             }
@@ -529,22 +537,6 @@
         "additionalProperties": false,
         "description": "Represents a token object in the response to a Login request"
       },
-      "CategoryData": {
-        "type": "object",
-        "properties": {
-          "name": {
-            "type": "string",
-            "description": "Name of the category",
-            "nullable": true
-          },
-          "icon": {
-            "type": "string",
-            "description": "Icon of the category",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
       "GetAllCategoriesCategory": {
         "type": "object",
         "properties": {
@@ -581,6 +573,27 @@
         "additionalProperties": false,
         "description": "The body of a Get request to category/all"
       },
+      "GetCategoryResponseBody": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Name of the category",
+            "nullable": true
+          },
+          "icon": {
+            "type": "string",
+            "description": "Icon of the category",
+            "nullable": true
+          },
+          "uuid": {
+            "type": "string",
+            "description": "UUID of the category object",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "GetPostFilteredPost": {
         "type": "object",
         "properties": {
@@ -592,6 +605,11 @@
           "body": {
             "type": "string",
             "description": "Body/content of the post",
+            "nullable": true
+          },
+          "bannerImageBase64": {
+            "type": "string",
+            "description": "The banner image of the post",
             "nullable": true
           },
           "categoryUuid": {
@@ -656,6 +674,11 @@
             "description": "Body/content of the post",
             "nullable": true
           },
+          "bannerImageBase64": {
+            "type": "string",
+            "description": "The banner image of the post",
+            "nullable": true
+          },
           "categoryUuid": {
             "type": "string",
             "description": "UUID of the category of the post",
@@ -696,6 +719,11 @@
           "body": {
             "type": "string",
             "description": "Body/content of the post",
+            "nullable": true
+          },
+          "bannerImageBase64": {
+            "type": "string",
+            "description": "The banner image of the post",
             "nullable": true
           },
           "categoryUuid": {
@@ -747,6 +775,11 @@
           "body": {
             "type": "string",
             "description": "Body/content of the post",
+            "nullable": true
+          },
+          "bannerImageBase64": {
+            "type": "string",
+            "description": "The banner image of the post",
             "nullable": true
           },
           "categoryUuid": {

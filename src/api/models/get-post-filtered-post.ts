@@ -31,6 +31,12 @@ export interface GetPostFilteredPost {
    */
   body?: string | null
   /**
+   * The banner image of the post
+   * @type {string}
+   * @memberof GetPostFilteredPost
+   */
+  bannerImageBase64?: string | null
+  /**
    * UUID of the category of the post
    * @type {string}
    * @memberof GetPostFilteredPost

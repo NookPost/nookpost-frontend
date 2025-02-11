@@ -39,9 +39,9 @@ import {
   operationServerMap,
 } from '../base'
 // @ts-ignore
-import type { CategoryData } from '../models'
-// @ts-ignore
 import type { GetAllCategoriesResponseBody } from '../models'
+// @ts-ignore
+import type { GetCategoryResponseBody } from '../models'
 /**
  * CategoriesApi - axios parameter creator
  * @export
@@ -171,7 +171,9 @@ export const CategoriesApiFp = function (configuration?: Configuration) {
     async categoryGet(
       uuid: string,
       options?: RawAxiosRequestConfig,
-    ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CategoryData>> {
+    ): Promise<
+      (axios?: AxiosInstance, basePath?: string) => AxiosPromise<GetCategoryResponseBody>
+    > {
       const localVarAxiosArgs = await localVarAxiosParamCreator.categoryGet(uuid, options)
       const localVarOperationServerIndex = configuration?.serverIndex ?? 0
       const localVarOperationServerBasePath =
@@ -214,7 +216,10 @@ export const CategoriesApiFactory = function (
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    categoryGet(uuid: string, options?: RawAxiosRequestConfig): AxiosPromise<CategoryData> {
+    categoryGet(
+      uuid: string,
+      options?: RawAxiosRequestConfig,
+    ): AxiosPromise<GetCategoryResponseBody> {
       return localVarFp.categoryGet(uuid, options).then((request) => request(axios, basePath))
     },
   }

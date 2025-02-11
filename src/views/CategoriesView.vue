@@ -1,20 +1,19 @@
 <script setup lang="ts">
 import CategoryItem from '@/components/CategoryItem.vue'
-import { onMounted, ref } from 'vue'
-import { fetchCategories } from '@/view-api-interaction/CategoriesView'
-import type { Category } from '@/types/category'
+import { categoryData } from '@/store/categories'
+import { onMounted } from 'vue'
 
-const categories = ref<Category[]>([])
+const categoryStore = categoryData()
 
 onMounted(() => {
-  fetchCategories().then((c) => (categories.value = c))
+  categoryStore.loadCategories()
 })
 </script>
 
 <template>
   <h1 class="blue">Categories</h1>
   <div class="category-list">
-    <template v-for="category in categories" v-bind:key="category.uuid">
+    <template v-for="category in categoryStore.categories" v-bind:key="category.uuid">
       <CategoryItem :category="category"></CategoryItem>
     </template>
   </div>

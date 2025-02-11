@@ -8,14 +8,13 @@ const route = useRoute()
 let id = route.params.id
 const post: Ref<Post | null> = ref(null)
 
-if(id instanceof Array){
+if (id instanceof Array) {
   id = id[0]
 }
 
 onMounted(() => {
-  fetchPost(id).then(p => post.value = p)
+  fetchPost(id).then((p) => (post.value = p))
 })
-
 </script>
 
 <template>

@@ -31,6 +31,12 @@ export interface GetPostResponseBody {
    */
   body?: string | null
   /**
+   * The banner image of the post
+   * @type {string}
+   * @memberof GetPostResponseBody
+   */
+  bannerImageBase64?: string | null
+  /**
    * UUID of the category of the post
    * @type {string}
    * @memberof GetPostResponseBody

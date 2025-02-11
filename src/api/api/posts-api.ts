@@ -104,6 +104,7 @@ export const PostsApiAxiosParamCreator = function (configuration?: Configuration
      * @summary Gets a filtered set of posts
      * @param {string} [uuid] The UUID of the post to get
      * @param {string} [categoryUuid] The uuid of the category the posts are in
+     * @param {string} [textSearch] Text to search for in articles (body and title)
      * @param {number} [page] The page the posts should be on (requires pageItemCount)
      * @param {number} [pageItemCount] The number of posts per page (requires page)
      * @param {*} [options] Override http request option.
@@ -112,6 +113,7 @@ export const PostsApiAxiosParamCreator = function (configuration?: Configuration
     postsFilterGet: async (
       uuid?: string,
       categoryUuid?: string,
+      textSearch?: string,
       page?: number,
       pageItemCount?: number,
       options: RawAxiosRequestConfig = {},
@@ -137,6 +139,10 @@ export const PostsApiAxiosParamCreator = function (configuration?: Configuration
 
       if (categoryUuid !== undefined) {
         localVarQueryParameter['categoryUuid'] = categoryUuid
+      }
+
+      if (textSearch !== undefined) {
+        localVarQueryParameter['textSearch'] = textSearch
       }
 
       if (page !== undefined) {
@@ -336,6 +342,7 @@ export const PostsApiFp = function (configuration?: Configuration) {
      * @summary Gets a filtered set of posts
      * @param {string} [uuid] The UUID of the post to get
      * @param {string} [categoryUuid] The uuid of the category the posts are in
+     * @param {string} [textSearch] Text to search for in articles (body and title)
      * @param {number} [page] The page the posts should be on (requires pageItemCount)
      * @param {number} [pageItemCount] The number of posts per page (requires page)
      * @param {*} [options] Override http request option.
@@ -344,6 +351,7 @@ export const PostsApiFp = function (configuration?: Configuration) {
     async postsFilterGet(
       uuid?: string,
       categoryUuid?: string,
+      textSearch?: string,
       page?: number,
       pageItemCount?: number,
       options?: RawAxiosRequestConfig,
@@ -353,6 +361,7 @@ export const PostsApiFp = function (configuration?: Configuration) {
       const localVarAxiosArgs = await localVarAxiosParamCreator.postsFilterGet(
         uuid,
         categoryUuid,
+        textSearch,
         page,
         pageItemCount,
         options,
@@ -469,6 +478,7 @@ export const PostsApiFactory = function (
      * @summary Gets a filtered set of posts
      * @param {string} [uuid] The UUID of the post to get
      * @param {string} [categoryUuid] The uuid of the category the posts are in
+     * @param {string} [textSearch] Text to search for in articles (body and title)
      * @param {number} [page] The page the posts should be on (requires pageItemCount)
      * @param {number} [pageItemCount] The number of posts per page (requires page)
      * @param {*} [options] Override http request option.
@@ -477,12 +487,13 @@ export const PostsApiFactory = function (
     postsFilterGet(
       uuid?: string,
       categoryUuid?: string,
+      textSearch?: string,
       page?: number,
       pageItemCount?: number,
       options?: RawAxiosRequestConfig,
     ): AxiosPromise<GetPostFilteredResponseBody> {
       return localVarFp
-        .postsFilterGet(uuid, categoryUuid, page, pageItemCount, options)
+        .postsFilterGet(uuid, categoryUuid, textSearch, page, pageItemCount, options)
         .then((request) => request(axios, basePath))
     },
     /**
@@ -552,6 +563,7 @@ export class PostsApi extends BaseAPI {
    * @summary Gets a filtered set of posts
    * @param {string} [uuid] The UUID of the post to get
    * @param {string} [categoryUuid] The uuid of the category the posts are in
+   * @param {string} [textSearch] Text to search for in articles (body and title)
    * @param {number} [page] The page the posts should be on (requires pageItemCount)
    * @param {number} [pageItemCount] The number of posts per page (requires page)
    * @param {*} [options] Override http request option.
@@ -561,12 +573,13 @@ export class PostsApi extends BaseAPI {
   public postsFilterGet(
     uuid?: string,
     categoryUuid?: string,
+    textSearch?: string,
     page?: number,
     pageItemCount?: number,
     options?: RawAxiosRequestConfig,
   ) {
     return PostsApiFp(this.configuration)
-      .postsFilterGet(uuid, categoryUuid, page, pageItemCount, options)
+      .postsFilterGet(uuid, categoryUuid, textSearch, page, pageItemCount, options)
       .then((request) => request(this.axios, this.basePath))
   }
 

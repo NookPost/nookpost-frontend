@@ -13,9 +13,9 @@ git_push.sh
 index.ts
 models/authentication-login-request-body.ts
 models/authentication-login-response-body.ts
-models/category-data.ts
 models/get-all-categories-category.ts
 models/get-all-categories-response-body.ts
+models/get-category-response-body.ts
 models/get-post-filtered-post.ts
 models/get-post-filtered-response-body.ts
 models/get-post-response-body.ts

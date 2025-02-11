@@ -2,26 +2,18 @@
 import { useRoute } from 'vue-router'
 import PostDetail from '@/components/PostDetail.vue'
 import type { Post } from '@/types/post'
-import { ref, type Ref } from 'vue'
-import type { Category } from '@/types/category'
+import { onMounted, ref, type Ref } from 'vue'
+import { fetchPost } from '@/view-api-interaction/PostDetailView'
 const route = useRoute()
-const id = route.params.id
-const categories: Category[] = [
-  {
-    name: 'Technology',
-    uuid: '35dbaec3-6738-42e5-bfd8-79e5877e3ffd',
-    icon: 'pi pi-microchip',
-  },
-]
-const post: Ref<Post, Post> = ref({
-  uuid: 'adadasd',
-  title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam',
-  author: 'Jack Sparrow',
-  body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.',
-  category: categories[0],
-  created: 1739692463,
-  modified: 0,
-  bannerImageBase64: '',
+let id = route.params.id
+const post: Ref<Post | null> = ref(null)
+
+if (id instanceof Array) {
+  id = id[0]
+}
+
+onMounted(() => {
+  fetchPost(id).then((p) => (post.value = p))
 })
 </script>
 
@@ -29,7 +21,7 @@ const post: Ref<Post, Post> = ref({
   <div class="post-detail-view">
     This will later be the detail page for post {{ id }}
     <!-- View sample -->
-    <PostDetail :data="post" />
+    <PostDetail v-if="post" :data="post" />
     <!-- Edit sample (for creation pass empty object) -->
     <!-- <PostDetail
       v-model:data="post"

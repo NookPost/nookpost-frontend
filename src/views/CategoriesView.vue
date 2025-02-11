@@ -1,14 +1,13 @@
 <script setup lang="ts">
 import CategoryItem from '@/components/CategoryItem.vue'
-import { categoryData } from '@/store/categories';
-import { onMounted } from 'vue';
+import { categoryData } from '@/store/categories'
+import { onMounted } from 'vue'
 
 const categoryStore = categoryData()
 
 onMounted(() => {
   categoryStore.loadCategories()
 })
-
 </script>
 
 <template>

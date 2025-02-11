@@ -21,7 +21,6 @@ export const categoryData = defineStore('categoryData', () => {
   return { categories, loadCategories, loading }
 })
 
-
 async function fetchCategories(): Promise<Category[]> {
   let categories: GetAllCategoriesCategory[] = []
   const configuration = getAPIConfig(true)

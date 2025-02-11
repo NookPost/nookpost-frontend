@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { computed, ref, type Ref } from 'vue'
+import { ref, type Ref } from 'vue'
 import { getAPIConfig } from '@/util/api'
 import { AxiosError, type AxiosResponse } from 'axios'
 import type { Category } from '@/types/category'

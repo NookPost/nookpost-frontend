@@ -18,13 +18,22 @@ if (id instanceof Array) {
 
 if (create) {
   edit.value = true
-  post.value = {author: "", bannerImageBase64: "", body: "", category: {icon: "", name: "", uuid: ""}, created: 0, modified: 0, title: "", uuid: ""}
+  post.value = {
+    author: '',
+    bannerImageBase64: '',
+    body: '',
+    category: { icon: '', name: '', uuid: '' },
+    created: 0,
+    modified: 0,
+    title: '',
+    uuid: '',
+  }
 }
 
 const categories = categoryData()
 
 onMounted(() => {
-  if(!create) {
+  if (!create) {
     fetchPost(id).then((p) => (post.value = p))
   }
 })

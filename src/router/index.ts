@@ -56,7 +56,7 @@ const router = createRouter({
       component: () => import('../views/PostDetailView.vue'),
       meta: {
         create: true,
-      }
+      },
     },
     {
       path: '/login',

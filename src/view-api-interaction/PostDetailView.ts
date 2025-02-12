@@ -31,7 +31,9 @@ export async function fetchPost(uuid: string): Promise<Post | null> {
         bannerImageBase64: response.data.bannerImageBase64 ?? '',
         created: response.data.createdOn ?? 0,
         modified: response.data.modifiedOn ?? 0,
-        category: categoryStore.categories.find((c: Category) => c.uuid == response.data.uuid) ?? {
+        category: categoryStore.categories.find(
+          (c: Category) => c.uuid == response.data.categoryUuid,
+        ) ?? {
           uuid: '',
           icon: '',
           name: '',

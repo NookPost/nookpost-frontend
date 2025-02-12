@@ -33,6 +33,14 @@ const router = createRouter({
       component: () => import('../views/PostDetailView.vue'),
     },
     {
+      path: '/post/edit/:id',
+      name: 'post-edit',
+      component: () => import('../views/PostDetailView.vue'),
+      meta: {
+        edit: true,
+      },
+    },
+    {
       path: '/categories',
       name: 'categories',
       component: () => import('../views/CategoriesView.vue'),

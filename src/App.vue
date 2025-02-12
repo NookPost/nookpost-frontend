@@ -10,10 +10,16 @@ import { Toast } from 'primevue'
   <Toast position="bottom-center" group="bottom-center" />
   <TopBar v-if="!$route.meta.hideNavbar" />
 
-  <RouterView />
+  <div class="app-wrapper">
+    <RouterView />
+  </div>
 </template>
 
 <style scoped>
+.app-wrapper {
+  padding: 0.5rem 0;
+}
+
 header {
   margin-top: 20px;
   line-height: 1.5;

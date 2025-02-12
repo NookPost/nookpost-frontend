@@ -68,7 +68,7 @@ const resolver = ({ values }: FormResolverOptions) => {
 <style scoped src="/src/assets/post.css" />
 
 <template>
-  <div class="post-border detail">
+  <div class="post-border frame detail">
     <span v-if="!edit">
       <h1 class="post-title">{{ data.title }}</h1>
       <div class="post-meta detail">

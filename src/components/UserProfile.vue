@@ -68,7 +68,7 @@ const resolver = ({ values }: FormResolverOptions) => {
 
 <template>
   <span class="profile-grid">
-    <div class="profile-border">
+    <div class="profile-border frame">
       <span v-if="!edit" class="profile-metadata">
         <div class="profile-avatar">
           <Avatar v-if="imageBase64 !== ''" :image="imageBase64" shape="circle" size="xlarge" />
@@ -161,7 +161,7 @@ const resolver = ({ values }: FormResolverOptions) => {
         </FloatLabel>
       </Form>
     </div>
-    <div class="profile-post-preview profile-border">
+    <div class="profile-post-preview profile-border frame">
       <!-- Display last 3 Posts -->
       <template v-for="post in posts.slice(0, 3)" :key="post.uuid">
         <PostPreview :post="post"></PostPreview>

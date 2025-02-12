@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import TheWelcome from '../components/TheWelcome.vue'
 import PostPreviewGrid from '@/components/PostPreviewGrid.vue'
 import type { Category } from '@/types/category'
 import type { Post } from '@/types/post'
@@ -46,7 +45,6 @@ const posts: Post[] = [
 
 <template>
   <main>
-    <TheWelcome />
     <PostPreviewGrid v-bind:posts="posts" />
   </main>
 </template>

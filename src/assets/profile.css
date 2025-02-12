@@ -1,6 +1,4 @@
 div.profile-border {
-  border: 1px solid var(--p-inputtext-border-color);
-  border-radius: 6px;
   padding: 25px;
   background-color: var(--color-background);
 }

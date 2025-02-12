@@ -5,15 +5,23 @@ import TopBar from './components/TopBar.vue'
 import { Toast } from 'primevue'
 </script>
 
+<style src="/src/assets/frame.css" />
+
 <template>
   <Toast position="top-right" group="top-right" />
   <Toast position="bottom-center" group="bottom-center" />
   <TopBar v-if="!$route.meta.hideNavbar" />
 
-  <RouterView />
+  <div class="app-wrapper">
+    <RouterView />
+  </div>
 </template>
 
 <style scoped>
+.app-wrapper {
+  padding: 0.5rem 0;
+}
+
 header {
   margin-top: 20px;
   line-height: 1.5;

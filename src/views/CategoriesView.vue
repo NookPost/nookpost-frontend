@@ -22,6 +22,7 @@ onMounted(() => {
 <style scoped>
 h1 {
   padding: 15px;
+  padding-top: 0;
   font-weight: bold;
   font-size: 2.6rem;
 }

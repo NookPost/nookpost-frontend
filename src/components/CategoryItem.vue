@@ -41,7 +41,7 @@ a:hover {
 }
 
 .category {
-  --p-card-background: var(--vt-c-divider-dark-2);
+  background: var(--vt-c-divider-dark-2);
   width: fit-content;
 }
 

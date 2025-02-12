@@ -20,7 +20,7 @@ function getShortenedBody(input: string): string {
 
 <template>
   <RouterLink :to="'/post/' + post.uuid" class="post-preview-router">
-    <div class="post-border preview">
+    <div class="post-border frame preview">
       <h1 class="post-title">{{ post.title }}</h1>
       <div class="post-meta">
         <h2>

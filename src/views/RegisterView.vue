@@ -64,7 +64,7 @@ const resolver = ({ values }: FormResolverOptions) => {
 
 <template>
   <div class="form-center outer">
-    <div class="form-center inner">
+    <div class="form-center inner frame">
       <Form class="flex flex-col gap-4 fit" v-slot="$form" :resolver @submit="onFormSubmit">
         <img src="/src/assets/logo.svg" />
         <div class="flex flex-col gap-1">

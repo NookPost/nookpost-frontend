@@ -23,7 +23,7 @@ export const categoryData = defineStore('categoryData', () => {
 
 async function fetchCategories(): Promise<Category[]> {
   let categories: GetAllCategoriesCategory[] = []
-  const configuration = getAPIConfig(true)
+  const configuration = getAPIConfig(false)
   const categoryApi = new CategoriesApi(configuration)
   let response: AxiosResponse<GetAllCategoriesResponseBody, unknown>
   try {

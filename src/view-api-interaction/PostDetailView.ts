@@ -9,7 +9,7 @@ const categoryStore = categoryData()
 
 export async function fetchPost(uuid: string): Promise<Post | null> {
   let post: Post | null = null
-  const configuration = getAPIConfig(true)
+  const configuration = getAPIConfig(false)
   const postApi = new PostsApi(configuration)
   let response: AxiosResponse<GetPostResponseBody, unknown>
   try {

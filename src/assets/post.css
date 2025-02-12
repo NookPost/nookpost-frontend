@@ -7,6 +7,10 @@ div.post-border {
   opacity: 0.8;
 }
 
+.post-border.detail {
+  width: 100%;
+}
+
 .post-title {
   margin-bottom: 3px;
   font-size: 35px;
@@ -70,7 +74,8 @@ div.post-border {
 }
 
 form.edit {
-  display: grid;
+  display: flex;
+  flex-direction: column;
   gap: 10px;
 }
 

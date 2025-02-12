@@ -5,7 +5,7 @@ import TopBar from './components/TopBar.vue'
 import { Toast } from 'primevue'
 </script>
 
-<style src="/src/assets/frame.css"/>
+<style src="/src/assets/frame.css" />
 
 <template>
   <Toast position="top-right" group="top-right" />

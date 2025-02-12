@@ -8,17 +8,25 @@ import { ProgressSpinner } from 'primevue'
 import { categoryData } from '@/store/categories'
 const route = useRoute()
 let id = route.params.id
-const edit: boolean = (route.meta.edit as boolean) ?? false
+const edit: Ref<boolean, boolean> = ref((route.meta.edit as boolean | undefined) ?? false)
+const create: boolean = (route.meta.create as boolean | undefined) ?? false
 const post: Ref<Post | null> = ref(null)
 
 if (id instanceof Array) {
   id = id[0]
 }
 
+if (create) {
+  edit.value = true
+  post.value = {author: "", bannerImageBase64: "", body: "", category: {icon: "", name: "", uuid: ""}, created: 0, modified: 0, title: "", uuid: ""}
+}
+
 const categories = categoryData()
 
 onMounted(() => {
-  fetchPost(id).then((p) => (post.value = p))
+  if(!create) {
+    fetchPost(id).then((p) => (post.value = p))
+  }
 })
 </script>
 

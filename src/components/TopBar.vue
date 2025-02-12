@@ -61,6 +61,11 @@ const avatarMenu = ref(<MenuItem[]>[
     route: '/settings',
   },
   {
+    label: 'Create Post',
+    icon: PrimeIcons.PLUS,
+    route: '/post/create',
+  },
+  {
     label: 'Logout',
     icon: PrimeIcons.SIGN_OUT,
     command: () => {

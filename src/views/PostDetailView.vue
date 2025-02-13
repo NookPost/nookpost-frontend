@@ -33,22 +33,19 @@ if (create) {
 const categories = categoryData()
 
 onMounted(() => {
-  if (!create) {
-    fetchPost(id).then((p) => (post.value = p))
-  }
+  categories.loadCategories().then(() => {
+    if (!create) {
+      fetchPost(id).then((p) => (post.value = p))
+    }
+  })
 })
 </script>
 
 <template>
   <div class="post-detail-view">
     <!-- When edit is false, then display  -->
-    <PostDetail
-      v-if="post"
-      v-model:data="post"
-      :edit="edit"
-      v-on:update:post="console.log"
-      :categories="categories.categories"
-    />
+    <PostDetail v-if="post" v-model:data="post" :edit="edit" v-on:update:post="console.log"
+      :categories="categories.categories" />
     <ProgressSpinner v-else />
   </div>
 </template>

@@ -6,19 +6,25 @@ import type { Category } from '@/types/category'
 import type { GetAllCategoriesCategory, GetAllCategoriesResponseBody } from '@/api'
 import { CategoriesApi } from '@/api/apis/categories-api'
 
-export const categoryData = defineStore('categoryData', () => {
-  const categories: Ref<Category[]> = ref([])
-  const loading: Ref<boolean> = ref(true)
-
-  async function loadCategories() {
-    loading.value = true
-    categories.value = await fetchCategories()
-    loading.value = false
+export const categoryData = defineStore('categoryData', {
+  state: () => {
+    const categories: Ref<Category[]> = ref([])
+    const loading: Ref<boolean> = ref(true)
+    return { categories, loading }
+  },
+  actions: {
+    async loadCategories() {
+      this.loading = true
+      this.categories = await fetchCategories()
+      this.loading = false
+    }
+  },
+  getters: {
+    getCategoryByUuid: (state) => (uuid: string) => {
+      return state.categories.find(c => c.uuid == uuid)
+    }
   }
 
-  loadCategories()
-
-  return { categories, loadCategories, loading }
 })
 
 async function fetchCategories(): Promise<Category[]> {

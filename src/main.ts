@@ -13,10 +13,10 @@ import Tooltip from 'primevue/tooltip'
 
 const app = createApp(App)
 
-app.use(router)
-
 const pinia = createPinia()
 app.use(pinia)
+
+app.use(router)
 
 app.use(ToastService)
 

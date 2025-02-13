@@ -33,9 +33,11 @@ if (create) {
 const categories = categoryData()
 
 onMounted(() => {
-  if (!create) {
-    fetchPost(id).then((p) => (post.value = p))
-  }
+  categories.loadCategories().then(() => {
+    if (!create) {
+      fetchPost(id).then((p) => (post.value = p))
+    }
+  })
 })
 </script>
 

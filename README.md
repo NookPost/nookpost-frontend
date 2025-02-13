@@ -45,3 +45,14 @@ Copy new `swagger.json` to `assets`
 ```sh
 npx @openapitools/openapi-generator-cli generate -g typescript-axios -i assets/swagger.json -o src/api --additional-properties="withSeparateModelsAndApi=true,apiPackage=api,modelPackage=models"
 ```
+
+## Deployment
+
+### Docker
+
+```sh
+docker compose up
+```
+
+The environment variable `BACKEND_URL` sets the URL for the backend in the docker image. It is mandatory.
+

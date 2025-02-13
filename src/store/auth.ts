@@ -46,7 +46,7 @@ export const authStore = defineStore('authStore', {
     return { isLoggedIn, expireTime }
   },
   actions: {
-    async register(username: string, password: string): Promise<boolean> {
+    async register(username: string, password: string, displayname: string): Promise<boolean> {
       const configuration = getAPIConfig(false)
       const authAPI = new UsersApi(configuration)
       let response: AxiosResponse<UsersPostResponseBody, unknown>
@@ -54,6 +54,7 @@ export const authStore = defineStore('authStore', {
         response = await authAPI.usersPost(<UsersPostRequestBody>{
           username: username,
           password: password,
+          displayName: displayname,
         })
       } catch (err) {
         if (err instanceof AxiosError) {

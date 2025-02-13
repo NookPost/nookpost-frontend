@@ -21,7 +21,7 @@ async function onFormSubmit(event: FormSubmitEvent) {
   if (event.valid) {
     isLoading.value = true
     const formData = toRaw(event.states)
-    const success: boolean = await auth.register(formData.username.value, formData.password.value)
+    const success: boolean = await auth.register(formData.username.value, formData.displayname.value, formData.password.value)
     if (success) {
       router.push('/')
     } else {
@@ -42,6 +42,10 @@ const resolver = ({ values }: FormResolverOptions) => {
 
   if (!values.username) {
     errors.username = [{ message: 'Username is required.' }]
+  }
+
+  if (!values.displayname) {
+    errors.displayname = [{ message: 'Displayname is required.' }]
   }
 
   if (!values.password) {
@@ -71,6 +75,12 @@ const resolver = ({ values }: FormResolverOptions) => {
           <InputText name="username" placeholder="Username" />
           <Message v-if="$form.username?.invalid" severity="error" size="small" variant="simple">{{
             $form.username.error.message
+          }}</Message>
+        </div>
+        <div class="flex flex-col gap-1">
+          <InputText name="displayname" placeholder="Displayname" />
+          <Message v-if="$form.displayname?.invalid" severity="error" size="small" variant="simple">{{
+            $form.displayname.error.message
           }}</Message>
         </div>
         <div class="flex flex-col gap-1 form-password">

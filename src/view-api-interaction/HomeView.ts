@@ -23,7 +23,7 @@ export async function fetchPosts(): Promise<Post[]> {
   }
   if (response != undefined && response.status === 200 && response.statusText === 'OK') {
     if (response.data != null) {
-      response.data.posts?.forEach(post => {
+      response.data.posts?.forEach((post) => {
         posts.push({
           uuid: post.uuid ?? '',
           title: post.title ?? '',
@@ -32,9 +32,7 @@ export async function fetchPosts(): Promise<Post[]> {
           bannerImageBase64: post.bannerImageBase64 ?? '',
           created: post.createdOn ?? 0,
           modified: post.modifiedOn ?? 0,
-          category: categoryStore.categories.find(
-            (c: Category) => c.uuid == post.categoryUuid,
-          ) ?? {
+          category: categoryStore.categories.find((c: Category) => c.uuid == post.categoryUuid) ?? {
             uuid: '',
             icon: '',
             name: '',

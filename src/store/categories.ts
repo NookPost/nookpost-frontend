@@ -17,14 +17,13 @@ export const categoryData = defineStore('categoryData', {
       this.loading = true
       this.categories = await fetchCategories()
       this.loading = false
-    }
+    },
   },
   getters: {
     getCategoryByUuid: (state) => (uuid: string) => {
-      return state.categories.find(c => c.uuid == uuid)
-    }
-  }
-
+      return state.categories.find((c) => c.uuid == uuid)
+    },
+  },
 })
 
 async function fetchCategories(): Promise<Category[]> {

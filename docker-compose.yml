@@ -6,4 +6,4 @@ services:
     ports:
       - 8080:80
     environment:
-      - BACKEND_URL="https://nookpost-dev.jkulzer.dev"
+      - BACKEND_URL="https://nookpost-dev-api.jkulzer.dev"

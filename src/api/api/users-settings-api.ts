@@ -39,23 +39,21 @@ import {
   operationServerMap,
 } from '../base'
 // @ts-ignore
-import type { CategoryData } from '../models'
-// @ts-ignore
-import type { GetAllCategoriesResponseBody } from '../models'
+import type { UserSettingsData } from '../models'
 /**
- * CategoriesApi - axios parameter creator
+ * UsersSettingsApi - axios parameter creator
  * @export
  */
-export const CategoriesApiAxiosParamCreator = function (configuration?: Configuration) {
+export const UsersSettingsApiAxiosParamCreator = function (configuration?: Configuration) {
   return {
     /**
      *
-     * @summary Gets all categories
+     * @summary Gets the user\'s settings
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    categoryAllGet: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-      const localVarPath = `/category/all`
+    userMeSettingsGet: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+      const localVarPath = `/user/me/settings`
       // use dummy base URL string because the URL constructor only accepts absolute URLs.
       const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL)
       let baseOptions
@@ -85,18 +83,18 @@ export const CategoriesApiAxiosParamCreator = function (configuration?: Configur
     },
     /**
      *
-     * @summary Gets a category
-     * @param {string} uuid
+     * @summary Updates the user\'s settings
+     * @param {UserSettingsData} userSettingsData
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    categoryGet: async (
-      uuid: string,
+    userMeSettingsPut: async (
+      userSettingsData: UserSettingsData,
       options: RawAxiosRequestConfig = {},
     ): Promise<RequestArgs> => {
-      // verify required parameter 'uuid' is not null or undefined
-      assertParamExists('categoryGet', 'uuid', uuid)
-      const localVarPath = `/category`
+      // verify required parameter 'userSettingsData' is not null or undefined
+      assertParamExists('userMeSettingsPut', 'userSettingsData', userSettingsData)
+      const localVarPath = `/user/me/settings`
       // use dummy base URL string because the URL constructor only accepts absolute URLs.
       const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL)
       let baseOptions
@@ -104,16 +102,14 @@ export const CategoriesApiAxiosParamCreator = function (configuration?: Configur
         baseOptions = configuration.baseOptions
       }
 
-      const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options }
+      const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options }
       const localVarHeaderParameter = {} as any
       const localVarQueryParameter = {} as any
 
       // authentication Bearer required
       await setApiKeyToObject(localVarHeaderParameter, 'Authorization', configuration)
 
-      if (uuid !== undefined) {
-        localVarQueryParameter['uuid'] = uuid
-      }
+      localVarHeaderParameter['Content-Type'] = 'application/json'
 
       setSearchParams(localVarUrlObj, localVarQueryParameter)
       let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {}
@@ -122,6 +118,11 @@ export const CategoriesApiAxiosParamCreator = function (configuration?: Configur
         ...headersFromBaseOptions,
         ...options.headers,
       }
+      localVarRequestOptions.data = serializeDataIfNeeded(
+        userSettingsData,
+        localVarRequestOptions,
+        configuration,
+      )
 
       return {
         url: toPathString(localVarUrlObj),
@@ -132,27 +133,26 @@ export const CategoriesApiAxiosParamCreator = function (configuration?: Configur
 }
 
 /**
- * CategoriesApi - functional programming interface
+ * UsersSettingsApi - functional programming interface
  * @export
  */
-export const CategoriesApiFp = function (configuration?: Configuration) {
-  const localVarAxiosParamCreator = CategoriesApiAxiosParamCreator(configuration)
+export const UsersSettingsApiFp = function (configuration?: Configuration) {
+  const localVarAxiosParamCreator = UsersSettingsApiAxiosParamCreator(configuration)
   return {
     /**
      *
-     * @summary Gets all categories
+     * @summary Gets the user\'s settings
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    async categoryAllGet(
+    async userMeSettingsGet(
       options?: RawAxiosRequestConfig,
-    ): Promise<
-      (axios?: AxiosInstance, basePath?: string) => AxiosPromise<GetAllCategoriesResponseBody>
-    > {
-      const localVarAxiosArgs = await localVarAxiosParamCreator.categoryAllGet(options)
+    ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UserSettingsData>> {
+      const localVarAxiosArgs = await localVarAxiosParamCreator.userMeSettingsGet(options)
       const localVarOperationServerIndex = configuration?.serverIndex ?? 0
       const localVarOperationServerBasePath =
-        operationServerMap['CategoriesApi.categoryAllGet']?.[localVarOperationServerIndex]?.url
+        operationServerMap['UsersSettingsApi.userMeSettingsGet']?.[localVarOperationServerIndex]
+          ?.url
       return (axios, basePath) =>
         createRequestFunction(
           localVarAxiosArgs,
@@ -163,19 +163,23 @@ export const CategoriesApiFp = function (configuration?: Configuration) {
     },
     /**
      *
-     * @summary Gets a category
-     * @param {string} uuid
+     * @summary Updates the user\'s settings
+     * @param {UserSettingsData} userSettingsData
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    async categoryGet(
-      uuid: string,
+    async userMeSettingsPut(
+      userSettingsData: UserSettingsData,
       options?: RawAxiosRequestConfig,
-    ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CategoryData>> {
-      const localVarAxiosArgs = await localVarAxiosParamCreator.categoryGet(uuid, options)
+    ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+      const localVarAxiosArgs = await localVarAxiosParamCreator.userMeSettingsPut(
+        userSettingsData,
+        options,
+      )
       const localVarOperationServerIndex = configuration?.serverIndex ?? 0
       const localVarOperationServerBasePath =
-        operationServerMap['CategoriesApi.categoryGet']?.[localVarOperationServerIndex]?.url
+        operationServerMap['UsersSettingsApi.userMeSettingsPut']?.[localVarOperationServerIndex]
+          ?.url
       return (axios, basePath) =>
         createRequestFunction(
           localVarAxiosArgs,
@@ -188,69 +192,74 @@ export const CategoriesApiFp = function (configuration?: Configuration) {
 }
 
 /**
- * CategoriesApi - factory interface
+ * UsersSettingsApi - factory interface
  * @export
  */
-export const CategoriesApiFactory = function (
+export const UsersSettingsApiFactory = function (
   configuration?: Configuration,
   basePath?: string,
   axios?: AxiosInstance,
 ) {
-  const localVarFp = CategoriesApiFp(configuration)
+  const localVarFp = UsersSettingsApiFp(configuration)
   return {
     /**
      *
-     * @summary Gets all categories
+     * @summary Gets the user\'s settings
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    categoryAllGet(options?: RawAxiosRequestConfig): AxiosPromise<GetAllCategoriesResponseBody> {
-      return localVarFp.categoryAllGet(options).then((request) => request(axios, basePath))
+    userMeSettingsGet(options?: RawAxiosRequestConfig): AxiosPromise<UserSettingsData> {
+      return localVarFp.userMeSettingsGet(options).then((request) => request(axios, basePath))
     },
     /**
      *
-     * @summary Gets a category
-     * @param {string} uuid
+     * @summary Updates the user\'s settings
+     * @param {UserSettingsData} userSettingsData
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    categoryGet(uuid: string, options?: RawAxiosRequestConfig): AxiosPromise<CategoryData> {
-      return localVarFp.categoryGet(uuid, options).then((request) => request(axios, basePath))
+    userMeSettingsPut(
+      userSettingsData: UserSettingsData,
+      options?: RawAxiosRequestConfig,
+    ): AxiosPromise<void> {
+      return localVarFp
+        .userMeSettingsPut(userSettingsData, options)
+        .then((request) => request(axios, basePath))
     },
   }
 }
 
 /**
- * CategoriesApi - object-oriented interface
+ * UsersSettingsApi - object-oriented interface
  * @export
- * @class CategoriesApi
+ * @class UsersSettingsApi
  * @extends {BaseAPI}
  */
-export class CategoriesApi extends BaseAPI {
+export class UsersSettingsApi extends BaseAPI {
   /**
    *
-   * @summary Gets all categories
+   * @summary Gets the user\'s settings
    * @param {*} [options] Override http request option.
    * @throws {RequiredError}
-   * @memberof CategoriesApi
+   * @memberof UsersSettingsApi
    */
-  public categoryAllGet(options?: RawAxiosRequestConfig) {
-    return CategoriesApiFp(this.configuration)
-      .categoryAllGet(options)
+  public userMeSettingsGet(options?: RawAxiosRequestConfig) {
+    return UsersSettingsApiFp(this.configuration)
+      .userMeSettingsGet(options)
       .then((request) => request(this.axios, this.basePath))
   }
 
   /**
    *
-   * @summary Gets a category
-   * @param {string} uuid
+   * @summary Updates the user\'s settings
+   * @param {UserSettingsData} userSettingsData
    * @param {*} [options] Override http request option.
    * @throws {RequiredError}
-   * @memberof CategoriesApi
+   * @memberof UsersSettingsApi
    */
-  public categoryGet(uuid: string, options?: RawAxiosRequestConfig) {
-    return CategoriesApiFp(this.configuration)
-      .categoryGet(uuid, options)
+  public userMeSettingsPut(userSettingsData: UserSettingsData, options?: RawAxiosRequestConfig) {
+    return UsersSettingsApiFp(this.configuration)
+      .userMeSettingsPut(userSettingsData, options)
       .then((request) => request(this.axios, this.basePath))
   }
 }

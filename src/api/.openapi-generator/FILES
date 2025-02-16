@@ -4,8 +4,8 @@ api.ts
 api/authentication-api.ts
 api/categories-api.ts
 api/posts-api.ts
-api/user-settings-api.ts
 api/users-api.ts
+api/users-settings-api.ts
 base.ts
 common.ts
 configuration.ts

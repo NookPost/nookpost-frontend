@@ -54,8 +54,8 @@ export const CategoriesApiAxiosParamCreator = function (configuration?: Configur
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    categoryAllGet: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-      const localVarPath = `/category/all`
+    categoriesGet: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+      const localVarPath = `/categories`
       // use dummy base URL string because the URL constructor only accepts absolute URLs.
       const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL)
       let baseOptions
@@ -90,13 +90,16 @@ export const CategoriesApiAxiosParamCreator = function (configuration?: Configur
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    categoryGet: async (
+    categoriesUuidGet: async (
       uuid: string,
       options: RawAxiosRequestConfig = {},
     ): Promise<RequestArgs> => {
       // verify required parameter 'uuid' is not null or undefined
-      assertParamExists('categoryGet', 'uuid', uuid)
-      const localVarPath = `/category`
+      assertParamExists('categoriesUuidGet', 'uuid', uuid)
+      const localVarPath = `/categories/{uuid}`.replace(
+        `{${'uuid'}}`,
+        encodeURIComponent(String(uuid)),
+      )
       // use dummy base URL string because the URL constructor only accepts absolute URLs.
       const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL)
       let baseOptions
@@ -110,10 +113,6 @@ export const CategoriesApiAxiosParamCreator = function (configuration?: Configur
 
       // authentication Bearer required
       await setApiKeyToObject(localVarHeaderParameter, 'Authorization', configuration)
-
-      if (uuid !== undefined) {
-        localVarQueryParameter['uuid'] = uuid
-      }
 
       setSearchParams(localVarUrlObj, localVarQueryParameter)
       let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {}
@@ -144,15 +143,15 @@ export const CategoriesApiFp = function (configuration?: Configuration) {
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    async categoryAllGet(
+    async categoriesGet(
       options?: RawAxiosRequestConfig,
     ): Promise<
       (axios?: AxiosInstance, basePath?: string) => AxiosPromise<GetAllCategoriesResponseBody>
     > {
-      const localVarAxiosArgs = await localVarAxiosParamCreator.categoryAllGet(options)
+      const localVarAxiosArgs = await localVarAxiosParamCreator.categoriesGet(options)
       const localVarOperationServerIndex = configuration?.serverIndex ?? 0
       const localVarOperationServerBasePath =
-        operationServerMap['CategoriesApi.categoryAllGet']?.[localVarOperationServerIndex]?.url
+        operationServerMap['CategoriesApi.categoriesGet']?.[localVarOperationServerIndex]?.url
       return (axios, basePath) =>
         createRequestFunction(
           localVarAxiosArgs,
@@ -168,16 +167,16 @@ export const CategoriesApiFp = function (configuration?: Configuration) {
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    async categoryGet(
+    async categoriesUuidGet(
       uuid: string,
       options?: RawAxiosRequestConfig,
     ): Promise<
       (axios?: AxiosInstance, basePath?: string) => AxiosPromise<GetCategoryResponseBody>
     > {
-      const localVarAxiosArgs = await localVarAxiosParamCreator.categoryGet(uuid, options)
+      const localVarAxiosArgs = await localVarAxiosParamCreator.categoriesUuidGet(uuid, options)
       const localVarOperationServerIndex = configuration?.serverIndex ?? 0
       const localVarOperationServerBasePath =
-        operationServerMap['CategoriesApi.categoryGet']?.[localVarOperationServerIndex]?.url
+        operationServerMap['CategoriesApi.categoriesUuidGet']?.[localVarOperationServerIndex]?.url
       return (axios, basePath) =>
         createRequestFunction(
           localVarAxiosArgs,
@@ -206,8 +205,8 @@ export const CategoriesApiFactory = function (
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    categoryAllGet(options?: RawAxiosRequestConfig): AxiosPromise<GetAllCategoriesResponseBody> {
-      return localVarFp.categoryAllGet(options).then((request) => request(axios, basePath))
+    categoriesGet(options?: RawAxiosRequestConfig): AxiosPromise<GetAllCategoriesResponseBody> {
+      return localVarFp.categoriesGet(options).then((request) => request(axios, basePath))
     },
     /**
      *
@@ -216,11 +215,11 @@ export const CategoriesApiFactory = function (
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    categoryGet(
+    categoriesUuidGet(
       uuid: string,
       options?: RawAxiosRequestConfig,
     ): AxiosPromise<GetCategoryResponseBody> {
-      return localVarFp.categoryGet(uuid, options).then((request) => request(axios, basePath))
+      return localVarFp.categoriesUuidGet(uuid, options).then((request) => request(axios, basePath))
     },
   }
 }
@@ -239,9 +238,9 @@ export class CategoriesApi extends BaseAPI {
    * @throws {RequiredError}
    * @memberof CategoriesApi
    */
-  public categoryAllGet(options?: RawAxiosRequestConfig) {
+  public categoriesGet(options?: RawAxiosRequestConfig) {
     return CategoriesApiFp(this.configuration)
-      .categoryAllGet(options)
+      .categoriesGet(options)
       .then((request) => request(this.axios, this.basePath))
   }
 
@@ -253,9 +252,9 @@ export class CategoriesApi extends BaseAPI {
    * @throws {RequiredError}
    * @memberof CategoriesApi
    */
-  public categoryGet(uuid: string, options?: RawAxiosRequestConfig) {
+  public categoriesUuidGet(uuid: string, options?: RawAxiosRequestConfig) {
     return CategoriesApiFp(this.configuration)
-      .categoryGet(uuid, options)
+      .categoriesUuidGet(uuid, options)
       .then((request) => request(this.axios, this.basePath))
   }
 }

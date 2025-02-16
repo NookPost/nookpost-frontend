@@ -15,5 +15,5 @@
 export * from './api/authentication-api'
 export * from './api/categories-api'
 export * from './api/posts-api'
-export * from './api/user-settings-api'
 export * from './api/users-api'
+export * from './api/users-settings-api'

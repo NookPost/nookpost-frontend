@@ -70,7 +70,7 @@
         }
       }
     },
-    "/category": {
+    "/categories/{uuid}": {
       "get": {
         "tags": [
           "Categories"
@@ -79,7 +79,7 @@
         "parameters": [
           {
             "name": "uuid",
-            "in": "query",
+            "in": "path",
             "required": true,
             "schema": {
               "type": "string"
@@ -106,7 +106,7 @@
         }
       }
     },
-    "/category/all": {
+    "/categories": {
       "get": {
         "tags": [
           "Categories"
@@ -129,7 +129,7 @@
         }
       }
     },
-    "/posts": {
+    "/posts/{uuid}": {
       "get": {
         "tags": [
           "Posts"
@@ -138,7 +138,7 @@
         "parameters": [
           {
             "name": "uuid",
-            "in": "query",
+            "in": "path",
             "required": true,
             "schema": {
               "type": "string"
@@ -164,6 +164,72 @@
           }
         }
       },
+      "put": {
+        "tags": [
+          "Posts"
+        ],
+        "summary": "Modifies a post",
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PutPostRequestBody"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Posts"
+        ],
+        "summary": "Deletes a post",
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/posts": {
       "post": {
         "tags": [
           "Posts"
@@ -198,62 +264,6 @@
           }
         }
       },
-      "put": {
-        "tags": [
-          "Posts"
-        ],
-        "summary": "Modifies a post",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/PutPostRequestBody"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "400": {
-            "description": "Bad Request"
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "Posts"
-        ],
-        "summary": "Deletes a post",
-        "parameters": [
-          {
-            "name": "uuid",
-            "in": "query",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "400": {
-            "description": "Bad Request"
-          }
-        }
-      }
-    },
-    "/posts/filter": {
       "get": {
         "tags": [
           "Posts"
@@ -262,9 +272,9 @@
         "description": "The list will be ordered by date of creation",
         "parameters": [
           {
-            "name": "uuid",
+            "name": "username",
             "in": "query",
-            "description": "The UUID of the post to get",
+            "description": "The username of the author that created the post",
             "schema": {
               "type": "string"
             }
@@ -321,7 +331,7 @@
         }
       }
     },
-    "/users": {
+    "/users/{username}": {
       "get": {
         "tags": [
           "Users"
@@ -330,7 +340,7 @@
         "parameters": [
           {
             "name": "username",
-            "in": "query",
+            "in": "path",
             "required": true,
             "schema": {
               "type": "string"
@@ -350,40 +360,6 @@
           },
           "404": {
             "description": "Not Found"
-          },
-          "400": {
-            "description": "Bad Request"
-          }
-        }
-      },
-      "post": {
-        "tags": [
-          "Users"
-        ],
-        "summary": "Creates a new user",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/UsersPostRequestBody"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/UsersPostResponseBody"
-                }
-              }
-            }
-          },
-          "409": {
-            "description": "Conflict"
           },
           "400": {
             "description": "Bad Request"
@@ -453,10 +429,46 @@
         }
       }
     },
-    "/userSettings": {
+    "/users": {
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Creates a new user",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UsersPostRequestBody"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UsersPostResponseBody"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/user/me/settings": {
       "get": {
         "tags": [
-          "UserSettings"
+          "Users Settings"
         ],
         "summary": "Gets the user's settings",
         "responses": {
@@ -477,7 +489,7 @@
       },
       "put": {
         "tags": [
-          "UserSettings"
+          "Users Settings"
         ],
         "summary": "Updates the user's settings",
         "requestBody": {
@@ -617,6 +629,11 @@
             "description": "UUID of the category of the post",
             "nullable": true
           },
+          "authorDisplayName": {
+            "type": "string",
+            "description": "The display name of the author",
+            "nullable": true
+          },
           "uuid": {
             "type": "string",
             "description": "The UUID of the post.",
@@ -682,6 +699,11 @@
           "categoryUuid": {
             "type": "string",
             "description": "UUID of the category of the post",
+            "nullable": true
+          },
+          "authorDisplayName": {
+            "type": "string",
+            "description": "The display name of the author",
             "nullable": true
           },
           "uuid": {
@@ -786,11 +808,6 @@
             "type": "string",
             "description": "UUID of the category of the post",
             "nullable": true
-          },
-          "uuid": {
-            "type": "string",
-            "description": "The UUID of the post.",
-            "nullable": true
           }
         },
         "additionalProperties": false,
@@ -880,6 +897,11 @@
           "email": {
             "type": "string",
             "description": "Email of the user (null if user does not provide contact info)",
+            "nullable": true
+          },
+          "uuid": {
+            "type": "string",
+            "description": "The UUID of the user",
             "nullable": true
           }
         },

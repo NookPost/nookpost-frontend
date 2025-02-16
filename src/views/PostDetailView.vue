@@ -19,7 +19,8 @@ if (id instanceof Array) {
 if (create) {
   edit.value = true
   post.value = {
-    author: '',
+    authorUsername: '',
+    authorDisplayname: '',
     bannerImageBase64: '',
     body: '',
     category: { icon: '', name: '', uuid: '' },

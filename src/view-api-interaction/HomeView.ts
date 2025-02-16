@@ -8,12 +8,12 @@ import { AxiosError, type AxiosResponse } from 'axios'
 const categoryStore = categoryData()
 
 export async function fetchPosts(): Promise<Post[]> {
-  let posts: Post[] = []
+  const posts: Post[] = []
   const configuration = getAPIConfig(false)
   const postApi = new PostsApi(configuration)
   let response: AxiosResponse<GetPostFilteredResponseBody, unknown>
   try {
-    response = await postApi.postsFilterGet()
+    response = await postApi.postsGet()
   } catch (err) {
     if (err instanceof AxiosError) {
       response = err.response as AxiosResponse<GetPostFilteredResponseBody, unknown>
@@ -28,7 +28,8 @@ export async function fetchPosts(): Promise<Post[]> {
           uuid: post.uuid ?? '',
           title: post.title ?? '',
           body: post.body ?? '',
-          author: post.authorUsername ?? '',
+          authorUsername: post.authorUsername ?? '',
+          authorDisplayname: post.authorUsername ?? '',
           bannerImageBase64: post.bannerImageBase64 ?? '',
           created: post.createdOn ?? 0,
           modified: post.modifiedOn ?? 0,

@@ -93,3 +93,16 @@ form.edit {
   align-items: center;
   gap: 0.25rem;
 }
+
+.post-author-link:hover {
+  background: transparent;
+  text-decoration: underline;
+}
+
+.post-category-link:hover {
+  background: transparent;
+}
+
+.post-category-link:hover > .p-tag {
+  opacity: 0.8;
+}

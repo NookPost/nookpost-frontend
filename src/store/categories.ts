@@ -4,7 +4,7 @@ import { getAPIConfig } from '@/util/api'
 import { AxiosError, type AxiosResponse } from 'axios'
 import type { Category } from '@/types/category'
 import type { GetAllCategoriesCategory, GetAllCategoriesResponseBody } from '@/api'
-import { CategoriesApi } from '@/api/apis/categories-api'
+import { CategoriesApi } from '@/api/api/categories-api'
 
 export const categoryData = defineStore('categoryData', {
   state: () => {
@@ -32,7 +32,7 @@ async function fetchCategories(): Promise<Category[]> {
   const categoryApi = new CategoriesApi(configuration)
   let response: AxiosResponse<GetAllCategoriesResponseBody, unknown>
   try {
-    response = await categoryApi.categoryAllGet()
+    response = await categoryApi.categoriesGet()
   } catch (err) {
     if (err instanceof AxiosError) {
       response = err.response as AxiosResponse<GetAllCategoriesResponseBody, unknown>

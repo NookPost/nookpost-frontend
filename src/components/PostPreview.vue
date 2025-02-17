@@ -46,14 +46,22 @@ function getShortenedBody(input: string): string {
             </RouterLink>
           </div>
         </div>
-        <Button
-          v-if="authData.userName === post.authorUsername"
-          :icon="PrimeIcons.PENCIL"
-          severity="secondary"
-          as="router-link"
-          :to="'/post/edit/' + post.uuid"
-          v-tooltip.bottom="'Edit Post'"
-        />
+        <div v-if="authData.userName === post.authorUsername" class="post-controls">
+          <Button
+            :icon="PrimeIcons.PENCIL"
+            severity="secondary"
+            as="router-link"
+            :to="'/post/edit/' + post.uuid"
+            v-tooltip.bottom="'Edit Post'"
+          />
+          <!-- Add Deletion Logic here -->
+          <Button
+            :icon="PrimeIcons.TRASH"
+            severity="danger"
+            @click="console.log(post.uuid)"
+            v-tooltip.bottom="'Delete Post'"
+          />
+        </div>
       </div>
       <div class="post-body">
         <p>

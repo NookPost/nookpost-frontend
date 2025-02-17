@@ -33,6 +33,15 @@ div.post-border {
   flex-wrap: nowrap;
 }
 
+.post-preview-meta-bar:deep(.p-button-label) {
+  line-height: 1;
+}
+
+.post-controls {
+  display: flex;
+  gap: 5px;
+}
+
 .post-meta:not(.edit) {
   font-size: 0.75em;
 }

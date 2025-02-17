@@ -13,8 +13,9 @@ import { AxiosError, type AxiosResponse } from 'axios'
 
 // private Store
 const authData = defineStore('authData', () => {
-  const accessToken: Ref<string | null, string | null> = ref(null)
-  const expiryTimestamp: Ref<number | null, number | null> = ref(null)
+  const accessToken: Ref<string | null> = ref(null)
+  const expiryTimestamp: Ref<number | null> = ref(null)
+  const userName: Ref<string | null> = ref(null)
 
   if (localStorage.getItem('accessToken')) {
     accessToken.value = localStorage.getItem('accessToken')
@@ -22,16 +23,21 @@ const authData = defineStore('authData', () => {
   if (localStorage.getItem('expiryTimestamp')) {
     expiryTimestamp.value = Number(localStorage.getItem('expiryTimestamp'))
   }
+  if (localStorage.getItem('userName')) {
+    userName.value = localStorage.getItem('userName')
+  }
 
-  return { accessToken, expiryTimestamp }
+  return { accessToken, expiryTimestamp, userName }
 })
 
-function saveLoginResponseData(accessToken: string, expireTimestamp: number) {
+function saveLoginResponseData(accessToken: string, expireTimestamp: number, userName: string) {
   const data = authData()
   data.accessToken = accessToken
   data.expiryTimestamp = expireTimestamp
+  data.userName = userName
   localStorage.setItem('accessToken', accessToken)
   localStorage.setItem('expiryTimestamp', String(expireTimestamp))
+  localStorage.setItem('userName', userName)
 }
 
 export const authStore = defineStore('authStore', {
@@ -42,8 +48,9 @@ export const authStore = defineStore('authStore', {
       // convert timestamp in seconds to milliseconds
       data.expiryTimestamp != null ? new Date(data.expiryTimestamp * 1000) : null,
     )
+    const userName = computed(() => data.userName)
 
-    return { isLoggedIn, expireTime }
+    return { isLoggedIn, expireTime, userName }
   },
   actions: {
     async register(username: string, password: string, displayname: string): Promise<boolean> {
@@ -64,7 +71,7 @@ export const authStore = defineStore('authStore', {
         }
       }
       if (response != undefined && response.status === 200 && response.statusText === 'OK') {
-        saveLoginResponseData(response.data.token ?? '', response.data.expiryTimestamp ?? 0)
+        saveLoginResponseData(response.data.token ?? '', response.data.expiryTimestamp ?? 0, username)
         return true
       } else {
         // error handling
@@ -89,7 +96,7 @@ export const authStore = defineStore('authStore', {
         }
       }
       if (response != undefined && response.status === 200 && response.statusText === 'OK') {
-        saveLoginResponseData(response.data.token ?? '', response.data.expiryTimestamp ?? 0)
+        saveLoginResponseData(response.data.token ?? '', response.data.expiryTimestamp ?? 0, username)
         return true
       } else {
         // error handling

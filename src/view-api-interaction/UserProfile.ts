@@ -2,7 +2,6 @@ import {
   PostsApi,
   UsersApi,
   type GetPostFilteredResponseBody,
-  type GetPostResponseBody,
   type UsersGetResponseBody,
 } from '@/api'
 import { categoryData } from '@/store/categories'
@@ -46,7 +45,7 @@ export async function fetchUserProfile(username: string): Promise<Profile | null
 }
 
 export async function fetchPostsByUser(username: string): Promise<Post[]> {
-  let posts: Post[] = []
+  const posts: Post[] = []
   const configuration = getAPIConfig(false)
   const postApi = new PostsApi(configuration)
   let response: AxiosResponse<GetPostFilteredResponseBody, unknown>

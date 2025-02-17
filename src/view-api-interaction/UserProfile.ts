@@ -14,7 +14,7 @@ export async function fetchUserProfile(username: string): Promise<Profile | null
   const postApi = new UsersApi(configuration)
   let response: AxiosResponse<UsersGetResponseBody, unknown>
   try {
-    response = await postApi.usersGet(username)
+    response = await postApi.usersUsernameGet(username)
   } catch (err) {
     if (err instanceof AxiosError) {
       response = err.response as AxiosResponse<UsersGetResponseBody, unknown>
@@ -46,7 +46,7 @@ export async function fetchPostsByUser(username: string): Promise<Post[]> {
   let response: AxiosResponse<GetPostFilteredResponseBody, unknown>
   try {
     //TODO: Filter by the actual username!
-    response = await postApi.postsFilterGet()
+    response = await postApi.postsGet(username, undefined, undefined, undefined, undefined)
   } catch (err) {
     if (err instanceof AxiosError) {
       response = err.response as AxiosResponse<GetPostFilteredResponseBody, unknown>
@@ -61,7 +61,8 @@ export async function fetchPostsByUser(username: string): Promise<Post[]> {
           uuid: post.uuid ?? '',
           title: post.title ?? '',
           body: post.body ?? '',
-          author: post.authorUsername ?? '',
+          authorUsername: post.authorUsername ?? '',
+          authorDisplayname: post.authorDisplayName ?? '',
           bannerImageBase64: post.bannerImageBase64 ?? '',
           created: post.createdOn ?? 0,
           modified: post.modifiedOn ?? 0,

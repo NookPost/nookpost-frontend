@@ -25,7 +25,7 @@ onMounted(() => {
     categories.value = categoryStore.categories
     fetchUserProfile(id).then((u) => {
       profile.value = u
-      fetchPostsByUser("").then((p) => {
+      fetchPostsByUser(u?.username ?? '').then((p) => {
         posts.value = p
       })
     })
@@ -34,6 +34,5 @@ onMounted(() => {
 </script>
 
 <template>
-  <div>User {{ id }}</div>
   <UserProfile v-if="profile" :profile="profile" :posts="posts"></UserProfile>
 </template>

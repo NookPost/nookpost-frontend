@@ -71,7 +71,11 @@ export const authStore = defineStore('authStore', {
         }
       }
       if (response != undefined && response.status === 200 && response.statusText === 'OK') {
-        saveLoginResponseData(response.data.token ?? '', response.data.expiryTimestamp ?? 0, username)
+        saveLoginResponseData(
+          response.data.token ?? '',
+          response.data.expiryTimestamp ?? 0,
+          username,
+        )
         return true
       } else {
         // error handling
@@ -96,7 +100,11 @@ export const authStore = defineStore('authStore', {
         }
       }
       if (response != undefined && response.status === 200 && response.statusText === 'OK') {
-        saveLoginResponseData(response.data.token ?? '', response.data.expiryTimestamp ?? 0, username)
+        saveLoginResponseData(
+          response.data.token ?? '',
+          response.data.expiryTimestamp ?? 0,
+          username,
+        )
         return true
       } else {
         // error handling

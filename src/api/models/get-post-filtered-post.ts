@@ -43,6 +43,12 @@ export interface GetPostFilteredPost {
    */
   categoryUuid?: string | null
   /**
+   * The display name of the author
+   * @type {string}
+   * @memberof GetPostFilteredPost
+   */
+  authorDisplayName?: string | null
+  /**
    * The UUID of the post.
    * @type {string}
    * @memberof GetPostFilteredPost

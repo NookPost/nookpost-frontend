@@ -42,10 +42,4 @@ export interface PutPostRequestBody {
    * @memberof PutPostRequestBody
    */
   categoryUuid?: string | null
-  /**
-   * The UUID of the post.
-   * @type {string}
-   * @memberof PutPostRequestBody
-   */
-  uuid?: string | null
 }

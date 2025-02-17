@@ -4,7 +4,8 @@ export interface Post {
   uuid: string
   title: string
   body: string
-  author: string
+  authorDisplayname: string
+  authorUsername: string
   category: Category
   bannerImageBase64: string
   created: number

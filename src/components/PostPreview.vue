@@ -25,21 +25,20 @@ function getShortenedBody(input: string): string {
       <div class="post-meta">
         <h2>
           created&nbsp;by
-          <span class="post-author">{{ post.author.replace(' ', '&nbsp;') }}</span> on&nbsp;<span
-            class="post-created"
-            convert
-            timestamp
-            in
-            seconds
-            to
-            milliseconds
-            >{{ new Date(post.created * 1000).toLocaleDateString() }}</span
+          <RouterLink class="post-author-link" :to="'/profile/' + post.authorUsername">
+            <span class="post-author">{{ post.authorDisplayname.replace(' ', '&nbsp;') }}</span>
+          </RouterLink>
+          on&nbsp;<span class="post-created">{{
+            new Date(post.created * 1000).toLocaleDateString()
+          }}</span
           ><!-- convert timestamp in seconds to milliseconds -->
         </h2>
         <div class="post-tags">
-          <Tag class="post-category"
-            ><span :class="post.category.icon" />{{ post.category.name }}</Tag
-          >
+          <RouterLink class="post-category-link" :to="'/category/' + post.category.name">
+            <Tag class="post-category"
+              ><span :class="post.category.icon" />{{ post.category.name }}</Tag
+            >
+          </RouterLink>
         </div>
       </div>
       <div class="post-body">

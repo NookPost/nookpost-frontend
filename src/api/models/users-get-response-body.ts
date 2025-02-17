@@ -54,4 +54,10 @@ export interface UsersGetResponseBody {
    * @memberof UsersGetResponseBody
    */
   email?: string | null
+  /**
+   * The UUID of the user
+   * @type {string}
+   * @memberof UsersGetResponseBody
+   */
+  uuid?: string | null
 }

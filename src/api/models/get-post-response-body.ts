@@ -43,6 +43,12 @@ export interface GetPostResponseBody {
    */
   categoryUuid?: string | null
   /**
+   * The display name of the author
+   * @type {string}
+   * @memberof GetPostResponseBody
+   */
+  authorDisplayName?: string | null
+  /**
    * The UUID of the post.
    * @type {string}
    * @memberof GetPostResponseBody

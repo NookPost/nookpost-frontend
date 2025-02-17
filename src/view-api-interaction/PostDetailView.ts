@@ -13,7 +13,7 @@ export async function fetchPost(uuid: string): Promise<Post | null> {
   const postApi = new PostsApi(configuration)
   let response: AxiosResponse<GetPostResponseBody, unknown>
   try {
-    response = await postApi.postsGet(uuid)
+    response = await postApi.postsUuidGet(uuid)
   } catch (err) {
     if (err instanceof AxiosError) {
       response = err.response as AxiosResponse<GetPostResponseBody, unknown>
@@ -27,7 +27,8 @@ export async function fetchPost(uuid: string): Promise<Post | null> {
         uuid: response.data.uuid ?? '',
         title: response.data.title ?? '',
         body: response.data.body ?? '',
-        author: response.data.authorUsername ?? '',
+        authorUsername: response.data.authorUsername ?? '',
+        authorDisplayname: response.data.authorDisplayName ?? '',
         bannerImageBase64: response.data.bannerImageBase64 ?? '',
         created: response.data.createdOn ?? 0,
         modified: response.data.modifiedOn ?? 0,

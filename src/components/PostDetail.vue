@@ -74,16 +74,20 @@ const resolver = ({ values }: FormResolverOptions) => {
       <div class="post-meta detail">
         <h2>
           created&nbsp;by
-          <span class="post-author">{{ data.author.replace(' ', '&nbsp;') }}</span>
+          <RouterLink class="post-author-link" :to="'/profile/' + data.authorUsername">
+            <span class="post-author">{{ data.authorDisplayname.replace(' ', '&nbsp;') }}</span>
+          </RouterLink>
           on&nbsp;<span class="post-created">{{
             new Date(data.created * 1000).toLocaleDateString()
           }}</span
           ><!-- convert timestamp in seconds to milliseconds -->
         </h2>
         <div class="post-tags">
-          <Tag class="post-category"
-            ><span :class="data.category.icon" />{{ data.category.name }}</Tag
-          >
+          <RouterLink class="post-category-link" :to="'/category/' + data.category.name">
+            <Tag class="post-category"
+              ><span :class="data.category.icon" />{{ data.category.name }}</Tag
+            >
+          </RouterLink>
         </div>
       </div>
       <Image

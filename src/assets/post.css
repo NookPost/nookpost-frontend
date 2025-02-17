@@ -26,6 +26,13 @@ div.post-border {
   color: var(--color-text);
 }
 
+.post-preview-meta-bar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+}
+
 .post-meta:not(.edit) {
   font-size: 0.75em;
 }

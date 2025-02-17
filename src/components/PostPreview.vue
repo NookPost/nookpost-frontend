@@ -1,8 +1,12 @@
 <script setup lang="ts">
-import { Tag } from 'primevue'
+import { Tag, Button } from 'primevue'
+import { PrimeIcons } from '@primevue/core/api'
 import { ref, type PropType } from 'vue'
 import { RouterLink } from 'vue-router'
 import type { Post } from '@/types/post'
+import { authStore } from '@/store/auth'
+
+const authData = authStore()
 
 const readMore = ref(false)
 
@@ -22,24 +26,34 @@ function getShortenedBody(input: string): string {
   <RouterLink :to="'/post/' + post.uuid" class="post-preview-router">
     <div class="post-border frame preview">
       <h1 class="post-title">{{ post.title }}</h1>
-      <div class="post-meta">
-        <h2>
-          created&nbsp;by
-          <RouterLink class="post-author-link" :to="'/profile/' + post.authorUsername">
-            <span class="post-author">{{ post.authorDisplayname.replace(' ', '&nbsp;') }}</span>
-          </RouterLink>
-          on&nbsp;<span class="post-created">{{
-            new Date(post.created * 1000).toLocaleDateString()
-          }}</span
-          ><!-- convert timestamp in seconds to milliseconds -->
-        </h2>
-        <div class="post-tags">
-          <RouterLink class="post-category-link" :to="'/category/' + post.category.name">
-            <Tag class="post-category"
-              ><span :class="post.category.icon" />{{ post.category.name }}</Tag
-            >
-          </RouterLink>
+      <div class="post-preview-meta-bar">
+        <div class="post-meta">
+          <h2>
+            created&nbsp;by
+            <RouterLink class="post-author-link" :to="'/profile/' + post.authorUsername">
+              <span class="post-author">{{ post.authorDisplayname.replace(' ', '&nbsp;') }}</span>
+            </RouterLink>
+            on&nbsp;<span class="post-created">{{
+              new Date(post.created * 1000).toLocaleDateString()
+            }}</span
+            ><!-- convert timestamp in seconds to milliseconds -->
+          </h2>
+          <div class="post-tags">
+            <RouterLink class="post-category-link" :to="'/category/' + post.category.name">
+              <Tag class="post-category"
+                ><span :class="post.category.icon" />{{ post.category.name }}</Tag
+              >
+            </RouterLink>
+          </div>
         </div>
+        <Button
+          v-if="authData.userName === post.authorUsername"
+          :icon="PrimeIcons.PENCIL"
+          severity="secondary"
+          as="router-link"
+          :to="'/post/edit/' + post.uuid"
+          v-tooltip.bottom="'Edit Post'"
+        />
       </div>
       <div class="post-body">
         <p>

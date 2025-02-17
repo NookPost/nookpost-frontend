@@ -1,4 +1,10 @@
-import { PostsApi, UsersApi, type GetPostFilteredResponseBody, type GetPostResponseBody, type UsersGetResponseBody } from '@/api'
+import {
+  PostsApi,
+  UsersApi,
+  type GetPostFilteredResponseBody,
+  type GetPostResponseBody,
+  type UsersGetResponseBody,
+} from '@/api'
 import { categoryData } from '@/store/categories'
 import type { Category } from '@/types/category'
 import type { Post } from '@/types/post'
@@ -26,13 +32,13 @@ export async function fetchUserProfile(username: string): Promise<Profile | null
     if (response.data != null) {
       user = {
         //TODO: map the UUID correctly!
-        uuid: "",
-        username: response.data.username ?? "",
-        displayname: response.data.displayName ?? "",
-        tagline: response.data.tagLine ?? "",
-        bio: response.data.bio ?? "",
-        email: response.data.email ?? "",
-        profilePictureBase64: response.data.profilePictureBase64 ?? ""
+        uuid: '',
+        username: response.data.username ?? '',
+        displayname: response.data.displayName ?? '',
+        tagline: response.data.tagLine ?? '',
+        bio: response.data.bio ?? '',
+        email: response.data.email ?? '',
+        profilePictureBase64: response.data.profilePictureBase64 ?? '',
       }
     }
   }

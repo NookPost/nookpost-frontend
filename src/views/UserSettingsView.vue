@@ -33,11 +33,12 @@ const initialValues = ref(
 function onSubmit(event: FormSubmitEvent): void {
   data.value = {
     displayEmailOnProfile: event.states.displayEmailOnProfile.value,
-    useDarkMode: event.states.theme.value === 'Dark'
-            ? true
-            : event.states.theme.value === 'Light'
-              ? false
-              : null,
+    useDarkMode:
+      event.states.theme.value === 'Dark'
+        ? true
+        : event.states.theme.value === 'Light'
+          ? false
+          : null,
   }
   console.log(data.value)
 }

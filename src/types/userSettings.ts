@@ -1,4 +1,4 @@
 export interface userSettings {
-  useDarkMode: boolean | undefined
+  useDarkMode: boolean | null
   displayEmailOnProfile: boolean
 }

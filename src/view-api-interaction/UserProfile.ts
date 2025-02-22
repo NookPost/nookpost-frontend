@@ -30,8 +30,6 @@ export async function fetchUserProfile(username: string): Promise<Profile | null
   if (response != undefined && response.status === 200 && response.statusText === 'OK') {
     if (response.data != null) {
       user = {
-        //TODO: map the UUID correctly!
-        uuid: '',
         username: response.data.username ?? '',
         displayname: response.data.displayName ?? '',
         tagline: response.data.tagLine ?? '',
@@ -50,7 +48,6 @@ export async function fetchPostsByUser(username: string): Promise<Post[]> {
   const postApi = new PostsApi(configuration)
   let response: AxiosResponse<GetPostFilteredResponseBody, unknown>
   try {
-    //TODO: Filter by the actual username!
     response = await postApi.postsGet(username, undefined, undefined, undefined, undefined)
   } catch (err) {
     if (err instanceof AxiosError) {

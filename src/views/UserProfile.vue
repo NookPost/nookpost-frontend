@@ -2,6 +2,7 @@
 import { useRoute } from 'vue-router'
 import type { Profile } from '@/types/profile'
 import UserProfile from '@/components/UserProfile.vue'
+import { ProgressSpinner } from 'primevue'
 import type { Category } from '@/types/category'
 import type { Post } from '@/types/post'
 import { onMounted, ref, type Ref } from 'vue'
@@ -35,4 +36,6 @@ onMounted(() => {
 
 <template>
   <UserProfile v-if="profile" :profile="profile" :posts="posts"></UserProfile>
+  <!--TODO: Center this!-->
+  <ProgressSpinner v-else />
 </template>

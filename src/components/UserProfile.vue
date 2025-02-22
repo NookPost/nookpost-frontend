@@ -40,7 +40,6 @@ function onFormSubmit(event: FormSubmitEvent) {
     isLoading.value = true
     const formData = toRaw(event.states)
     emit('update:profile', {
-      uuid: props.profile.uuid,
       username: props.profile.username,
       displayname: formData.displayname.value,
       email: formData.email.value,

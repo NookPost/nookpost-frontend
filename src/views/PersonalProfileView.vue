@@ -8,7 +8,6 @@ const route = useRoute()
 const id = route.params.username
 
 const profile: Profile = {
-  uuid: 'akdjnasjdb',
   username: 'Test_1234',
   displayname: 'Teee Rock Bottom',
   email: 'test@test.com',

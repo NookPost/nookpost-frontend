@@ -1,5 +1,4 @@
 export interface Profile {
-  uuid: string
   username: string
   displayname: string
   tagline: string

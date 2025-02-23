@@ -16,7 +16,7 @@ const id = route.params.category
 const category: Category = {
   uuid: '',
   name: 'Category Name',
-  icon: 'pi pi-microchip'
+  icon: 'pi pi-microchip',
 }
 
 onMounted(() => {

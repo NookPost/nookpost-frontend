@@ -8,10 +8,10 @@ const posts: Ref<Post[]> = ref([])
 
 const categoryStore = categoryData()
 
-const params: URLSearchParams = new URLSearchParams(window.location.search);
+const params: URLSearchParams = new URLSearchParams(window.location.search)
 
 onMounted(() => {
-  const searchstring = params.get("q")
+  const searchstring = params.get('q')
   console.log(searchstring)
   categoryStore.loadCategories().then(() => {
     fetchPosts().then((p) => (posts.value = p))

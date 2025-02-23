@@ -30,6 +30,8 @@ export default {
 
 <style src="/src/assets/frame.css" />
 
+<style src="/src/assets/category.css" scoped />
+
 <style scoped>
 a {
   padding: 0;
@@ -38,28 +40,5 @@ a {
 a:hover {
   background-color: transparent;
   opacity: 0.8;
-}
-
-.category {
-  background: var(--vt-c-divider-dark-2);
-  width: fit-content;
-}
-
-.category div {
-  display: grid;
-  align-items: center;
-}
-
-.category h1 {
-  color: var(--color-heading);
-  display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
-  gap: 10px;
-  line-height: 1;
-}
-
-.category h1 .pi {
-  --p-icon-size: 24px;
 }
 </style>

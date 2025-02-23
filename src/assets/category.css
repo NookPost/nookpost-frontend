@@ -1,0 +1,25 @@
+.frame.category {
+  background: var(--vt-c-divider-dark-2);
+}
+
+.category {
+  width: fit-content;
+}
+
+.category div {
+  display: grid;
+  align-items: center;
+}
+
+.category h1 {
+  color: var(--color-heading);
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  gap: 10px;
+  line-height: 1;
+}
+
+.category h1 .pi {
+  --p-icon-size: 24px;
+}

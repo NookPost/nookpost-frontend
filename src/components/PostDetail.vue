@@ -7,6 +7,10 @@ import { Form, type FormResolverOptions, type FormSubmitEvent } from '@primevue/
 import Editor from 'primevue/editor'
 import 'quill/dist/quill.core.css'
 import type { Category } from '@/types/category'
+import { authStore } from '@/store/auth'
+import { PrimeIcons } from '@primevue/core/api'
+
+const authData = authStore()
 
 const props = defineProps({
   data: {
@@ -71,23 +75,41 @@ const resolver = ({ values }: FormResolverOptions) => {
   <div class="post-border frame detail">
     <span v-if="!edit">
       <h1 class="post-title">{{ data.title }}</h1>
-      <div class="post-meta detail">
-        <h2>
-          created&nbsp;by
-          <RouterLink class="post-author-link" :to="'/profile/' + data.authorUsername">
-            <span class="post-author">{{ data.authorDisplayname.replace(' ', '&nbsp;') }}</span>
-          </RouterLink>
-          on&nbsp;<span class="post-created">{{
-            new Date(data.created * 1000).toLocaleDateString()
-          }}</span
-          ><!-- convert timestamp in seconds to milliseconds -->
-        </h2>
-        <div class="post-tags">
-          <RouterLink class="post-category-link" :to="'/category/' + data.category.uuid">
-            <Tag class="post-category"
-              ><span :class="data.category.icon" />{{ data.category.name }}</Tag
-            >
-          </RouterLink>
+      <div class="post-detail-meta-bar">
+        <div class="post-meta detail">
+          <h2>
+            created&nbsp;by
+            <RouterLink class="post-author-link" :to="'/profile/' + data.authorUsername">
+              <span class="post-author">{{ data.authorDisplayname.replace(' ', '&nbsp;') }}</span>
+            </RouterLink>
+            on&nbsp;<span class="post-created">{{
+              new Date(data.created * 1000).toLocaleDateString()
+            }}</span
+            ><!-- convert timestamp in seconds to milliseconds -->
+          </h2>
+          <div class="post-tags">
+            <RouterLink class="post-category-link" :to="'/category/' + data.category.uuid">
+              <Tag class="post-category"
+                ><span :class="data.category.icon" />{{ data.category.name }}</Tag
+              >
+            </RouterLink>
+          </div>
+        </div>
+        <div v-if="authData.userName === data.authorUsername" class="post-controls">
+          <Button
+            :icon="PrimeIcons.PENCIL"
+            severity="secondary"
+            as="router-link"
+            :to="'/post/edit/' + data.uuid"
+            v-tooltip.bottom="'Edit Post'"
+          />
+          <!-- Add Deletion Logic here -->
+          <Button
+            :icon="PrimeIcons.TRASH"
+            severity="danger"
+            @click="console.log(data.uuid)"
+            v-tooltip.bottom="'Delete Post'"
+          />
         </div>
       </div>
       <Image

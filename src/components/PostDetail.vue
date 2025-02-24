@@ -55,7 +55,7 @@ const resolver = ({ values }: FormResolverOptions) => {
     errors.title = [{ message: 'Title is required.' }]
   }
 
-  if (!values.category) {
+  if (!values.category?.uuid) {
     errors.category = [{ message: 'Category is required.' }]
   }
 

@@ -9,6 +9,7 @@ import 'quill/dist/quill.core.css'
 import type { Category } from '@/types/category'
 import { authStore } from '@/store/auth'
 import { PrimeIcons } from '@primevue/core/api'
+import { deletePost } from '@/component-api-interaction/PostDeletion'
 
 const authData = authStore()
 
@@ -28,6 +29,10 @@ const props = defineProps({
     required: false,
   },
 })
+
+function onClickDelete(uuid: string) {
+  deletePost(uuid)
+}
 
 const emit = defineEmits<{
   (e: 'update:post', val: Post): Post
@@ -107,7 +112,7 @@ const resolver = ({ values }: FormResolverOptions) => {
           <Button
             :icon="PrimeIcons.TRASH"
             severity="danger"
-            @click="console.log(data.uuid)"
+            @click="onClickDelete(data.uuid)"
             v-tooltip.bottom="'Delete Post'"
           />
         </div>

@@ -3,7 +3,7 @@ import { useRoute } from 'vue-router'
 import PostDetail from '@/components/PostDetail.vue'
 import type { Post } from '@/types/post'
 import { onMounted, ref, type Ref } from 'vue'
-import { fetchPost } from '@/view-api-interaction/PostDetailView'
+import { fetchPost, updatePost } from '@/view-api-interaction/PostDetailView'
 import { ProgressSpinner } from 'primevue'
 import { categoryData } from '@/store/categories'
 const route = useRoute()
@@ -34,12 +34,22 @@ if (create) {
 const categories = categoryData()
 
 onMounted(() => {
+  edit.value = (route.meta.edit as boolean | undefined) ?? false
   categories.loadCategories().then(() => {
     if (!create) {
       fetchPost(id).then((p) => (post.value = p))
     }
   })
 })
+
+function onEditPost(editedPost: Post) {
+  updatePost(editedPost).then(() => {
+    edit.value = false
+    fetchPost(editedPost.uuid).then((p) => {
+      post.value = p
+    })
+  })
+}
 </script>
 
 <template>
@@ -49,7 +59,7 @@ onMounted(() => {
       v-if="post"
       v-model:data="post"
       :edit="edit"
-      v-on:update:post="console.log"
+      v-on:update:post="onEditPost"
       :categories="categories.categories"
     />
     <ProgressSpinner v-else />

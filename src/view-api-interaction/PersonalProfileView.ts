@@ -1,7 +1,4 @@
-import {
-  UsersApi,
-  type UsersGetResponseBody,
-} from '@/api'
+import { UsersApi, type UsersGetResponseBody } from '@/api'
 import type { Profile } from '@/types/profile'
 import { getAPIConfig } from '@/util/api'
 import { AxiosError, type AxiosResponse } from 'axios'

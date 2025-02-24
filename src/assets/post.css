@@ -1,6 +1,7 @@
 div.post-border {
   padding: 25px;
   background-color: var(--vt-c-divider-dark-2);
+  height: 100%;
 }
 
 .post-border.preview:hover {
@@ -26,14 +27,22 @@ div.post-border {
   color: var(--color-text);
 }
 
-.post-preview-meta-bar {
+.post-preview-meta-bar,
+.post-detail-meta-bar {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   flex-wrap: nowrap;
+  align-items: center;
 }
 
-.post-preview-meta-bar:deep(.p-button-label) {
+.post-preview-meta-bar:deep(.p-button),
+.post-detail-meta-bar:deep(.p-button) {
+  height: fit-content;
+}
+
+.post-preview-meta-bar:deep(.p-button-label),
+.post-detail-meta-bar:deep(.p-button-label) {
   line-height: 1;
 }
 

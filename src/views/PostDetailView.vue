@@ -18,20 +18,16 @@ if (route.params.id instanceof Array) {
   id = route.params.id
 }
 
-
 const categories = categoryData()
 
-watch(
-  [() => route.meta.edit, () => route.meta.create, () => route.params.id],
-  () => onViewLoaded(),
-)
+watch([() => route.meta.edit, () => route.meta.create, () => route.params.id], () => onViewLoaded())
 
 onMounted(() => {
   onViewLoaded()
 })
 
 function onViewLoaded() {
-  console.log("reloaded!")
+  console.log('reloaded!')
   if (route.params.id instanceof Array) {
     id = route.params.id[0]
   } else {
@@ -65,8 +61,7 @@ function onViewLoaded() {
 function onSubmitPost(editedPost: Post) {
   if (create) {
     createPost(editedPost)
-  }
-  else {
+  } else {
     updatePost(editedPost)
   }
 }
@@ -75,8 +70,13 @@ function onSubmitPost(editedPost: Post) {
 <template>
   <div class="post-detail-view">
     <!-- When edit is false, then display  -->
-    <PostDetail v-if="post" v-model:data="post" :edit="edit" v-on:update:post="onSubmitPost"
-      :categories="categories.categories" />
+    <PostDetail
+      v-if="post"
+      v-model:data="post"
+      :edit="edit"
+      v-on:update:post="onSubmitPost"
+      :categories="categories.categories"
+    />
     <ProgressSpinner v-else />
   </div>
 </template>

@@ -1,4 +1,10 @@
-import { PostsApi, type GetPostResponseBody, type PostData, type PostPostResponseBody, type PutPostRequestBody } from '@/api'
+import {
+  PostsApi,
+  type GetPostResponseBody,
+  type PostData,
+  type PostPostResponseBody,
+  type PutPostRequestBody,
+} from '@/api'
 import router from '@/router'
 import { categoryData } from '@/store/categories'
 import type { Category } from '@/types/category'

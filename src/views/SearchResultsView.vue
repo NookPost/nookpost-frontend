@@ -10,11 +10,9 @@ const route = useRoute()
 
 const categoryStore = categoryData()
 
-const params: URLSearchParams = new URLSearchParams(window.location.search)
-
 watch(
   () => route.query.q,
-  () => onLoaded()
+  () => onLoaded(),
 )
 
 onMounted(() => {
@@ -22,8 +20,8 @@ onMounted(() => {
 })
 
 function onLoaded() {
-  const searchstring = route.query.q instanceof Array ? route.query.q[0]?.toString() :
-    route.query.q?.toString()
+  const searchstring =
+    route.query.q instanceof Array ? route.query.q[0]?.toString() : route.query.q?.toString()
   console.log(searchstring)
   categoryStore.loadCategories().then(() => {
     fetchPostsByTextSearch(searchstring).then((p) => (posts.value = p))

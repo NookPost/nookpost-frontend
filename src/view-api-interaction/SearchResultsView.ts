@@ -1,7 +1,4 @@
-import {
-  PostsApi,
-  type GetPostFilteredResponseBody,
-} from '@/api'
+import { PostsApi, type GetPostFilteredResponseBody } from '@/api'
 import { categoryData } from '@/store/categories'
 import type { Category } from '@/types/category'
 import type { Post } from '@/types/post'

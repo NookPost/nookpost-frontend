@@ -1,4 +1,10 @@
-import { PostsApi, type GetPostResponseBody, type PutPostRequestBody } from '@/api'
+import {
+  PostsApi,
+  type GetPostResponseBody,
+  type PostData,
+  type PostPostResponseBody,
+  type PutPostRequestBody,
+} from '@/api'
 import router from '@/router'
 import { categoryData } from '@/store/categories'
 import type { Category } from '@/types/category'
@@ -7,6 +13,31 @@ import { getAPIConfig } from '@/util/api'
 import { AxiosError, type AxiosResponse } from 'axios'
 
 const categoryStore = categoryData()
+
+export async function createPost(post: Post) {
+  const configuration = getAPIConfig(true)
+  const postApi = new PostsApi(configuration)
+  const postRequestBody: PostData = {
+    title: post.title,
+    body: post.body,
+    bannerImageBase64: post.bannerImageBase64,
+    categoryUuid: post.category.uuid,
+  }
+
+  let response: AxiosResponse<PostPostResponseBody>
+  try {
+    response = await postApi.postsPost(postRequestBody)
+  } catch (err) {
+    if (err instanceof AxiosError) {
+      response = err.response as AxiosResponse<PostPostResponseBody>
+    } else {
+      throw err
+    }
+  }
+  if (response != undefined && response.status === 200 && response.statusText === 'OK') {
+    router.push('/post/' + response.data.uuid)
+  }
+}
 
 export async function updatePost(post: Post) {
   const configuration = getAPIConfig(true)

@@ -2,18 +2,20 @@
 import { useRoute } from 'vue-router'
 import PostDetail from '@/components/PostDetail.vue'
 import type { Post } from '@/types/post'
-import { onMounted, ref, type Ref } from 'vue'
-import { fetchPost } from '@/view-api-interaction/PostDetailView'
+import { onMounted, ref, watch, type Ref } from 'vue'
+import { fetchPost, updatePost } from '@/view-api-interaction/PostDetailView'
 import { ProgressSpinner } from 'primevue'
 import { categoryData } from '@/store/categories'
 const route = useRoute()
-let id = route.params.id
+let id: string
 const edit: Ref<boolean, boolean> = ref((route.meta.edit as boolean | undefined) ?? false)
 const create: boolean = (route.meta.create as boolean | undefined) ?? false
 const post: Ref<Post | null> = ref(null)
 
-if (id instanceof Array) {
-  id = id[0]
+if (route.params.id instanceof Array) {
+  id = route.params.id[0]
+} else {
+  id = route.params.id
 }
 
 if (create) {
@@ -33,13 +35,27 @@ if (create) {
 
 const categories = categoryData()
 
+watch(
+  () => route.meta.edit,
+  () => onViewLoaded(),
+)
+
 onMounted(() => {
+  onViewLoaded()
+})
+
+function onViewLoaded() {
+  edit.value = (route.meta.edit as boolean | undefined) ?? false
   categories.loadCategories().then(() => {
     if (!create) {
       fetchPost(id).then((p) => (post.value = p))
     }
   })
-})
+}
+
+function onEditPost(editedPost: Post) {
+  updatePost(editedPost)
+}
 </script>
 
 <template>
@@ -49,7 +65,7 @@ onMounted(() => {
       v-if="post"
       v-model:data="post"
       :edit="edit"
-      v-on:update:post="console.log"
+      v-on:update:post="onEditPost"
       :categories="categories.categories"
     />
     <ProgressSpinner v-else />

@@ -1,4 +1,5 @@
-import { PostsApi, type GetPostResponseBody } from '@/api'
+import { PostsApi, type GetPostResponseBody, type PutPostRequestBody } from '@/api'
+import router from '@/router'
 import { categoryData } from '@/store/categories'
 import type { Category } from '@/types/category'
 import type { Post } from '@/types/post'
@@ -6,6 +7,31 @@ import { getAPIConfig } from '@/util/api'
 import { AxiosError, type AxiosResponse } from 'axios'
 
 const categoryStore = categoryData()
+
+export async function updatePost(post: Post) {
+  const configuration = getAPIConfig(true)
+  const postApi = new PostsApi(configuration)
+  const putRequestBody: PutPostRequestBody = {
+    title: post.title,
+    body: post.body,
+    bannerImageBase64: post.bannerImageBase64,
+    categoryUuid: post.category.uuid,
+  }
+
+  let response: AxiosResponse
+  try {
+    response = await postApi.postsUuidPut(post.uuid, putRequestBody)
+  } catch (err) {
+    if (err instanceof AxiosError) {
+      response = err.response as AxiosResponse
+    } else {
+      throw err
+    }
+  }
+  if (response != undefined && response.status === 200 && response.statusText === 'OK') {
+    router.push('/post/' + post.uuid)
+  }
+}
 
 export async function fetchPost(uuid: string): Promise<Post | null> {
   let post: Post | null = null

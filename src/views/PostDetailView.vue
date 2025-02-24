@@ -12,7 +12,6 @@ const edit: Ref<boolean, boolean> = ref((route.meta.edit as boolean | undefined)
 const create: boolean = (route.meta.create as boolean | undefined) ?? false
 const post: Ref<Post | null> = ref(null)
 
-
 if (route.params.id instanceof Array) {
   id = route.params.id[0]
 } else {
@@ -38,7 +37,7 @@ const categories = categoryData()
 
 watch(
   () => route.meta.edit,
-  () => onViewLoaded()
+  () => onViewLoaded(),
 )
 
 onMounted(() => {
@@ -62,8 +61,13 @@ function onEditPost(editedPost: Post) {
 <template>
   <div class="post-detail-view">
     <!-- When edit is false, then display  -->
-    <PostDetail v-if="post" v-model:data="post" :edit="edit" v-on:update:post="onEditPost"
-      :categories="categories.categories" />
+    <PostDetail
+      v-if="post"
+      v-model:data="post"
+      :edit="edit"
+      v-on:update:post="onEditPost"
+      :categories="categories.categories"
+    />
     <ProgressSpinner v-else />
   </div>
 </template>

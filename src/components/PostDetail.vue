@@ -83,7 +83,7 @@ const resolver = ({ values }: FormResolverOptions) => {
           ><!-- convert timestamp in seconds to milliseconds -->
         </h2>
         <div class="post-tags">
-          <RouterLink class="post-category-link" :to="'/category/' + data.category.name">
+          <RouterLink class="post-category-link" :to="'/category/' + data.category.uuid">
             <Tag class="post-category"
               ><span :class="data.category.icon" />{{ data.category.name }}</Tag
             >

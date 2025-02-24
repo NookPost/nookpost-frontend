@@ -5,6 +5,7 @@ import { ref, type PropType } from 'vue'
 import { RouterLink } from 'vue-router'
 import type { Post } from '@/types/post'
 import { authStore } from '@/store/auth'
+import { deletePost } from '@/component-api-interaction/PostDeletion'
 
 const authData = authStore()
 
@@ -17,6 +18,10 @@ function getShortenedBody(input: string): string {
   }
   const temp: string = input.slice(0, numberOfChars - 1)
   return temp.substring(0, temp.lastIndexOf(' '))
+}
+
+function onClickDelete(uuid: string) {
+  deletePost(uuid)
 }
 </script>
 
@@ -58,7 +63,7 @@ function getShortenedBody(input: string): string {
           <Button
             :icon="PrimeIcons.TRASH"
             severity="danger"
-            @click="console.log(post.uuid)"
+            @click="onClickDelete(post.uuid)"
             v-tooltip.bottom="'Delete Post'"
           />
         </div>

@@ -21,7 +21,7 @@ export async function fetchPosts(): Promise<Post[]> {
       throw err
     }
   }
-  if (response != undefined && response.status === 200 && response.statusText === 'OK') {
+  if (response != undefined && response.status >= 200 && response.status <= 299) {
     if (response.data != null) {
       response.data.posts?.forEach((post) => {
         posts.push({

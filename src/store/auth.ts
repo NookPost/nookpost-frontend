@@ -70,7 +70,7 @@ export const authStore = defineStore('authStore', {
           throw err
         }
       }
-      if (response != undefined && response.status === 200 && response.statusText === 'OK') {
+      if (response != undefined && response.status >= 200 && response.status <= 299) {
         saveLoginResponseData(
           response.data.token ?? '',
           response.data.expiryTimestamp ?? 0,
@@ -99,7 +99,7 @@ export const authStore = defineStore('authStore', {
           throw err
         }
       }
-      if (response != undefined && response.status === 200 && response.statusText === 'OK') {
+      if (response != undefined && response.status >= 200 && response.status <= 299) {
         saveLoginResponseData(
           response.data.token ?? '',
           response.data.expiryTimestamp ?? 0,

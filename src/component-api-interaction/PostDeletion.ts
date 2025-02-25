@@ -17,7 +17,7 @@ export async function deletePost(uuid: string) {
       throw err
     }
   }
-  if (response != undefined && response.status === 200 && response.statusText === 'OK') {
+  if (response != undefined && response.status >= 200 && response.status <= 299) {
     //TODO: Check if this is really the best thing to do...
     router.push('/')
   }

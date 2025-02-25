@@ -34,7 +34,7 @@ export async function createPost(post: Post) {
       throw err
     }
   }
-  if (response != undefined && response.status === 200 && response.statusText === 'OK') {
+  if (response != undefined && response.status >= 200 && response.status <= 299) {
     router.push('/post/' + response.data.uuid)
   }
 }
@@ -59,7 +59,7 @@ export async function updatePost(post: Post) {
       throw err
     }
   }
-  if (response != undefined && response.status === 200 && response.statusText === 'OK') {
+  if (response != undefined && response.status >= 200 && response.status <= 299) {
     router.push('/post/' + post.uuid)
   }
 }
@@ -78,7 +78,7 @@ export async function fetchPost(uuid: string): Promise<Post | null> {
       throw err
     }
   }
-  if (response != undefined && response.status === 200 && response.statusText === 'OK') {
+  if (response != undefined && response.status >= 200 && response.status <= 299) {
     if (response.data != null) {
       post = {
         uuid: response.data.uuid ?? '',

@@ -24,8 +24,8 @@ if (id instanceof Array) {
 }
 
 onMounted(() => {
-  if(id == authStore().userName){
-    router.replace("/myprofile")
+  if (id == authStore().userName) {
+    router.replace('/myprofile')
   }
   categoryStore.loadCategories().then(() => {
     categories.value = categoryStore.categories

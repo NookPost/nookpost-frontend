@@ -52,8 +52,8 @@ export const UsersSettingsApiAxiosParamCreator = function (configuration?: Confi
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    userMeSettingsGet: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-      const localVarPath = `/user/me/settings`
+    apiV1UserMeSettingsGet: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+      const localVarPath = `/api/v1/user/me/settings`
       // use dummy base URL string because the URL constructor only accepts absolute URLs.
       const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL)
       let baseOptions
@@ -88,13 +88,13 @@ export const UsersSettingsApiAxiosParamCreator = function (configuration?: Confi
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    userMeSettingsPut: async (
+    apiV1UserMeSettingsPut: async (
       userSettingsData: UserSettingsData,
       options: RawAxiosRequestConfig = {},
     ): Promise<RequestArgs> => {
       // verify required parameter 'userSettingsData' is not null or undefined
-      assertParamExists('userMeSettingsPut', 'userSettingsData', userSettingsData)
-      const localVarPath = `/user/me/settings`
+      assertParamExists('apiV1UserMeSettingsPut', 'userSettingsData', userSettingsData)
+      const localVarPath = `/api/v1/user/me/settings`
       // use dummy base URL string because the URL constructor only accepts absolute URLs.
       const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL)
       let baseOptions
@@ -145,14 +145,15 @@ export const UsersSettingsApiFp = function (configuration?: Configuration) {
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    async userMeSettingsGet(
+    async apiV1UserMeSettingsGet(
       options?: RawAxiosRequestConfig,
     ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UserSettingsData>> {
-      const localVarAxiosArgs = await localVarAxiosParamCreator.userMeSettingsGet(options)
+      const localVarAxiosArgs = await localVarAxiosParamCreator.apiV1UserMeSettingsGet(options)
       const localVarOperationServerIndex = configuration?.serverIndex ?? 0
       const localVarOperationServerBasePath =
-        operationServerMap['UsersSettingsApi.userMeSettingsGet']?.[localVarOperationServerIndex]
-          ?.url
+        operationServerMap['UsersSettingsApi.apiV1UserMeSettingsGet']?.[
+          localVarOperationServerIndex
+        ]?.url
       return (axios, basePath) =>
         createRequestFunction(
           localVarAxiosArgs,
@@ -168,18 +169,19 @@ export const UsersSettingsApiFp = function (configuration?: Configuration) {
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    async userMeSettingsPut(
+    async apiV1UserMeSettingsPut(
       userSettingsData: UserSettingsData,
       options?: RawAxiosRequestConfig,
     ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-      const localVarAxiosArgs = await localVarAxiosParamCreator.userMeSettingsPut(
+      const localVarAxiosArgs = await localVarAxiosParamCreator.apiV1UserMeSettingsPut(
         userSettingsData,
         options,
       )
       const localVarOperationServerIndex = configuration?.serverIndex ?? 0
       const localVarOperationServerBasePath =
-        operationServerMap['UsersSettingsApi.userMeSettingsPut']?.[localVarOperationServerIndex]
-          ?.url
+        operationServerMap['UsersSettingsApi.apiV1UserMeSettingsPut']?.[
+          localVarOperationServerIndex
+        ]?.url
       return (axios, basePath) =>
         createRequestFunction(
           localVarAxiosArgs,
@@ -208,8 +210,8 @@ export const UsersSettingsApiFactory = function (
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    userMeSettingsGet(options?: RawAxiosRequestConfig): AxiosPromise<UserSettingsData> {
-      return localVarFp.userMeSettingsGet(options).then((request) => request(axios, basePath))
+    apiV1UserMeSettingsGet(options?: RawAxiosRequestConfig): AxiosPromise<UserSettingsData> {
+      return localVarFp.apiV1UserMeSettingsGet(options).then((request) => request(axios, basePath))
     },
     /**
      *
@@ -218,12 +220,12 @@ export const UsersSettingsApiFactory = function (
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    userMeSettingsPut(
+    apiV1UserMeSettingsPut(
       userSettingsData: UserSettingsData,
       options?: RawAxiosRequestConfig,
     ): AxiosPromise<void> {
       return localVarFp
-        .userMeSettingsPut(userSettingsData, options)
+        .apiV1UserMeSettingsPut(userSettingsData, options)
         .then((request) => request(axios, basePath))
     },
   }
@@ -243,9 +245,9 @@ export class UsersSettingsApi extends BaseAPI {
    * @throws {RequiredError}
    * @memberof UsersSettingsApi
    */
-  public userMeSettingsGet(options?: RawAxiosRequestConfig) {
+  public apiV1UserMeSettingsGet(options?: RawAxiosRequestConfig) {
     return UsersSettingsApiFp(this.configuration)
-      .userMeSettingsGet(options)
+      .apiV1UserMeSettingsGet(options)
       .then((request) => request(this.axios, this.basePath))
   }
 
@@ -257,9 +259,12 @@ export class UsersSettingsApi extends BaseAPI {
    * @throws {RequiredError}
    * @memberof UsersSettingsApi
    */
-  public userMeSettingsPut(userSettingsData: UserSettingsData, options?: RawAxiosRequestConfig) {
+  public apiV1UserMeSettingsPut(
+    userSettingsData: UserSettingsData,
+    options?: RawAxiosRequestConfig,
+  ) {
     return UsersSettingsApiFp(this.configuration)
-      .userMeSettingsPut(userSettingsData, options)
+      .apiV1UserMeSettingsPut(userSettingsData, options)
       .then((request) => request(this.axios, this.basePath))
   }
 }

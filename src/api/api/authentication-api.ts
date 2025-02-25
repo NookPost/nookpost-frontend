@@ -57,17 +57,17 @@ export const AuthenticationApiAxiosParamCreator = function (configuration?: Conf
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    authenticationChangePasswordPut: async (
+    apiV1AuthenticationChangePasswordPut: async (
       putChangePasswordRequestBody: PutChangePasswordRequestBody,
       options: RawAxiosRequestConfig = {},
     ): Promise<RequestArgs> => {
       // verify required parameter 'putChangePasswordRequestBody' is not null or undefined
       assertParamExists(
-        'authenticationChangePasswordPut',
+        'apiV1AuthenticationChangePasswordPut',
         'putChangePasswordRequestBody',
         putChangePasswordRequestBody,
       )
-      const localVarPath = `/authentication/changePassword`
+      const localVarPath = `/api/v1/authentication/changePassword`
       // use dummy base URL string because the URL constructor only accepts absolute URLs.
       const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL)
       let baseOptions
@@ -109,17 +109,17 @@ export const AuthenticationApiAxiosParamCreator = function (configuration?: Conf
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    authenticationLoginPost: async (
+    apiV1AuthenticationLoginPost: async (
       authenticationLoginRequestBody: AuthenticationLoginRequestBody,
       options: RawAxiosRequestConfig = {},
     ): Promise<RequestArgs> => {
       // verify required parameter 'authenticationLoginRequestBody' is not null or undefined
       assertParamExists(
-        'authenticationLoginPost',
+        'apiV1AuthenticationLoginPost',
         'authenticationLoginRequestBody',
         authenticationLoginRequestBody,
       )
-      const localVarPath = `/authentication/login`
+      const localVarPath = `/api/v1/authentication/login`
       // use dummy base URL string because the URL constructor only accepts absolute URLs.
       const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL)
       let baseOptions
@@ -171,17 +171,18 @@ export const AuthenticationApiFp = function (configuration?: Configuration) {
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    async authenticationChangePasswordPut(
+    async apiV1AuthenticationChangePasswordPut(
       putChangePasswordRequestBody: PutChangePasswordRequestBody,
       options?: RawAxiosRequestConfig,
     ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-      const localVarAxiosArgs = await localVarAxiosParamCreator.authenticationChangePasswordPut(
-        putChangePasswordRequestBody,
-        options,
-      )
+      const localVarAxiosArgs =
+        await localVarAxiosParamCreator.apiV1AuthenticationChangePasswordPut(
+          putChangePasswordRequestBody,
+          options,
+        )
       const localVarOperationServerIndex = configuration?.serverIndex ?? 0
       const localVarOperationServerBasePath =
-        operationServerMap['AuthenticationApi.authenticationChangePasswordPut']?.[
+        operationServerMap['AuthenticationApi.apiV1AuthenticationChangePasswordPut']?.[
           localVarOperationServerIndex
         ]?.url
       return (axios, basePath) =>
@@ -199,19 +200,19 @@ export const AuthenticationApiFp = function (configuration?: Configuration) {
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    async authenticationLoginPost(
+    async apiV1AuthenticationLoginPost(
       authenticationLoginRequestBody: AuthenticationLoginRequestBody,
       options?: RawAxiosRequestConfig,
     ): Promise<
       (axios?: AxiosInstance, basePath?: string) => AxiosPromise<AuthenticationLoginResponseBody>
     > {
-      const localVarAxiosArgs = await localVarAxiosParamCreator.authenticationLoginPost(
+      const localVarAxiosArgs = await localVarAxiosParamCreator.apiV1AuthenticationLoginPost(
         authenticationLoginRequestBody,
         options,
       )
       const localVarOperationServerIndex = configuration?.serverIndex ?? 0
       const localVarOperationServerBasePath =
-        operationServerMap['AuthenticationApi.authenticationLoginPost']?.[
+        operationServerMap['AuthenticationApi.apiV1AuthenticationLoginPost']?.[
           localVarOperationServerIndex
         ]?.url
       return (axios, basePath) =>
@@ -243,12 +244,12 @@ export const AuthenticationApiFactory = function (
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    authenticationChangePasswordPut(
+    apiV1AuthenticationChangePasswordPut(
       putChangePasswordRequestBody: PutChangePasswordRequestBody,
       options?: RawAxiosRequestConfig,
     ): AxiosPromise<void> {
       return localVarFp
-        .authenticationChangePasswordPut(putChangePasswordRequestBody, options)
+        .apiV1AuthenticationChangePasswordPut(putChangePasswordRequestBody, options)
         .then((request) => request(axios, basePath))
     },
     /**
@@ -258,12 +259,12 @@ export const AuthenticationApiFactory = function (
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    authenticationLoginPost(
+    apiV1AuthenticationLoginPost(
       authenticationLoginRequestBody: AuthenticationLoginRequestBody,
       options?: RawAxiosRequestConfig,
     ): AxiosPromise<AuthenticationLoginResponseBody> {
       return localVarFp
-        .authenticationLoginPost(authenticationLoginRequestBody, options)
+        .apiV1AuthenticationLoginPost(authenticationLoginRequestBody, options)
         .then((request) => request(axios, basePath))
     },
   }
@@ -284,12 +285,12 @@ export class AuthenticationApi extends BaseAPI {
    * @throws {RequiredError}
    * @memberof AuthenticationApi
    */
-  public authenticationChangePasswordPut(
+  public apiV1AuthenticationChangePasswordPut(
     putChangePasswordRequestBody: PutChangePasswordRequestBody,
     options?: RawAxiosRequestConfig,
   ) {
     return AuthenticationApiFp(this.configuration)
-      .authenticationChangePasswordPut(putChangePasswordRequestBody, options)
+      .apiV1AuthenticationChangePasswordPut(putChangePasswordRequestBody, options)
       .then((request) => request(this.axios, this.basePath))
   }
 
@@ -301,12 +302,12 @@ export class AuthenticationApi extends BaseAPI {
    * @throws {RequiredError}
    * @memberof AuthenticationApi
    */
-  public authenticationLoginPost(
+  public apiV1AuthenticationLoginPost(
     authenticationLoginRequestBody: AuthenticationLoginRequestBody,
     options?: RawAxiosRequestConfig,
   ) {
     return AuthenticationApiFp(this.configuration)
-      .authenticationLoginPost(authenticationLoginRequestBody, options)
+      .apiV1AuthenticationLoginPost(authenticationLoginRequestBody, options)
       .then((request) => request(this.axios, this.basePath))
   }
 }

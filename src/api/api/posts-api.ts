@@ -65,7 +65,7 @@ export const PostsApiAxiosParamCreator = function (configuration?: Configuration
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    postsGet: async (
+    apiV1PostsGet: async (
       username?: string,
       categoryUuid?: string,
       textSearch?: string,
@@ -73,7 +73,7 @@ export const PostsApiAxiosParamCreator = function (configuration?: Configuration
       pageItemCount?: number,
       options: RawAxiosRequestConfig = {},
     ): Promise<RequestArgs> => {
-      const localVarPath = `/posts`
+      const localVarPath = `/api/v1/posts`
       // use dummy base URL string because the URL constructor only accepts absolute URLs.
       const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL)
       let baseOptions
@@ -128,13 +128,13 @@ export const PostsApiAxiosParamCreator = function (configuration?: Configuration
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    postsPost: async (
+    apiV1PostsPost: async (
       postData: PostData,
       options: RawAxiosRequestConfig = {},
     ): Promise<RequestArgs> => {
       // verify required parameter 'postData' is not null or undefined
-      assertParamExists('postsPost', 'postData', postData)
-      const localVarPath = `/posts`
+      assertParamExists('apiV1PostsPost', 'postData', postData)
+      const localVarPath = `/api/v1/posts`
       // use dummy base URL string because the URL constructor only accepts absolute URLs.
       const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL)
       let baseOptions
@@ -176,13 +176,16 @@ export const PostsApiAxiosParamCreator = function (configuration?: Configuration
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    postsUuidDelete: async (
+    apiV1PostsUuidDelete: async (
       uuid: string,
       options: RawAxiosRequestConfig = {},
     ): Promise<RequestArgs> => {
       // verify required parameter 'uuid' is not null or undefined
-      assertParamExists('postsUuidDelete', 'uuid', uuid)
-      const localVarPath = `/posts/{uuid}`.replace(`{${'uuid'}}`, encodeURIComponent(String(uuid)))
+      assertParamExists('apiV1PostsUuidDelete', 'uuid', uuid)
+      const localVarPath = `/api/v1/posts/{uuid}`.replace(
+        `{${'uuid'}}`,
+        encodeURIComponent(String(uuid)),
+      )
       // use dummy base URL string because the URL constructor only accepts absolute URLs.
       const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL)
       let baseOptions
@@ -217,13 +220,16 @@ export const PostsApiAxiosParamCreator = function (configuration?: Configuration
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    postsUuidGet: async (
+    apiV1PostsUuidGet: async (
       uuid: string,
       options: RawAxiosRequestConfig = {},
     ): Promise<RequestArgs> => {
       // verify required parameter 'uuid' is not null or undefined
-      assertParamExists('postsUuidGet', 'uuid', uuid)
-      const localVarPath = `/posts/{uuid}`.replace(`{${'uuid'}}`, encodeURIComponent(String(uuid)))
+      assertParamExists('apiV1PostsUuidGet', 'uuid', uuid)
+      const localVarPath = `/api/v1/posts/{uuid}`.replace(
+        `{${'uuid'}}`,
+        encodeURIComponent(String(uuid)),
+      )
       // use dummy base URL string because the URL constructor only accepts absolute URLs.
       const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL)
       let baseOptions
@@ -259,16 +265,19 @@ export const PostsApiAxiosParamCreator = function (configuration?: Configuration
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    postsUuidPut: async (
+    apiV1PostsUuidPut: async (
       uuid: string,
       putPostRequestBody: PutPostRequestBody,
       options: RawAxiosRequestConfig = {},
     ): Promise<RequestArgs> => {
       // verify required parameter 'uuid' is not null or undefined
-      assertParamExists('postsUuidPut', 'uuid', uuid)
+      assertParamExists('apiV1PostsUuidPut', 'uuid', uuid)
       // verify required parameter 'putPostRequestBody' is not null or undefined
-      assertParamExists('postsUuidPut', 'putPostRequestBody', putPostRequestBody)
-      const localVarPath = `/posts/{uuid}`.replace(`{${'uuid'}}`, encodeURIComponent(String(uuid)))
+      assertParamExists('apiV1PostsUuidPut', 'putPostRequestBody', putPostRequestBody)
+      const localVarPath = `/api/v1/posts/{uuid}`.replace(
+        `{${'uuid'}}`,
+        encodeURIComponent(String(uuid)),
+      )
       // use dummy base URL string because the URL constructor only accepts absolute URLs.
       const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL)
       let baseOptions
@@ -324,7 +333,7 @@ export const PostsApiFp = function (configuration?: Configuration) {
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    async postsGet(
+    async apiV1PostsGet(
       username?: string,
       categoryUuid?: string,
       textSearch?: string,
@@ -334,7 +343,7 @@ export const PostsApiFp = function (configuration?: Configuration) {
     ): Promise<
       (axios?: AxiosInstance, basePath?: string) => AxiosPromise<GetPostFilteredResponseBody>
     > {
-      const localVarAxiosArgs = await localVarAxiosParamCreator.postsGet(
+      const localVarAxiosArgs = await localVarAxiosParamCreator.apiV1PostsGet(
         username,
         categoryUuid,
         textSearch,
@@ -344,7 +353,7 @@ export const PostsApiFp = function (configuration?: Configuration) {
       )
       const localVarOperationServerIndex = configuration?.serverIndex ?? 0
       const localVarOperationServerBasePath =
-        operationServerMap['PostsApi.postsGet']?.[localVarOperationServerIndex]?.url
+        operationServerMap['PostsApi.apiV1PostsGet']?.[localVarOperationServerIndex]?.url
       return (axios, basePath) =>
         createRequestFunction(
           localVarAxiosArgs,
@@ -360,14 +369,14 @@ export const PostsApiFp = function (configuration?: Configuration) {
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    async postsPost(
+    async apiV1PostsPost(
       postData: PostData,
       options?: RawAxiosRequestConfig,
     ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PostPostResponseBody>> {
-      const localVarAxiosArgs = await localVarAxiosParamCreator.postsPost(postData, options)
+      const localVarAxiosArgs = await localVarAxiosParamCreator.apiV1PostsPost(postData, options)
       const localVarOperationServerIndex = configuration?.serverIndex ?? 0
       const localVarOperationServerBasePath =
-        operationServerMap['PostsApi.postsPost']?.[localVarOperationServerIndex]?.url
+        operationServerMap['PostsApi.apiV1PostsPost']?.[localVarOperationServerIndex]?.url
       return (axios, basePath) =>
         createRequestFunction(
           localVarAxiosArgs,
@@ -383,14 +392,14 @@ export const PostsApiFp = function (configuration?: Configuration) {
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    async postsUuidDelete(
+    async apiV1PostsUuidDelete(
       uuid: string,
       options?: RawAxiosRequestConfig,
     ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-      const localVarAxiosArgs = await localVarAxiosParamCreator.postsUuidDelete(uuid, options)
+      const localVarAxiosArgs = await localVarAxiosParamCreator.apiV1PostsUuidDelete(uuid, options)
       const localVarOperationServerIndex = configuration?.serverIndex ?? 0
       const localVarOperationServerBasePath =
-        operationServerMap['PostsApi.postsUuidDelete']?.[localVarOperationServerIndex]?.url
+        operationServerMap['PostsApi.apiV1PostsUuidDelete']?.[localVarOperationServerIndex]?.url
       return (axios, basePath) =>
         createRequestFunction(
           localVarAxiosArgs,
@@ -406,14 +415,14 @@ export const PostsApiFp = function (configuration?: Configuration) {
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    async postsUuidGet(
+    async apiV1PostsUuidGet(
       uuid: string,
       options?: RawAxiosRequestConfig,
     ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GetPostResponseBody>> {
-      const localVarAxiosArgs = await localVarAxiosParamCreator.postsUuidGet(uuid, options)
+      const localVarAxiosArgs = await localVarAxiosParamCreator.apiV1PostsUuidGet(uuid, options)
       const localVarOperationServerIndex = configuration?.serverIndex ?? 0
       const localVarOperationServerBasePath =
-        operationServerMap['PostsApi.postsUuidGet']?.[localVarOperationServerIndex]?.url
+        operationServerMap['PostsApi.apiV1PostsUuidGet']?.[localVarOperationServerIndex]?.url
       return (axios, basePath) =>
         createRequestFunction(
           localVarAxiosArgs,
@@ -430,19 +439,19 @@ export const PostsApiFp = function (configuration?: Configuration) {
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    async postsUuidPut(
+    async apiV1PostsUuidPut(
       uuid: string,
       putPostRequestBody: PutPostRequestBody,
       options?: RawAxiosRequestConfig,
     ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-      const localVarAxiosArgs = await localVarAxiosParamCreator.postsUuidPut(
+      const localVarAxiosArgs = await localVarAxiosParamCreator.apiV1PostsUuidPut(
         uuid,
         putPostRequestBody,
         options,
       )
       const localVarOperationServerIndex = configuration?.serverIndex ?? 0
       const localVarOperationServerBasePath =
-        operationServerMap['PostsApi.postsUuidPut']?.[localVarOperationServerIndex]?.url
+        operationServerMap['PostsApi.apiV1PostsUuidPut']?.[localVarOperationServerIndex]?.url
       return (axios, basePath) =>
         createRequestFunction(
           localVarAxiosArgs,
@@ -476,7 +485,7 @@ export const PostsApiFactory = function (
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    postsGet(
+    apiV1PostsGet(
       username?: string,
       categoryUuid?: string,
       textSearch?: string,
@@ -485,7 +494,7 @@ export const PostsApiFactory = function (
       options?: RawAxiosRequestConfig,
     ): AxiosPromise<GetPostFilteredResponseBody> {
       return localVarFp
-        .postsGet(username, categoryUuid, textSearch, page, pageItemCount, options)
+        .apiV1PostsGet(username, categoryUuid, textSearch, page, pageItemCount, options)
         .then((request) => request(axios, basePath))
     },
     /**
@@ -495,11 +504,13 @@ export const PostsApiFactory = function (
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    postsPost(
+    apiV1PostsPost(
       postData: PostData,
       options?: RawAxiosRequestConfig,
     ): AxiosPromise<PostPostResponseBody> {
-      return localVarFp.postsPost(postData, options).then((request) => request(axios, basePath))
+      return localVarFp
+        .apiV1PostsPost(postData, options)
+        .then((request) => request(axios, basePath))
     },
     /**
      *
@@ -508,8 +519,10 @@ export const PostsApiFactory = function (
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    postsUuidDelete(uuid: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
-      return localVarFp.postsUuidDelete(uuid, options).then((request) => request(axios, basePath))
+    apiV1PostsUuidDelete(uuid: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+      return localVarFp
+        .apiV1PostsUuidDelete(uuid, options)
+        .then((request) => request(axios, basePath))
     },
     /**
      *
@@ -518,8 +531,11 @@ export const PostsApiFactory = function (
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    postsUuidGet(uuid: string, options?: RawAxiosRequestConfig): AxiosPromise<GetPostResponseBody> {
-      return localVarFp.postsUuidGet(uuid, options).then((request) => request(axios, basePath))
+    apiV1PostsUuidGet(
+      uuid: string,
+      options?: RawAxiosRequestConfig,
+    ): AxiosPromise<GetPostResponseBody> {
+      return localVarFp.apiV1PostsUuidGet(uuid, options).then((request) => request(axios, basePath))
     },
     /**
      *
@@ -529,13 +545,13 @@ export const PostsApiFactory = function (
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    postsUuidPut(
+    apiV1PostsUuidPut(
       uuid: string,
       putPostRequestBody: PutPostRequestBody,
       options?: RawAxiosRequestConfig,
     ): AxiosPromise<void> {
       return localVarFp
-        .postsUuidPut(uuid, putPostRequestBody, options)
+        .apiV1PostsUuidPut(uuid, putPostRequestBody, options)
         .then((request) => request(axios, basePath))
     },
   }
@@ -560,7 +576,7 @@ export class PostsApi extends BaseAPI {
    * @throws {RequiredError}
    * @memberof PostsApi
    */
-  public postsGet(
+  public apiV1PostsGet(
     username?: string,
     categoryUuid?: string,
     textSearch?: string,
@@ -569,7 +585,7 @@ export class PostsApi extends BaseAPI {
     options?: RawAxiosRequestConfig,
   ) {
     return PostsApiFp(this.configuration)
-      .postsGet(username, categoryUuid, textSearch, page, pageItemCount, options)
+      .apiV1PostsGet(username, categoryUuid, textSearch, page, pageItemCount, options)
       .then((request) => request(this.axios, this.basePath))
   }
 
@@ -581,9 +597,9 @@ export class PostsApi extends BaseAPI {
    * @throws {RequiredError}
    * @memberof PostsApi
    */
-  public postsPost(postData: PostData, options?: RawAxiosRequestConfig) {
+  public apiV1PostsPost(postData: PostData, options?: RawAxiosRequestConfig) {
     return PostsApiFp(this.configuration)
-      .postsPost(postData, options)
+      .apiV1PostsPost(postData, options)
       .then((request) => request(this.axios, this.basePath))
   }
 
@@ -595,9 +611,9 @@ export class PostsApi extends BaseAPI {
    * @throws {RequiredError}
    * @memberof PostsApi
    */
-  public postsUuidDelete(uuid: string, options?: RawAxiosRequestConfig) {
+  public apiV1PostsUuidDelete(uuid: string, options?: RawAxiosRequestConfig) {
     return PostsApiFp(this.configuration)
-      .postsUuidDelete(uuid, options)
+      .apiV1PostsUuidDelete(uuid, options)
       .then((request) => request(this.axios, this.basePath))
   }
 
@@ -609,9 +625,9 @@ export class PostsApi extends BaseAPI {
    * @throws {RequiredError}
    * @memberof PostsApi
    */
-  public postsUuidGet(uuid: string, options?: RawAxiosRequestConfig) {
+  public apiV1PostsUuidGet(uuid: string, options?: RawAxiosRequestConfig) {
     return PostsApiFp(this.configuration)
-      .postsUuidGet(uuid, options)
+      .apiV1PostsUuidGet(uuid, options)
       .then((request) => request(this.axios, this.basePath))
   }
 
@@ -624,13 +640,13 @@ export class PostsApi extends BaseAPI {
    * @throws {RequiredError}
    * @memberof PostsApi
    */
-  public postsUuidPut(
+  public apiV1PostsUuidPut(
     uuid: string,
     putPostRequestBody: PutPostRequestBody,
     options?: RawAxiosRequestConfig,
   ) {
     return PostsApiFp(this.configuration)
-      .postsUuidPut(uuid, putPostRequestBody, options)
+      .apiV1PostsUuidPut(uuid, putPostRequestBody, options)
       .then((request) => request(this.axios, this.basePath))
   }
 }

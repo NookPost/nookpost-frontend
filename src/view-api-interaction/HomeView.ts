@@ -13,7 +13,7 @@ export async function fetchPosts(): Promise<Post[]> {
   const postApi = new PostsApi(configuration)
   let response: AxiosResponse<GetPostFilteredResponseBody, unknown>
   try {
-    response = await postApi.postsGet()
+    response = await postApi.apiV1PostsGet()
   } catch (err) {
     if (err instanceof AxiosError) {
       response = err.response as AxiosResponse<GetPostFilteredResponseBody, unknown>

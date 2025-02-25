@@ -50,7 +50,8 @@ function onProfileEdit(user: Profile) {
     :posts="posts"
     :editable="true"
     @update:profile="onProfileEdit"
-  ></UserProfile>
+  >
+  </UserProfile>
   <!--TODO: Center this!-->
   <ProgressSpinner v-else />
 </template>

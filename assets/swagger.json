@@ -5,7 +5,7 @@
     "version": "1.0"
   },
   "paths": {
-    "/authentication/login": {
+    "/api/v1/authentication/login": {
       "post": {
         "tags": [
           "Authentication"
@@ -41,7 +41,7 @@
         }
       }
     },
-    "/authentication/changePassword": {
+    "/api/v1/authentication/changePassword": {
       "put": {
         "tags": [
           "Authentication"
@@ -70,7 +70,7 @@
         }
       }
     },
-    "/categories/{uuid}": {
+    "/api/v1/categories/{uuid}": {
       "get": {
         "tags": [
           "Categories"
@@ -106,7 +106,7 @@
         }
       }
     },
-    "/categories": {
+    "/api/v1/categories": {
       "get": {
         "tags": [
           "Categories"
@@ -129,7 +129,7 @@
         }
       }
     },
-    "/posts/{uuid}": {
+    "/api/v1/posts/{uuid}": {
       "get": {
         "tags": [
           "Posts"
@@ -229,7 +229,7 @@
         }
       }
     },
-    "/posts": {
+    "/api/v1/posts": {
       "post": {
         "tags": [
           "Posts"
@@ -331,7 +331,7 @@
         }
       }
     },
-    "/users/{username}": {
+    "/api/v1/users/{username}": {
       "get": {
         "tags": [
           "Users"
@@ -367,7 +367,7 @@
         }
       }
     },
-    "/users/me": {
+    "/api/v1/users/me": {
       "get": {
         "tags": [
           "Users"
@@ -429,7 +429,7 @@
         }
       }
     },
-    "/users": {
+    "/api/v1/users": {
       "post": {
         "tags": [
           "Users"
@@ -465,7 +465,7 @@
         }
       }
     },
-    "/user/me/settings": {
+    "/api/v1/user/me/settings": {
       "get": {
         "tags": [
           "Users Settings"

@@ -58,8 +58,8 @@ export const UsersApiAxiosParamCreator = function (configuration?: Configuration
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    usersMeDelete: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-      const localVarPath = `/users/me`
+    apiV1UsersMeDelete: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+      const localVarPath = `/api/v1/users/me`
       // use dummy base URL string because the URL constructor only accepts absolute URLs.
       const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL)
       let baseOptions
@@ -93,8 +93,8 @@ export const UsersApiAxiosParamCreator = function (configuration?: Configuration
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    usersMeGet: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-      const localVarPath = `/users/me`
+    apiV1UsersMeGet: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+      const localVarPath = `/api/v1/users/me`
       // use dummy base URL string because the URL constructor only accepts absolute URLs.
       const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL)
       let baseOptions
@@ -129,13 +129,13 @@ export const UsersApiAxiosParamCreator = function (configuration?: Configuration
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    usersMePut: async (
+    apiV1UsersMePut: async (
       userPutRequestBody: UserPutRequestBody,
       options: RawAxiosRequestConfig = {},
     ): Promise<RequestArgs> => {
       // verify required parameter 'userPutRequestBody' is not null or undefined
-      assertParamExists('usersMePut', 'userPutRequestBody', userPutRequestBody)
-      const localVarPath = `/users/me`
+      assertParamExists('apiV1UsersMePut', 'userPutRequestBody', userPutRequestBody)
+      const localVarPath = `/api/v1/users/me`
       // use dummy base URL string because the URL constructor only accepts absolute URLs.
       const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL)
       let baseOptions
@@ -177,13 +177,13 @@ export const UsersApiAxiosParamCreator = function (configuration?: Configuration
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    usersPost: async (
+    apiV1UsersPost: async (
       usersPostRequestBody: UsersPostRequestBody,
       options: RawAxiosRequestConfig = {},
     ): Promise<RequestArgs> => {
       // verify required parameter 'usersPostRequestBody' is not null or undefined
-      assertParamExists('usersPost', 'usersPostRequestBody', usersPostRequestBody)
-      const localVarPath = `/users`
+      assertParamExists('apiV1UsersPost', 'usersPostRequestBody', usersPostRequestBody)
+      const localVarPath = `/api/v1/users`
       // use dummy base URL string because the URL constructor only accepts absolute URLs.
       const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL)
       let baseOptions
@@ -225,13 +225,13 @@ export const UsersApiAxiosParamCreator = function (configuration?: Configuration
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    usersUsernameGet: async (
+    apiV1UsersUsernameGet: async (
       username: string,
       options: RawAxiosRequestConfig = {},
     ): Promise<RequestArgs> => {
       // verify required parameter 'username' is not null or undefined
-      assertParamExists('usersUsernameGet', 'username', username)
-      const localVarPath = `/users/{username}`.replace(
+      assertParamExists('apiV1UsersUsernameGet', 'username', username)
+      const localVarPath = `/api/v1/users/{username}`.replace(
         `{${'username'}}`,
         encodeURIComponent(String(username)),
       )
@@ -278,13 +278,13 @@ export const UsersApiFp = function (configuration?: Configuration) {
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    async usersMeDelete(
+    async apiV1UsersMeDelete(
       options?: RawAxiosRequestConfig,
     ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-      const localVarAxiosArgs = await localVarAxiosParamCreator.usersMeDelete(options)
+      const localVarAxiosArgs = await localVarAxiosParamCreator.apiV1UsersMeDelete(options)
       const localVarOperationServerIndex = configuration?.serverIndex ?? 0
       const localVarOperationServerBasePath =
-        operationServerMap['UsersApi.usersMeDelete']?.[localVarOperationServerIndex]?.url
+        operationServerMap['UsersApi.apiV1UsersMeDelete']?.[localVarOperationServerIndex]?.url
       return (axios, basePath) =>
         createRequestFunction(
           localVarAxiosArgs,
@@ -299,13 +299,13 @@ export const UsersApiFp = function (configuration?: Configuration) {
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    async usersMeGet(
+    async apiV1UsersMeGet(
       options?: RawAxiosRequestConfig,
     ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UsersGetResponseBody>> {
-      const localVarAxiosArgs = await localVarAxiosParamCreator.usersMeGet(options)
+      const localVarAxiosArgs = await localVarAxiosParamCreator.apiV1UsersMeGet(options)
       const localVarOperationServerIndex = configuration?.serverIndex ?? 0
       const localVarOperationServerBasePath =
-        operationServerMap['UsersApi.usersMeGet']?.[localVarOperationServerIndex]?.url
+        operationServerMap['UsersApi.apiV1UsersMeGet']?.[localVarOperationServerIndex]?.url
       return (axios, basePath) =>
         createRequestFunction(
           localVarAxiosArgs,
@@ -321,17 +321,17 @@ export const UsersApiFp = function (configuration?: Configuration) {
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    async usersMePut(
+    async apiV1UsersMePut(
       userPutRequestBody: UserPutRequestBody,
       options?: RawAxiosRequestConfig,
     ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-      const localVarAxiosArgs = await localVarAxiosParamCreator.usersMePut(
+      const localVarAxiosArgs = await localVarAxiosParamCreator.apiV1UsersMePut(
         userPutRequestBody,
         options,
       )
       const localVarOperationServerIndex = configuration?.serverIndex ?? 0
       const localVarOperationServerBasePath =
-        operationServerMap['UsersApi.usersMePut']?.[localVarOperationServerIndex]?.url
+        operationServerMap['UsersApi.apiV1UsersMePut']?.[localVarOperationServerIndex]?.url
       return (axios, basePath) =>
         createRequestFunction(
           localVarAxiosArgs,
@@ -347,17 +347,17 @@ export const UsersApiFp = function (configuration?: Configuration) {
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    async usersPost(
+    async apiV1UsersPost(
       usersPostRequestBody: UsersPostRequestBody,
       options?: RawAxiosRequestConfig,
     ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UsersPostResponseBody>> {
-      const localVarAxiosArgs = await localVarAxiosParamCreator.usersPost(
+      const localVarAxiosArgs = await localVarAxiosParamCreator.apiV1UsersPost(
         usersPostRequestBody,
         options,
       )
       const localVarOperationServerIndex = configuration?.serverIndex ?? 0
       const localVarOperationServerBasePath =
-        operationServerMap['UsersApi.usersPost']?.[localVarOperationServerIndex]?.url
+        operationServerMap['UsersApi.apiV1UsersPost']?.[localVarOperationServerIndex]?.url
       return (axios, basePath) =>
         createRequestFunction(
           localVarAxiosArgs,
@@ -373,14 +373,17 @@ export const UsersApiFp = function (configuration?: Configuration) {
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    async usersUsernameGet(
+    async apiV1UsersUsernameGet(
       username: string,
       options?: RawAxiosRequestConfig,
     ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UsersGetResponseBody>> {
-      const localVarAxiosArgs = await localVarAxiosParamCreator.usersUsernameGet(username, options)
+      const localVarAxiosArgs = await localVarAxiosParamCreator.apiV1UsersUsernameGet(
+        username,
+        options,
+      )
       const localVarOperationServerIndex = configuration?.serverIndex ?? 0
       const localVarOperationServerBasePath =
-        operationServerMap['UsersApi.usersUsernameGet']?.[localVarOperationServerIndex]?.url
+        operationServerMap['UsersApi.apiV1UsersUsernameGet']?.[localVarOperationServerIndex]?.url
       return (axios, basePath) =>
         createRequestFunction(
           localVarAxiosArgs,
@@ -409,8 +412,8 @@ export const UsersApiFactory = function (
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    usersMeDelete(options?: RawAxiosRequestConfig): AxiosPromise<void> {
-      return localVarFp.usersMeDelete(options).then((request) => request(axios, basePath))
+    apiV1UsersMeDelete(options?: RawAxiosRequestConfig): AxiosPromise<void> {
+      return localVarFp.apiV1UsersMeDelete(options).then((request) => request(axios, basePath))
     },
     /**
      *
@@ -418,8 +421,8 @@ export const UsersApiFactory = function (
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    usersMeGet(options?: RawAxiosRequestConfig): AxiosPromise<UsersGetResponseBody> {
-      return localVarFp.usersMeGet(options).then((request) => request(axios, basePath))
+    apiV1UsersMeGet(options?: RawAxiosRequestConfig): AxiosPromise<UsersGetResponseBody> {
+      return localVarFp.apiV1UsersMeGet(options).then((request) => request(axios, basePath))
     },
     /**
      * Null values are ignored.
@@ -428,12 +431,12 @@ export const UsersApiFactory = function (
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    usersMePut(
+    apiV1UsersMePut(
       userPutRequestBody: UserPutRequestBody,
       options?: RawAxiosRequestConfig,
     ): AxiosPromise<void> {
       return localVarFp
-        .usersMePut(userPutRequestBody, options)
+        .apiV1UsersMePut(userPutRequestBody, options)
         .then((request) => request(axios, basePath))
     },
     /**
@@ -443,12 +446,12 @@ export const UsersApiFactory = function (
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    usersPost(
+    apiV1UsersPost(
       usersPostRequestBody: UsersPostRequestBody,
       options?: RawAxiosRequestConfig,
     ): AxiosPromise<UsersPostResponseBody> {
       return localVarFp
-        .usersPost(usersPostRequestBody, options)
+        .apiV1UsersPost(usersPostRequestBody, options)
         .then((request) => request(axios, basePath))
     },
     /**
@@ -458,12 +461,12 @@ export const UsersApiFactory = function (
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    usersUsernameGet(
+    apiV1UsersUsernameGet(
       username: string,
       options?: RawAxiosRequestConfig,
     ): AxiosPromise<UsersGetResponseBody> {
       return localVarFp
-        .usersUsernameGet(username, options)
+        .apiV1UsersUsernameGet(username, options)
         .then((request) => request(axios, basePath))
     },
   }
@@ -483,9 +486,9 @@ export class UsersApi extends BaseAPI {
    * @throws {RequiredError}
    * @memberof UsersApi
    */
-  public usersMeDelete(options?: RawAxiosRequestConfig) {
+  public apiV1UsersMeDelete(options?: RawAxiosRequestConfig) {
     return UsersApiFp(this.configuration)
-      .usersMeDelete(options)
+      .apiV1UsersMeDelete(options)
       .then((request) => request(this.axios, this.basePath))
   }
 
@@ -496,9 +499,9 @@ export class UsersApi extends BaseAPI {
    * @throws {RequiredError}
    * @memberof UsersApi
    */
-  public usersMeGet(options?: RawAxiosRequestConfig) {
+  public apiV1UsersMeGet(options?: RawAxiosRequestConfig) {
     return UsersApiFp(this.configuration)
-      .usersMeGet(options)
+      .apiV1UsersMeGet(options)
       .then((request) => request(this.axios, this.basePath))
   }
 
@@ -510,9 +513,9 @@ export class UsersApi extends BaseAPI {
    * @throws {RequiredError}
    * @memberof UsersApi
    */
-  public usersMePut(userPutRequestBody: UserPutRequestBody, options?: RawAxiosRequestConfig) {
+  public apiV1UsersMePut(userPutRequestBody: UserPutRequestBody, options?: RawAxiosRequestConfig) {
     return UsersApiFp(this.configuration)
-      .usersMePut(userPutRequestBody, options)
+      .apiV1UsersMePut(userPutRequestBody, options)
       .then((request) => request(this.axios, this.basePath))
   }
 
@@ -524,9 +527,12 @@ export class UsersApi extends BaseAPI {
    * @throws {RequiredError}
    * @memberof UsersApi
    */
-  public usersPost(usersPostRequestBody: UsersPostRequestBody, options?: RawAxiosRequestConfig) {
+  public apiV1UsersPost(
+    usersPostRequestBody: UsersPostRequestBody,
+    options?: RawAxiosRequestConfig,
+  ) {
     return UsersApiFp(this.configuration)
-      .usersPost(usersPostRequestBody, options)
+      .apiV1UsersPost(usersPostRequestBody, options)
       .then((request) => request(this.axios, this.basePath))
   }
 
@@ -538,9 +544,9 @@ export class UsersApi extends BaseAPI {
    * @throws {RequiredError}
    * @memberof UsersApi
    */
-  public usersUsernameGet(username: string, options?: RawAxiosRequestConfig) {
+  public apiV1UsersUsernameGet(username: string, options?: RawAxiosRequestConfig) {
     return UsersApiFp(this.configuration)
-      .usersUsernameGet(username, options)
+      .apiV1UsersUsernameGet(username, options)
       .then((request) => request(this.axios, this.basePath))
   }
 }

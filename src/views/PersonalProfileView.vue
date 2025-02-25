@@ -5,11 +5,9 @@ import UserProfile from '@/components/UserProfile.vue'
 import type { Category } from '@/types/category'
 import type { Post } from '@/types/post'
 import { categoryData } from '@/store/categories'
-import { onMounted, ref, watch, type Ref } from 'vue'
+import { onMounted, ref, type Ref } from 'vue'
 import { editMeUserProfile, fetchMeUserProfile } from '@/view-api-interaction/PersonalProfileView'
 import { fetchPostsByUser } from '@/view-api-interaction/UserProfile'
-import { authStore } from '@/store/auth'
-import router from '@/router'
 const route = useRoute()
 let id = route.params.username
 

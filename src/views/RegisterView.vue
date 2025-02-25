@@ -23,8 +23,8 @@ async function onFormSubmit(event: FormSubmitEvent) {
     const formData = toRaw(event.states)
     const success: boolean = await auth.register(
       formData.username.value,
-      formData.displayname.value,
       formData.password.value,
+      formData.displayname.value,
     )
     if (success) {
       router.push('/')

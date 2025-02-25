@@ -19,19 +19,16 @@ export async function editMeUserProfile(user: Profile) {
   try {
     response = await userApi.usersMePut(userMePutRequestBody)
   } catch (err) {
-    if(err instanceof AxiosError) {
+    if (err instanceof AxiosError) {
       response = err.response as AxiosResponse
-    }
-    else {
+    } else {
       throw err
     }
   }
-  if(response.status >= 200 && response.status <= 299){
-    router.push("/myprofile")
+  if (response.status >= 200 && response.status <= 299) {
+    router.push('/myprofile')
   }
-
 }
-
 
 export async function fetchMeUserProfile(): Promise<Profile | null> {
   let user: Profile | null = null

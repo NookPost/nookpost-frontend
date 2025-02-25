@@ -19,7 +19,6 @@ const profile: Ref<Profile | null> = ref(null)
 const categories: Ref<Category[]> = ref([])
 const posts: Ref<Post[]> = ref([])
 
-
 onMounted(() => {
   onLoaded()
 })
@@ -39,7 +38,7 @@ function onLoaded() {
   })
 }
 
-function onProfileEdit(user: Profile){
+function onProfileEdit(user: Profile) {
   editMeUserProfile(user).then(() => {
     onLoaded()
   })

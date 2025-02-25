@@ -13,7 +13,7 @@ export async function fetchPostsByTextSearch(querry: string | undefined): Promis
   const postApi = new PostsApi(configuration)
   let response: AxiosResponse<GetPostFilteredResponseBody, unknown>
   try {
-    response = await postApi.postsGet(undefined, undefined, querry, undefined, undefined)
+    response = await postApi.apiV1PostsGet(undefined, undefined, querry, undefined, undefined)
   } catch (err) {
     if (err instanceof AxiosError) {
       response = err.response as AxiosResponse<GetPostFilteredResponseBody, unknown>

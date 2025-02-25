@@ -19,6 +19,7 @@
 					packages = with pkgs; [
 						nodejs_23
 						python3
+						jdk
 					]; 
 				};
       }

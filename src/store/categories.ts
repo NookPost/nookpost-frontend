@@ -32,7 +32,7 @@ async function fetchCategories(): Promise<Category[]> {
   const categoryApi = new CategoriesApi(configuration)
   let response: AxiosResponse<GetAllCategoriesResponseBody, unknown>
   try {
-    response = await categoryApi.categoriesGet()
+    response = await categoryApi.apiV1CategoriesGet()
   } catch (err) {
     if (err instanceof AxiosError) {
       response = err.response as AxiosResponse<GetAllCategoriesResponseBody, unknown>

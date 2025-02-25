@@ -58,7 +58,7 @@ export const authStore = defineStore('authStore', {
       const authAPI = new UsersApi(configuration)
       let response: AxiosResponse<UsersPostResponseBody, unknown>
       try {
-        response = await authAPI.usersPost(<UsersPostRequestBody>{
+        response = await authAPI.apiV1UsersPost(<UsersPostRequestBody>{
           username: username,
           password: password,
           displayName: displayname,
@@ -88,7 +88,7 @@ export const authStore = defineStore('authStore', {
       const authAPI = new AuthenticationApi(configuration)
       let response: AxiosResponse<AuthenticationLoginResponseBody, unknown>
       try {
-        response = await authAPI.authenticationLoginPost(<AuthenticationLoginRequestBody>{
+        response = await authAPI.apiV1AuthenticationLoginPost(<AuthenticationLoginRequestBody>{
           username: username,
           password: password,
         })

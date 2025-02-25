@@ -26,7 +26,7 @@ export async function createPost(post: Post) {
 
   let response: AxiosResponse<PostPostResponseBody>
   try {
-    response = await postApi.postsPost(postRequestBody)
+    response = await postApi.apiV1PostsPost(postRequestBody)
   } catch (err) {
     if (err instanceof AxiosError) {
       response = err.response as AxiosResponse<PostPostResponseBody>
@@ -51,7 +51,7 @@ export async function updatePost(post: Post) {
 
   let response: AxiosResponse
   try {
-    response = await postApi.postsUuidPut(post.uuid, putRequestBody)
+    response = await postApi.apiV1PostsUuidPut(post.uuid, putRequestBody)
   } catch (err) {
     if (err instanceof AxiosError) {
       response = err.response as AxiosResponse
@@ -70,7 +70,7 @@ export async function fetchPost(uuid: string): Promise<Post | null> {
   const postApi = new PostsApi(configuration)
   let response: AxiosResponse<GetPostResponseBody, unknown>
   try {
-    response = await postApi.postsUuidGet(uuid)
+    response = await postApi.apiV1PostsUuidGet(uuid)
   } catch (err) {
     if (err instanceof AxiosError) {
       response = err.response as AxiosResponse<GetPostResponseBody, unknown>

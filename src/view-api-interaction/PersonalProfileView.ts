@@ -17,7 +17,7 @@ export async function editMeUserProfile(user: Profile) {
   const userApi = new UsersApi(configuration)
   let response: AxiosResponse
   try {
-    response = await userApi.usersMePut(userMePutRequestBody)
+    response = await userApi.apiV1UsersMePut(userMePutRequestBody)
   } catch (err) {
     if (err instanceof AxiosError) {
       response = err.response as AxiosResponse
@@ -36,7 +36,7 @@ export async function fetchMeUserProfile(): Promise<Profile | null> {
   const userApi = new UsersApi(configuration)
   let response: AxiosResponse<UsersGetResponseBody, unknown>
   try {
-    response = await userApi.usersMeGet()
+    response = await userApi.apiV1UsersMeGet()
   } catch (err) {
     if (err instanceof AxiosError) {
       response = err.response as AxiosResponse<UsersGetResponseBody, unknown>

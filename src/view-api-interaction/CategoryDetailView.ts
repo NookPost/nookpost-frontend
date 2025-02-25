@@ -13,7 +13,7 @@ export async function fetchPostsByCategory(categoryUuid: string): Promise<Post[]
   const postApi = new PostsApi(configuration)
   let response: AxiosResponse<GetPostFilteredResponseBody, unknown>
   try {
-    response = await postApi.postsGet(undefined, categoryUuid, undefined, undefined, undefined)
+    response = await postApi.apiV1PostsGet(undefined, categoryUuid, undefined, undefined, undefined)
   } catch (err) {
     if (err instanceof AxiosError) {
       response = err.response as AxiosResponse<GetPostFilteredResponseBody, unknown>

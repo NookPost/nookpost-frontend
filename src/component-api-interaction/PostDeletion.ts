@@ -9,7 +9,7 @@ export async function deletePost(uuid: string) {
 
   let response: AxiosResponse
   try {
-    response = await postApi.postsUuidDelete(uuid)
+    response = await postApi.apiV1PostsUuidDelete(uuid)
   } catch (err) {
     if (err instanceof AxiosError) {
       response = err.response as AxiosResponse

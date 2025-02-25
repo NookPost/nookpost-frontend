@@ -8,6 +8,8 @@ import type { Post } from '@/types/post'
 import { onMounted, ref, type Ref } from 'vue'
 import { categoryData } from '@/store/categories'
 import { fetchPostsByUser, fetchUserProfile } from '@/view-api-interaction/UserProfile'
+import { authStore } from '@/store/auth'
+import router from '@/router'
 const route = useRoute()
 let id = route.params.username
 
@@ -22,6 +24,9 @@ if (id instanceof Array) {
 }
 
 onMounted(() => {
+  if (id == authStore().userName) {
+    router.replace('/myprofile')
+  }
   categoryStore.loadCategories().then(() => {
     categories.value = categoryStore.categories
     fetchUserProfile(id).then((u) => {

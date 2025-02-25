@@ -40,7 +40,7 @@ async function fetchCategories(): Promise<Category[]> {
       throw err
     }
   }
-  if (response != undefined && response.status === 200 && response.statusText === 'OK') {
+  if (response != undefined && response.status >= 200 && response.status <= 299) {
     if (response.data.categories != null) {
       categories = response.data.categories
     }

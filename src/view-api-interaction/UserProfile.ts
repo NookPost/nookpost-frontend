@@ -27,7 +27,7 @@ export async function fetchUserProfile(username: string): Promise<Profile | null
       throw err
     }
   }
-  if (response != undefined && response.status === 200 && response.statusText === 'OK') {
+  if (response != undefined && response.status >= 200 && response.status <= 299) {
     if (response.data != null) {
       user = {
         username: response.data.username ?? '',
@@ -56,7 +56,7 @@ export async function fetchPostsByUser(username: string): Promise<Post[]> {
       throw err
     }
   }
-  if (response != undefined && response.status === 200 && response.statusText === 'OK') {
+  if (response != undefined && response.status >= 200 && response.status <= 299) {
     if (response.data != null) {
       response.data.posts?.forEach((post) => {
         posts.push({

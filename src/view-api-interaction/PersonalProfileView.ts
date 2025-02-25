@@ -17,7 +17,7 @@ export async function fetchMeUserProfile(): Promise<Profile | null> {
       throw err
     }
   }
-  if (response != undefined && response.status === 200 && response.statusText === 'OK') {
+  if (response != undefined && response.status >= 200 && response.status <= 299) {
     if (response.data != null) {
       user = {
         username: response.data.username ?? '',

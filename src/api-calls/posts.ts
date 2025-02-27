@@ -16,7 +16,6 @@ import { getCurrentInstance } from 'vue'
 
 const categoryStore = categoryData()
 
-
 export async function fetchPostsFiltered(
   username?: string,
   categoryUuid?: string,

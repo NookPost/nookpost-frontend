@@ -4,8 +4,7 @@ import type { Profile } from '@/types/profile'
 import { getAPIConfig } from '@/util/api'
 import { AxiosError, type AxiosResponse } from 'axios'
 import { useToast } from 'primevue'
-
-const toast = useToast()
+import { getCurrentInstance } from 'vue'
 
 export async function editMeUserProfile(user: Profile) {
   const userMePutRequestBody: UserPutRequestBody = {
@@ -33,7 +32,7 @@ export async function editMeUserProfile(user: Profile) {
   }
   else {
     if (response != undefined && response.status == 401) {
-      toast.add({
+      getCurrentInstance()?.appContext.config.globalProperties.$toast.add({
         severity: 'error',
         summary: 'Error',
         detail: 'You don\'t have permission to edit this resource. Are you signed in?',
@@ -42,7 +41,7 @@ export async function editMeUserProfile(user: Profile) {
       })
     }
     else {
-      toast.add({
+      getCurrentInstance()?.appContext.config.globalProperties.$toast.add({
         severity: 'error',
         summary: 'Error',
         detail: 'Server returned error: ' + response.status + ' ' + response.statusText,
@@ -81,7 +80,7 @@ export async function fetchMeUserProfile(): Promise<Profile | null> {
   }
   else {
     if (response != undefined && response.status == 401) {
-      toast.add({
+      getCurrentInstance()?.appContext.config.globalProperties.$toast.add({
         severity: 'error',
         summary: 'Error',
         detail: 'You don\'t have permission to view this resource. Are you signed in?',
@@ -90,7 +89,7 @@ export async function fetchMeUserProfile(): Promise<Profile | null> {
       })
     }
     else {
-      toast.add({
+      getCurrentInstance()?.appContext.config.globalProperties.$toast.add({
         severity: 'error',
         summary: 'Error',
         detail: 'Server returned error: ' + response.status + ' ' + response.statusText,
@@ -130,7 +129,7 @@ export async function fetchUserProfile(username: string): Promise<Profile | null
   }
   else {
     if (response != undefined && response.status == 404) {
-      toast.add({
+      getCurrentInstance()?.appContext.config.globalProperties.$toast.add({
         severity: 'error',
         summary: 'Error',
         detail: 'The requested user profile wasn\'t found.',
@@ -139,7 +138,7 @@ export async function fetchUserProfile(username: string): Promise<Profile | null
       })
     }
     else {
-      toast.add({
+      getCurrentInstance()?.appContext.config.globalProperties.$toast.add({
         severity: 'error',
         summary: 'Error',
         detail: 'Server returned error: ' + response.status + ' ' + response.statusText,

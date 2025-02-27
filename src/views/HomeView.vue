@@ -4,7 +4,10 @@ import { categoryData } from '@/store/categories'
 import type { Post } from '@/types/post'
 import { onMounted, ref, type Ref } from 'vue'
 import { fetchPostsFiltered } from '@/api-calls/posts'
+import { useToast } from 'primevue'
 const posts: Ref<Post[]> = ref([])
+
+const toast = useToast()
 
 const categoryStore = categoryData()
 

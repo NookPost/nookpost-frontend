@@ -16,9 +16,10 @@ const app = createApp(App)
 const pinia = createPinia()
 app.use(pinia)
 
+app.use(ToastService)
+
 app.use(router)
 
-app.use(ToastService)
 
 app.directive('tooltip', Tooltip)
 

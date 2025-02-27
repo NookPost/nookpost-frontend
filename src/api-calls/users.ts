@@ -3,7 +3,6 @@ import router from '@/router'
 import type { Profile } from '@/types/profile'
 import { getAPIConfig } from '@/util/api'
 import { AxiosError, type AxiosResponse } from 'axios'
-import { useToast } from 'primevue'
 import { getCurrentInstance } from 'vue'
 
 export async function editMeUserProfile(user: Profile) {

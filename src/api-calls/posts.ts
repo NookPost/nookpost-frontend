@@ -12,7 +12,6 @@ import type { Category } from '@/types/category'
 import type { Post } from '@/types/post'
 import { getAPIConfig } from '@/util/api'
 import { AxiosError, type AxiosResponse } from 'axios'
-import { useToast } from 'primevue'
 import { getCurrentInstance } from 'vue'
 
 const categoryStore = categoryData()

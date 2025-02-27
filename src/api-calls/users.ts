@@ -35,7 +35,7 @@ export async function editMeUserProfile(toastHandler: ToastServiceMethods, user:
         summary: 'Error',
         detail: "You don't have permission to edit this resource. Are you signed in?",
         life: 3000,
-        group: 'top-right',
+        group: 'bottom-center',
       })
     } else {
       toastHandler.add({
@@ -43,7 +43,7 @@ export async function editMeUserProfile(toastHandler: ToastServiceMethods, user:
         summary: 'Error',
         detail: 'Server returned error: ' + response.status + ' ' + response.statusText,
         life: 3000,
-        group: 'top-right',
+        group: 'bottom-center',
       })
     }
   }
@@ -83,7 +83,7 @@ export async function fetchMeUserProfile(
         summary: 'Error',
         detail: "You don't have permission to view this resource. Are you signed in?",
         life: 3000,
-        group: 'top-right',
+        group: 'bottom-center',
       })
     } else {
       toastHandler.add({
@@ -91,7 +91,7 @@ export async function fetchMeUserProfile(
         summary: 'Error',
         detail: 'Server returned error: ' + response.status + ' ' + response.statusText,
         life: 3000,
-        group: 'top-right',
+        group: 'bottom-center',
       })
     }
   }
@@ -134,7 +134,7 @@ export async function fetchUserProfile(
         summary: 'Error',
         detail: "The requested user profile wasn't found.",
         life: 3000,
-        group: 'top-right',
+        group: 'bottom-center',
       })
     } else {
       toastHandler.add({
@@ -142,7 +142,7 @@ export async function fetchUserProfile(
         summary: 'Error',
         detail: 'Server returned error: ' + response.status + ' ' + response.statusText,
         life: 3000,
-        group: 'top-right',
+        group: 'bottom-center',
       })
     }
   }

@@ -33,7 +33,7 @@ onMounted(() => {
         summary: 'Error',
         detail: 'The requested category was not found.',
         life: 3000,
-        group: 'top-right',
+        group: 'bottom-center',
       })
       router.replace("/");
     }

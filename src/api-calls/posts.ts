@@ -63,7 +63,7 @@ export async function fetchPostsFiltered(
       summary: 'Error',
       detail: 'Server returned error: ' + response.status + ' ' + response.statusText,
       life: 3000,
-      group: 'top-right',
+      group: 'bottom-center',
     })
   }
   return posts
@@ -113,7 +113,7 @@ export async function fetchPost(
         summary: 'Error',
         detail: "The requested post wasn't found.",
         life: 3000,
-        group: 'top-right',
+        group: 'bottom-center',
       })
       router.replace('/')
     } else {
@@ -122,7 +122,7 @@ export async function fetchPost(
         summary: 'Error',
         detail: 'Server returned error: ' + response.status + ' ' + response.statusText,
         life: 3000,
-        group: 'top-right',
+        group: 'bottom-center',
       })
     }
   }
@@ -159,7 +159,7 @@ export async function createPost(toastHandler: ToastServiceMethods, post: Post) 
         summary: 'Error',
         detail: "The requested category wasn't found.",
         life: 3000,
-        group: 'top-right',
+        group: 'bottom-center',
       })
     } else if (response != undefined && response.status == 413) {
       toastHandler.add({
@@ -167,7 +167,7 @@ export async function createPost(toastHandler: ToastServiceMethods, post: Post) 
         summary: 'Error',
         detail: 'The payload in your request was too large.',
         life: 3000,
-        group: 'top-right',
+        group: 'bottom-center',
       })
     } else {
       toastHandler.add({
@@ -175,7 +175,7 @@ export async function createPost(toastHandler: ToastServiceMethods, post: Post) 
         summary: 'Error',
         detail: 'Server returned error: ' + response.status + ' ' + response.statusText,
         life: 3000,
-        group: 'top-right',
+        group: 'bottom-center',
       })
     }
   }
@@ -210,7 +210,7 @@ export async function updatePost(toastHandler: ToastServiceMethods, post: Post) 
         summary: 'Error',
         detail: "The requested post wasn't found.",
         life: 3000,
-        group: 'top-right',
+        group: 'bottom-center',
       })
     } else if (response != undefined && response.status == 401) {
       toastHandler.add({
@@ -218,7 +218,7 @@ export async function updatePost(toastHandler: ToastServiceMethods, post: Post) 
         summary: 'Error',
         detail: 'You do not have permission to edit this post. Are you signed in?',
         life: 3000,
-        group: 'top-right',
+        group: 'bottom-center',
       })
     } else {
       toastHandler.add({
@@ -226,7 +226,7 @@ export async function updatePost(toastHandler: ToastServiceMethods, post: Post) 
         summary: 'Error',
         detail: 'Server returned error: ' + response.status + ' ' + response.statusText,
         life: 3000,
-        group: 'top-right',
+        group: 'bottom-center',
       })
     }
   }
@@ -256,7 +256,7 @@ export async function deletePost(toastHandler: ToastServiceMethods, uuid: string
         summary: 'Error',
         detail: "The requested post wasn't found.",
         life: 3000,
-        group: 'top-right',
+        group: 'bottom-center',
       })
     } else if (response != undefined && response.status == 401) {
       toastHandler.add({
@@ -264,7 +264,7 @@ export async function deletePost(toastHandler: ToastServiceMethods, uuid: string
         summary: 'Error',
         detail: 'You do not have permission to delete this post. Are you signed in?',
         life: 3000,
-        group: 'top-right',
+        group: 'bottom-center',
       })
     } else {
       toastHandler.add({
@@ -272,7 +272,7 @@ export async function deletePost(toastHandler: ToastServiceMethods, uuid: string
         summary: 'Error',
         detail: 'Server returned error: ' + response.status + ' ' + response.statusText,
         life: 3000,
-        group: 'top-right',
+        group: 'bottom-center',
       })
     }
   }

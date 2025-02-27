@@ -35,7 +35,7 @@ onMounted(() => {
         life: 3000,
         group: 'bottom-center',
       })
-      router.replace("/");
+      router.replace('/')
     }
   })
 })

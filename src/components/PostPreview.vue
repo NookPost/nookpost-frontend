@@ -15,9 +15,13 @@ function getShortenedBody(input: string): string {
   const numberOfChars: number = 250
   if (input.length > numberOfChars) {
     readMore.value = true
+    const temp: string = input.slice(0, numberOfChars - 1)
+    return temp.substring(
+      0,
+      temp.lastIndexOf(' ') == -1 ? numberOfChars - 1 : temp.lastIndexOf(' '),
+    )
   }
-  const temp: string = input.slice(0, numberOfChars - 1)
-  return temp.substring(0, temp.lastIndexOf(' ') == -1 ? numberOfChars - 1 : temp.lastIndexOf(' '))
+  return input
 }
 
 function onClickDelete(uuid: string) {

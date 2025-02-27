@@ -4,13 +4,16 @@ import { categoryData } from '@/store/categories'
 import type { Post } from '@/types/post'
 import { onMounted, ref, type Ref } from 'vue'
 import { fetchPostsFiltered } from '@/api-calls/posts'
+import { useToast } from 'primevue'
 const posts: Ref<Post[]> = ref([])
 
 const categoryStore = categoryData()
 
+const toast = useToast()
+
 onMounted(() => {
   categoryStore.loadCategories().then(() => {
-    fetchPostsFiltered().then((p) => (posts.value = p))
+    fetchPostsFiltered(toast).then((p) => (posts.value = p))
   })
 })
 </script>

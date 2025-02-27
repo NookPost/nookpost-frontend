@@ -8,6 +8,7 @@ import { categoryData } from '@/store/categories'
 import { onMounted, ref, type Ref } from 'vue'
 import { editMeUserProfile, fetchMeUserProfile } from '@/api-calls/users'
 import { fetchPostsFiltered } from '@/api-calls/posts'
+import { useToast } from 'primevue'
 const route = useRoute()
 let id = route.params.username
 
@@ -16,6 +17,7 @@ const categoryStore = categoryData()
 const profile: Ref<Profile | null> = ref(null)
 const categories: Ref<Category[]> = ref([])
 const posts: Ref<Post[]> = ref([])
+const toast = useToast()
 
 onMounted(() => {
   onLoaded()
@@ -27,9 +29,9 @@ function onLoaded() {
   }
   categoryStore.loadCategories().then(() => {
     categories.value = categoryStore.categories
-    fetchMeUserProfile().then((u) => {
+    fetchMeUserProfile(toast).then((u) => {
       profile.value = u
-      fetchPostsFiltered(u?.username ?? '').then((p) => {
+      fetchPostsFiltered(toast, u?.username ?? '').then((p) => {
         posts.value = p
       })
     })
@@ -37,7 +39,7 @@ function onLoaded() {
 }
 
 function onProfileEdit(user: Profile) {
-  editMeUserProfile(user).then(() => {
+  editMeUserProfile(toast, user).then(() => {
     onLoaded()
   })
 }

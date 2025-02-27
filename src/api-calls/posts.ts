@@ -12,11 +12,12 @@ import type { Category } from '@/types/category'
 import type { Post } from '@/types/post'
 import { getAPIConfig } from '@/util/api'
 import { AxiosError, type AxiosResponse } from 'axios'
-import { getCurrentInstance } from 'vue'
+import { type ToastServiceMethods } from 'primevue'
 
 const categoryStore = categoryData()
 
 export async function fetchPostsFiltered(
+  toastHandler: ToastServiceMethods,
   username?: string,
   categoryUuid?: string,
   textSearch?: string,
@@ -57,7 +58,7 @@ export async function fetchPostsFiltered(
       })
     }
   } else {
-    getCurrentInstance()?.appContext.config.globalProperties.$toast.add({
+    toastHandler.add({
       severity: 'error',
       summary: 'Error',
       detail: 'Server returned error: ' + response.status + ' ' + response.statusText,
@@ -68,7 +69,10 @@ export async function fetchPostsFiltered(
   return posts
 }
 
-export async function fetchPost(uuid: string): Promise<Post | null> {
+export async function fetchPost(
+  toastHandler: ToastServiceMethods,
+  uuid: string,
+): Promise<Post | null> {
   let post: Post | null = null
   const configuration = getAPIConfig(false)
   const postApi = new PostsApi(configuration)
@@ -104,15 +108,16 @@ export async function fetchPost(uuid: string): Promise<Post | null> {
     }
   } else {
     if (response != undefined && response.status == 404) {
-      getCurrentInstance()?.appContext.config.globalProperties.$toast.add({
+      toastHandler.add({
         severity: 'error',
         summary: 'Error',
         detail: "The requested post wasn't found.",
         life: 3000,
         group: 'top-right',
       })
+      router.replace('/')
     } else {
-      getCurrentInstance()?.appContext.config.globalProperties.$toast.add({
+      toastHandler.add({
         severity: 'error',
         summary: 'Error',
         detail: 'Server returned error: ' + response.status + ' ' + response.statusText,
@@ -125,7 +130,7 @@ export async function fetchPost(uuid: string): Promise<Post | null> {
   return post
 }
 
-export async function createPost(post: Post) {
+export async function createPost(toastHandler: ToastServiceMethods, post: Post) {
   const configuration = getAPIConfig(true)
   const postApi = new PostsApi(configuration)
   const postRequestBody: PostData = {
@@ -149,7 +154,7 @@ export async function createPost(post: Post) {
     router.push('/post/' + response.data.uuid)
   } else {
     if (response != undefined && response.status == 404) {
-      getCurrentInstance()?.appContext.config.globalProperties.$toast.add({
+      toastHandler.add({
         severity: 'error',
         summary: 'Error',
         detail: "The requested category wasn't found.",
@@ -157,7 +162,7 @@ export async function createPost(post: Post) {
         group: 'top-right',
       })
     } else if (response != undefined && response.status == 413) {
-      getCurrentInstance()?.appContext.config.globalProperties.$toast.add({
+      toastHandler.add({
         severity: 'error',
         summary: 'Error',
         detail: 'The payload in your request was too large.',
@@ -165,7 +170,7 @@ export async function createPost(post: Post) {
         group: 'top-right',
       })
     } else {
-      getCurrentInstance()?.appContext.config.globalProperties.$toast.add({
+      toastHandler.add({
         severity: 'error',
         summary: 'Error',
         detail: 'Server returned error: ' + response.status + ' ' + response.statusText,
@@ -176,7 +181,7 @@ export async function createPost(post: Post) {
   }
 }
 
-export async function updatePost(post: Post) {
+export async function updatePost(toastHandler: ToastServiceMethods, post: Post) {
   const configuration = getAPIConfig(true)
   const postApi = new PostsApi(configuration)
   const putRequestBody: PutPostRequestBody = {
@@ -200,7 +205,7 @@ export async function updatePost(post: Post) {
     router.push('/post/' + post.uuid)
   } else {
     if (response != undefined && response.status == 404) {
-      getCurrentInstance()?.appContext.config.globalProperties.$toast.add({
+      toastHandler.add({
         severity: 'error',
         summary: 'Error',
         detail: "The requested post wasn't found.",
@@ -208,7 +213,7 @@ export async function updatePost(post: Post) {
         group: 'top-right',
       })
     } else if (response != undefined && response.status == 401) {
-      getCurrentInstance()?.appContext.config.globalProperties.$toast.add({
+      toastHandler.add({
         severity: 'error',
         summary: 'Error',
         detail: 'You do not have permission to edit this post. Are you signed in?',
@@ -216,7 +221,7 @@ export async function updatePost(post: Post) {
         group: 'top-right',
       })
     } else {
-      getCurrentInstance()?.appContext.config.globalProperties.$toast.add({
+      toastHandler.add({
         severity: 'error',
         summary: 'Error',
         detail: 'Server returned error: ' + response.status + ' ' + response.statusText,
@@ -227,7 +232,7 @@ export async function updatePost(post: Post) {
   }
 }
 
-export async function deletePost(uuid: string) {
+export async function deletePost(toastHandler: ToastServiceMethods, uuid: string) {
   const configuration = getAPIConfig(true)
   const postApi = new PostsApi(configuration)
 
@@ -246,7 +251,7 @@ export async function deletePost(uuid: string) {
     router.push('/')
   } else {
     if (response != undefined && response.status == 404) {
-      getCurrentInstance()?.appContext.config.globalProperties.$toast.add({
+      toastHandler.add({
         severity: 'error',
         summary: 'Error',
         detail: "The requested post wasn't found.",
@@ -254,7 +259,7 @@ export async function deletePost(uuid: string) {
         group: 'top-right',
       })
     } else if (response != undefined && response.status == 401) {
-      getCurrentInstance()?.appContext.config.globalProperties.$toast.add({
+      toastHandler.add({
         severity: 'error',
         summary: 'Error',
         detail: 'You do not have permission to delete this post. Are you signed in?',
@@ -262,7 +267,7 @@ export async function deletePost(uuid: string) {
         group: 'top-right',
       })
     } else {
-      getCurrentInstance()?.appContext.config.globalProperties.$toast.add({
+      toastHandler.add({
         severity: 'error',
         summary: 'Error',
         detail: 'Server returned error: ' + response.status + ' ' + response.statusText,

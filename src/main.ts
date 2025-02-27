@@ -20,7 +20,6 @@ app.use(ToastService)
 
 app.use(router)
 
-
 app.directive('tooltip', Tooltip)
 
 const PrimeVueTheme = definePreset(Aura, {

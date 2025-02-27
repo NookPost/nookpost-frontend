@@ -58,13 +58,15 @@ export async function fetchPostsFiltered(
       })
     }
   } else {
-    getCurrentInstance()?.appContext.config.globalProperties.$getCurrentInstance()?.appContext.config.globalProperties.$toast.add({
-      severity: 'error',
-      summary: 'Error',
-      detail: 'Server returned error: ' + response.status + ' ' + response.statusText,
-      life: 3000,
-      group: 'top-right',
-    })
+    getCurrentInstance()
+      ?.appContext.config.globalProperties.$getCurrentInstance()
+      ?.appContext.config.globalProperties.$toast.add({
+        severity: 'error',
+        summary: 'Error',
+        detail: 'Server returned error: ' + response.status + ' ' + response.statusText,
+        life: 3000,
+        group: 'top-right',
+      })
   }
   return posts
 }
@@ -103,18 +105,16 @@ export async function fetchPost(uuid: string): Promise<Post | null> {
         },
       }
     }
-  }
-  else {
+  } else {
     if (response != undefined && response.status == 404) {
       getCurrentInstance()?.appContext.config.globalProperties.$toast.add({
         severity: 'error',
         summary: 'Error',
-        detail: 'The requested post wasn\'t found.',
+        detail: "The requested post wasn't found.",
         life: 3000,
         group: 'top-right',
       })
-    }
-    else {
+    } else {
       getCurrentInstance()?.appContext.config.globalProperties.$toast.add({
         severity: 'error',
         summary: 'Error',
@@ -150,18 +150,16 @@ export async function createPost(post: Post) {
   }
   if (response != undefined && response.status >= 200 && response.status <= 299) {
     router.push('/post/' + response.data.uuid)
-  }
-  else {
+  } else {
     if (response != undefined && response.status == 404) {
       getCurrentInstance()?.appContext.config.globalProperties.$toast.add({
         severity: 'error',
         summary: 'Error',
-        detail: 'The requested category wasn\'t found.',
+        detail: "The requested category wasn't found.",
         life: 3000,
         group: 'top-right',
       })
-    }
-    else if (response != undefined && response.status == 413) {
+    } else if (response != undefined && response.status == 413) {
       getCurrentInstance()?.appContext.config.globalProperties.$toast.add({
         severity: 'error',
         summary: 'Error',
@@ -169,8 +167,7 @@ export async function createPost(post: Post) {
         life: 3000,
         group: 'top-right',
       })
-    }
-    else {
+    } else {
       getCurrentInstance()?.appContext.config.globalProperties.$toast.add({
         severity: 'error',
         summary: 'Error',
@@ -178,7 +175,6 @@ export async function createPost(post: Post) {
         life: 3000,
         group: 'top-right',
       })
-
     }
   }
 }
@@ -205,18 +201,16 @@ export async function updatePost(post: Post) {
   }
   if (response != undefined && response.status >= 200 && response.status <= 299) {
     router.push('/post/' + post.uuid)
-  }
-  else {
+  } else {
     if (response != undefined && response.status == 404) {
       getCurrentInstance()?.appContext.config.globalProperties.$toast.add({
         severity: 'error',
         summary: 'Error',
-        detail: 'The requested post wasn\'t found.',
+        detail: "The requested post wasn't found.",
         life: 3000,
         group: 'top-right',
       })
-    }
-    else if (response != undefined && response.status == 401) {
+    } else if (response != undefined && response.status == 401) {
       getCurrentInstance()?.appContext.config.globalProperties.$toast.add({
         severity: 'error',
         summary: 'Error',
@@ -224,8 +218,7 @@ export async function updatePost(post: Post) {
         life: 3000,
         group: 'top-right',
       })
-    }
-    else {
+    } else {
       getCurrentInstance()?.appContext.config.globalProperties.$toast.add({
         severity: 'error',
         summary: 'Error',
@@ -254,18 +247,16 @@ export async function deletePost(uuid: string) {
   if (response != undefined && response.status >= 200 && response.status <= 299) {
     //TODO: Check if this is really the best thing to do...
     router.push('/')
-  }
-  else {
+  } else {
     if (response != undefined && response.status == 404) {
       getCurrentInstance()?.appContext.config.globalProperties.$toast.add({
         severity: 'error',
         summary: 'Error',
-        detail: 'The requested post wasn\'t found.',
+        detail: "The requested post wasn't found.",
         life: 3000,
         group: 'top-right',
       })
-    }
-    else if (response != undefined && response.status == 401) {
+    } else if (response != undefined && response.status == 401) {
       getCurrentInstance()?.appContext.config.globalProperties.$toast.add({
         severity: 'error',
         summary: 'Error',
@@ -273,8 +264,7 @@ export async function deletePost(uuid: string) {
         life: 3000,
         group: 'top-right',
       })
-    }
-    else {
+    } else {
       getCurrentInstance()?.appContext.config.globalProperties.$toast.add({
         severity: 'error',
         summary: 'Error',

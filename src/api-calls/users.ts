@@ -29,18 +29,16 @@ export async function editMeUserProfile(user: Profile) {
   }
   if (response.status >= 200 && response.status <= 299) {
     router.push('/myprofile')
-  }
-  else {
+  } else {
     if (response != undefined && response.status == 401) {
       getCurrentInstance()?.appContext.config.globalProperties.$toast.add({
         severity: 'error',
         summary: 'Error',
-        detail: 'You don\'t have permission to edit this resource. Are you signed in?',
+        detail: "You don't have permission to edit this resource. Are you signed in?",
         life: 3000,
         group: 'top-right',
       })
-    }
-    else {
+    } else {
       getCurrentInstance()?.appContext.config.globalProperties.$toast.add({
         severity: 'error',
         summary: 'Error',
@@ -77,18 +75,16 @@ export async function fetchMeUserProfile(): Promise<Profile | null> {
         profilePictureBase64: response.data.profilePictureBase64 ?? '',
       }
     }
-  }
-  else {
+  } else {
     if (response != undefined && response.status == 401) {
       getCurrentInstance()?.appContext.config.globalProperties.$toast.add({
         severity: 'error',
         summary: 'Error',
-        detail: 'You don\'t have permission to view this resource. Are you signed in?',
+        detail: "You don't have permission to view this resource. Are you signed in?",
         life: 3000,
         group: 'top-right',
       })
-    }
-    else {
+    } else {
       getCurrentInstance()?.appContext.config.globalProperties.$toast.add({
         severity: 'error',
         summary: 'Error',
@@ -126,18 +122,16 @@ export async function fetchUserProfile(username: string): Promise<Profile | null
         profilePictureBase64: response.data.profilePictureBase64 ?? '',
       }
     }
-  }
-  else {
+  } else {
     if (response != undefined && response.status == 404) {
       getCurrentInstance()?.appContext.config.globalProperties.$toast.add({
         severity: 'error',
         summary: 'Error',
-        detail: 'The requested user profile wasn\'t found.',
+        detail: "The requested user profile wasn't found.",
         life: 3000,
         group: 'top-right',
       })
-    }
-    else {
+    } else {
       getCurrentInstance()?.appContext.config.globalProperties.$toast.add({
         severity: 'error',
         summary: 'Error',

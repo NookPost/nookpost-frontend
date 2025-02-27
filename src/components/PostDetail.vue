@@ -9,7 +9,7 @@ import 'quill/dist/quill.core.css'
 import type { Category } from '@/types/category'
 import { authStore } from '@/store/auth'
 import { PrimeIcons } from '@primevue/core/api'
-import { deletePost } from '@/component-api-interaction/PostDeletion'
+import { deletePost } from '@/api-calls/posts'
 
 const authData = authStore()
 

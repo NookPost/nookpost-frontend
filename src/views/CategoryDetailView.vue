@@ -5,8 +5,8 @@ import type { Post } from '@/types/post'
 import { onMounted, ref, type Ref } from 'vue'
 import { useRoute } from 'vue-router'
 import type { Category } from '@/types/category'
-import { fetchPostsByCategory } from '@/view-api-interaction/CategoryDetailView'
 import { ProgressSpinner } from 'primevue'
+import { fetchPostsFiltered } from '@/api-calls/posts'
 const posts: Ref<Post[] | null> = ref(null)
 
 const categoryStore = categoryData()
@@ -24,7 +24,7 @@ onMounted(() => {
   categoryStore.loadCategories().then(() => {
     category.value = categoryStore.categories.find((c) => c.uuid == id) ?? null
     if (category.value != null) {
-      fetchPostsByCategory(id).then((p) => (posts.value = p))
+      fetchPostsFiltered(undefined, id).then((p) => (posts.value = p))
     }
   })
 })

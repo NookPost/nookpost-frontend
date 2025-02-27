@@ -3,14 +3,14 @@ import PostPreviewGrid from '@/components/PostPreviewGrid.vue'
 import { categoryData } from '@/store/categories'
 import type { Post } from '@/types/post'
 import { onMounted, ref, type Ref } from 'vue'
-import { fetchPosts } from '@/view-api-interaction/HomeView'
+import { fetchPostsFiltered } from '@/api-calls/posts'
 const posts: Ref<Post[]> = ref([])
 
 const categoryStore = categoryData()
 
 onMounted(() => {
   categoryStore.loadCategories().then(() => {
-    fetchPosts().then((p) => (posts.value = p))
+    fetchPostsFiltered().then((p) => (posts.value = p))
   })
 })
 </script>

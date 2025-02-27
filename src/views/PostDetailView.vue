@@ -3,9 +3,9 @@ import { useRoute } from 'vue-router'
 import PostDetail from '@/components/PostDetail.vue'
 import type { Post } from '@/types/post'
 import { onMounted, ref, watch, type Ref } from 'vue'
-import { createPost, fetchPost, updatePost } from '@/view-api-interaction/PostDetailView'
 import { ProgressSpinner } from 'primevue'
 import { categoryData } from '@/store/categories'
+import { createPost, fetchPost, updatePost } from '@/api-calls/posts'
 const route = useRoute()
 let id: string
 const edit: Ref<boolean, boolean> = ref((route.meta.edit as boolean | undefined) ?? false)

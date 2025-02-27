@@ -1,9 +1,9 @@
 <script setup lang="ts">
+import { fetchPostsFiltered } from '@/api-calls/posts'
 import PostPreviewGrid from '@/components/PostPreviewGrid.vue'
 import { categoryData } from '@/store/categories'
 import type { Post } from '@/types/post'
 import { onMounted, ref, watch, type Ref } from 'vue'
-import { fetchPostsByTextSearch } from '@/view-api-interaction/SearchResultsView'
 import { useRoute } from 'vue-router'
 const posts: Ref<Post[]> = ref([])
 const route = useRoute()
@@ -24,7 +24,7 @@ function onLoaded() {
     route.query.q instanceof Array ? route.query.q[0]?.toString() : route.query.q?.toString()
   console.log(searchstring)
   categoryStore.loadCategories().then(() => {
-    fetchPostsByTextSearch(searchstring).then((p) => (posts.value = p))
+    fetchPostsFiltered(undefined, undefined, searchstring).then((p) => (posts.value = p))
   })
 }
 </script>

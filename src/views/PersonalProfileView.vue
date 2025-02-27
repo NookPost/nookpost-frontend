@@ -6,8 +6,8 @@ import type { Category } from '@/types/category'
 import type { Post } from '@/types/post'
 import { categoryData } from '@/store/categories'
 import { onMounted, ref, type Ref } from 'vue'
-import { editMeUserProfile, fetchMeUserProfile } from '@/view-api-interaction/PersonalProfileView'
-import { fetchPostsByUser } from '@/view-api-interaction/UserProfile'
+import { editMeUserProfile, fetchMeUserProfile } from '@/api-calls/users'
+import { fetchPostsFiltered } from '@/api-calls/posts'
 const route = useRoute()
 let id = route.params.username
 
@@ -29,7 +29,7 @@ function onLoaded() {
     categories.value = categoryStore.categories
     fetchMeUserProfile().then((u) => {
       profile.value = u
-      fetchPostsByUser(u?.username ?? '').then((p) => {
+      fetchPostsFiltered(u?.username ?? '').then((p) => {
         posts.value = p
       })
     })

@@ -7,9 +7,10 @@ import type { Category } from '@/types/category'
 import type { Post } from '@/types/post'
 import { onMounted, ref, type Ref } from 'vue'
 import { categoryData } from '@/store/categories'
-import { fetchPostsByUser, fetchUserProfile } from '@/view-api-interaction/UserProfile'
 import { authStore } from '@/store/auth'
 import router from '@/router'
+import { fetchUserProfile } from '@/api-calls/users'
+import { fetchPostsFiltered } from '@/api-calls/posts'
 const route = useRoute()
 let id = route.params.username
 
@@ -31,7 +32,7 @@ onMounted(() => {
     categories.value = categoryStore.categories
     fetchUserProfile(id).then((u) => {
       profile.value = u
-      fetchPostsByUser(u?.username ?? '').then((p) => {
+      fetchPostsFiltered(u?.username ?? '').then((p) => {
         posts.value = p
       })
     })

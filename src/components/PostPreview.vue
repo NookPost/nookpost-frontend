@@ -5,7 +5,7 @@ import { ref, type PropType } from 'vue'
 import { RouterLink } from 'vue-router'
 import type { Post } from '@/types/post'
 import { authStore } from '@/store/auth'
-import { deletePost } from '@/component-api-interaction/PostDeletion'
+import { deletePost } from '@/api-calls/posts'
 
 const authData = authStore()
 

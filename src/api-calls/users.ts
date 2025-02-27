@@ -58,3 +58,32 @@ export async function fetchMeUserProfile(): Promise<Profile | null> {
   }
   return user
 }
+
+export async function fetchUserProfile(username: string): Promise<Profile | null> {
+  let user: Profile | null = null
+  const configuration = getAPIConfig(false)
+  const postApi = new UsersApi(configuration)
+  let response: AxiosResponse<UsersGetResponseBody, unknown>
+  try {
+    response = await postApi.apiV1UsersUsernameGet(username)
+  } catch (err) {
+    if (err instanceof AxiosError) {
+      response = err.response as AxiosResponse<UsersGetResponseBody, unknown>
+    } else {
+      throw err
+    }
+  }
+  if (response != undefined && response.status >= 200 && response.status <= 299) {
+    if (response.data != null) {
+      user = {
+        username: response.data.username ?? '',
+        displayname: response.data.displayName ?? '',
+        tagline: response.data.tagLine ?? '',
+        bio: response.data.bio ?? '',
+        email: response.data.email ?? '',
+        profilePictureBase64: response.data.profilePictureBase64 ?? '',
+      }
+    }
+  }
+  return user
+}

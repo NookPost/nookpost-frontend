@@ -1,4 +1,11 @@
-import { PostsApi, type GetPostFilteredResponseBody, type GetPostResponseBody, type PostData, type PostPostResponseBody, type PutPostRequestBody } from '@/api'
+import {
+  PostsApi,
+  type GetPostFilteredResponseBody,
+  type GetPostResponseBody,
+  type PostData,
+  type PostPostResponseBody,
+  type PutPostRequestBody,
+} from '@/api'
 import router from '@/router'
 import { categoryData } from '@/store/categories'
 import type { Category } from '@/types/category'
@@ -48,8 +55,7 @@ export async function fetchPostsFiltered(
         })
       })
     }
-  }
-  else{
+  } else {
     // Do shit
   }
   return posts

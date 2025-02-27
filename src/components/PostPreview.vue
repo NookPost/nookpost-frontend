@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Tag, Button } from 'primevue'
+import { Tag, Button, useToast } from 'primevue'
 import { PrimeIcons } from '@primevue/core/api'
 import { ref, type PropType } from 'vue'
 import { RouterLink } from 'vue-router'
@@ -11,6 +11,8 @@ const authData = authStore()
 
 const readMore = ref(false)
 
+const toast = useToast()
+
 function getShortenedBody(input: string): string {
   const numberOfChars: number = 250
   if (input.length > numberOfChars) {
@@ -21,7 +23,7 @@ function getShortenedBody(input: string): string {
 }
 
 function onClickDelete(uuid: string) {
-  deletePost(uuid)
+  deletePost(toast, uuid)
 }
 </script>
 

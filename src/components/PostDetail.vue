@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Tag, Image, InputText, FloatLabel, Button, Message, Select } from 'primevue'
+import { Tag, Image, InputText, FloatLabel, Button, Message, Select, useToast } from 'primevue'
 import { ref, toRaw, type PropType, type Ref } from 'vue'
 import type { Post } from '@/types/post'
 import CropperDialog from './CropperDialog.vue'
@@ -12,6 +12,8 @@ import { PrimeIcons } from '@primevue/core/api'
 import { deletePost } from '@/api-calls/posts'
 
 const authData = authStore()
+
+const toast = useToast()
 
 const props = defineProps({
   data: {
@@ -31,7 +33,7 @@ const props = defineProps({
 })
 
 function onClickDelete(uuid: string) {
-  deletePost(uuid)
+  deletePost(toast, uuid)
 }
 
 const emit = defineEmits<{

@@ -3,6 +3,9 @@ import router from '@/router'
 import type { Profile } from '@/types/profile'
 import { getAPIConfig } from '@/util/api'
 import { AxiosError, type AxiosResponse } from 'axios'
+import { useToast } from 'primevue'
+
+const toast = useToast()
 
 export async function editMeUserProfile(user: Profile) {
   const userMePutRequestBody: UserPutRequestBody = {
@@ -27,6 +30,26 @@ export async function editMeUserProfile(user: Profile) {
   }
   if (response.status >= 200 && response.status <= 299) {
     router.push('/myprofile')
+  }
+  else {
+    if (response != undefined && response.status == 401) {
+      toast.add({
+        severity: 'error',
+        summary: 'Error',
+        detail: 'You don\'t have permission to edit this resource. Are you signed in?',
+        life: 3000,
+        group: 'top-right',
+      })
+    }
+    else {
+      toast.add({
+        severity: 'error',
+        summary: 'Error',
+        detail: 'Server returned error: ' + response.status + ' ' + response.statusText,
+        life: 3000,
+        group: 'top-right',
+      })
+    }
   }
 }
 
@@ -56,6 +79,26 @@ export async function fetchMeUserProfile(): Promise<Profile | null> {
       }
     }
   }
+  else {
+    if (response != undefined && response.status == 401) {
+      toast.add({
+        severity: 'error',
+        summary: 'Error',
+        detail: 'You don\'t have permission to view this resource. Are you signed in?',
+        life: 3000,
+        group: 'top-right',
+      })
+    }
+    else {
+      toast.add({
+        severity: 'error',
+        summary: 'Error',
+        detail: 'Server returned error: ' + response.status + ' ' + response.statusText,
+        life: 3000,
+        group: 'top-right',
+      })
+    }
+  }
   return user
 }
 
@@ -83,6 +126,26 @@ export async function fetchUserProfile(username: string): Promise<Profile | null
         email: response.data.email ?? '',
         profilePictureBase64: response.data.profilePictureBase64 ?? '',
       }
+    }
+  }
+  else {
+    if (response != undefined && response.status == 404) {
+      toast.add({
+        severity: 'error',
+        summary: 'Error',
+        detail: 'The requested user profile wasn\'t found.',
+        life: 3000,
+        group: 'top-right',
+      })
+    }
+    else {
+      toast.add({
+        severity: 'error',
+        summary: 'Error',
+        detail: 'Server returned error: ' + response.status + ' ' + response.statusText,
+        life: 3000,
+        group: 'top-right',
+      })
     }
   }
   return user

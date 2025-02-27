@@ -12,8 +12,10 @@ import type { Category } from '@/types/category'
 import type { Post } from '@/types/post'
 import { getAPIConfig } from '@/util/api'
 import { AxiosError, type AxiosResponse } from 'axios'
+import { useToast } from 'primevue'
 
 const categoryStore = categoryData()
+const toast = useToast()
 
 export async function fetchPostsFiltered(
   username?: string,
@@ -56,7 +58,13 @@ export async function fetchPostsFiltered(
       })
     }
   } else {
-    // Do shit
+    toast.add({
+      severity: 'error',
+      summary: 'Error',
+      detail: 'Server returned error: ' + response.status + ' ' + response.statusText,
+      life: 3000,
+      group: 'top-right',
+    })
   }
   return posts
 }
@@ -96,6 +104,26 @@ export async function fetchPost(uuid: string): Promise<Post | null> {
       }
     }
   }
+  else {
+    if (response != undefined && response.status == 404) {
+      toast.add({
+        severity: 'error',
+        summary: 'Error',
+        detail: 'The requested post wasn\'t found.',
+        life: 3000,
+        group: 'top-right',
+      })
+    }
+    else {
+      toast.add({
+        severity: 'error',
+        summary: 'Error',
+        detail: 'Server returned error: ' + response.status + ' ' + response.statusText,
+        life: 3000,
+        group: 'top-right',
+      })
+    }
+  }
 
   return post
 }
@@ -123,6 +151,36 @@ export async function createPost(post: Post) {
   if (response != undefined && response.status >= 200 && response.status <= 299) {
     router.push('/post/' + response.data.uuid)
   }
+  else {
+    if (response != undefined && response.status == 404) {
+      toast.add({
+        severity: 'error',
+        summary: 'Error',
+        detail: 'The requested category wasn\'t found.',
+        life: 3000,
+        group: 'top-right',
+      })
+    }
+    else if(response != undefined && response.status == 413){
+      toast.add({
+        severity: 'error',
+        summary: 'Error',
+        detail: 'The payload in your request was too large.',
+        life: 3000,
+        group: 'top-right',
+      })
+    }
+    else {
+      toast.add({
+        severity: 'error',
+        summary: 'Error',
+        detail: 'Server returned error: ' + response.status + ' ' + response.statusText,
+        life: 3000,
+        group: 'top-right',
+      })
+
+    }
+  }
 }
 
 export async function updatePost(post: Post) {
@@ -148,6 +206,35 @@ export async function updatePost(post: Post) {
   if (response != undefined && response.status >= 200 && response.status <= 299) {
     router.push('/post/' + post.uuid)
   }
+  else {
+    if (response != undefined && response.status == 404) {
+      toast.add({
+        severity: 'error',
+        summary: 'Error',
+        detail: 'The requested post wasn\'t found.',
+        life: 3000,
+        group: 'top-right',
+      })
+    }
+    else if (response != undefined && response.status == 401) {
+      toast.add({
+        severity: 'error',
+        summary: 'Error',
+        detail: 'You do not have permission to edit this post. Are you signed in?',
+        life: 3000,
+        group: 'top-right',
+      })
+    }
+    else {
+      toast.add({
+        severity: 'error',
+        summary: 'Error',
+        detail: 'Server returned error: ' + response.status + ' ' + response.statusText,
+        life: 3000,
+        group: 'top-right',
+      })
+    }
+  }
 }
 
 export async function deletePost(uuid: string) {
@@ -167,5 +254,34 @@ export async function deletePost(uuid: string) {
   if (response != undefined && response.status >= 200 && response.status <= 299) {
     //TODO: Check if this is really the best thing to do...
     router.push('/')
+  }
+  else {
+    if (response != undefined && response.status == 404) {
+      toast.add({
+        severity: 'error',
+        summary: 'Error',
+        detail: 'The requested post wasn\'t found.',
+        life: 3000,
+        group: 'top-right',
+      })
+    }
+    else if (response != undefined && response.status == 401) {
+      toast.add({
+        severity: 'error',
+        summary: 'Error',
+        detail: 'You do not have permission to delete this post. Are you signed in?',
+        life: 3000,
+        group: 'top-right',
+      })
+    }
+    else {
+      toast.add({
+        severity: 'error',
+        summary: 'Error',
+        detail: 'Server returned error: ' + response.status + ' ' + response.statusText,
+        life: 3000,
+        group: 'top-right',
+      })
+    }
   }
 }

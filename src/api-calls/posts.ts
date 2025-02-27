@@ -16,6 +16,7 @@ import { getCurrentInstance } from 'vue'
 
 const categoryStore = categoryData()
 
+
 export async function fetchPostsFiltered(
   username?: string,
   categoryUuid?: string,
@@ -57,15 +58,13 @@ export async function fetchPostsFiltered(
       })
     }
   } else {
-    getCurrentInstance()
-      ?.appContext.config.globalProperties.$getCurrentInstance()
-      ?.appContext.config.globalProperties.$toast.add({
-        severity: 'error',
-        summary: 'Error',
-        detail: 'Server returned error: ' + response.status + ' ' + response.statusText,
-        life: 3000,
-        group: 'top-right',
-      })
+    getCurrentInstance()?.appContext.config.globalProperties.$toast.add({
+      severity: 'error',
+      summary: 'Error',
+      detail: 'Server returned error: ' + response.status + ' ' + response.statusText,
+      life: 3000,
+      group: 'top-right',
+    })
   }
   return posts
 }

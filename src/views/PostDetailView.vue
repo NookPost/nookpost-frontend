@@ -3,9 +3,9 @@ import { useRoute } from 'vue-router'
 import PostDetail from '@/components/PostDetail.vue'
 import type { Post } from '@/types/post'
 import { onMounted, ref, watch, type Ref } from 'vue'
-import { createPost, fetchPost, updatePost } from '@/view-api-interaction/PostDetailView'
-import { ProgressSpinner } from 'primevue'
+import { ProgressSpinner, useToast } from 'primevue'
 import { categoryData } from '@/store/categories'
+import { createPost, fetchPost, updatePost } from '@/api-calls/posts'
 const route = useRoute()
 let id: string
 const edit: Ref<boolean, boolean> = ref((route.meta.edit as boolean | undefined) ?? false)
@@ -19,6 +19,8 @@ if (route.params.id instanceof Array) {
 }
 
 const categories = categoryData()
+
+const toast = useToast()
 
 watch([() => route.meta.edit, () => route.meta.create, () => route.params.id], () => onViewLoaded())
 
@@ -53,16 +55,16 @@ function onViewLoaded() {
   }
   categories.loadCategories().then(() => {
     if (!create) {
-      fetchPost(id).then((p) => (post.value = p))
+      fetchPost(toast, id).then((p) => (post.value = p))
     }
   })
 }
 
 function onSubmitPost(editedPost: Post) {
   if (create) {
-    createPost(editedPost)
+    createPost(toast, editedPost)
   } else {
-    updatePost(editedPost)
+    updatePost(toast, editedPost)
   }
 }
 </script>

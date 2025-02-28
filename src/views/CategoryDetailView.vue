@@ -5,11 +5,13 @@ import type { Post } from '@/types/post'
 import { onMounted, ref, type Ref } from 'vue'
 import { useRoute } from 'vue-router'
 import type { Category } from '@/types/category'
-import { fetchPostsByCategory } from '@/view-api-interaction/CategoryDetailView'
-import { ProgressSpinner } from 'primevue'
+import { ProgressSpinner, useToast } from 'primevue'
+import { fetchPostsFiltered } from '@/api-calls/posts'
+import router from '@/router'
 const posts: Ref<Post[] | null> = ref(null)
 
 const categoryStore = categoryData()
+const toast = useToast()
 
 const route = useRoute()
 let id = route.params.categoryID
@@ -24,7 +26,16 @@ onMounted(() => {
   categoryStore.loadCategories().then(() => {
     category.value = categoryStore.categories.find((c) => c.uuid == id) ?? null
     if (category.value != null) {
-      fetchPostsByCategory(id).then((p) => (posts.value = p))
+      fetchPostsFiltered(toast, undefined, id).then((p) => (posts.value = p))
+    } else {
+      toast.add({
+        severity: 'error',
+        summary: 'Error',
+        detail: 'The requested category was not found.',
+        life: 3000,
+        group: 'bottom-center',
+      })
+      router.replace('/')
     }
   })
 })

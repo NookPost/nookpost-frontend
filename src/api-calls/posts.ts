@@ -16,6 +16,16 @@ import { type ToastServiceMethods } from 'primevue'
 
 const categoryStore = categoryData()
 
+/**
+ * Fetch a filtered list of posts
+ *
+ * @param toastHandler The handler to display error messages on
+ * @param username The author username to filter posts by
+ * @param categoryUuid The category to filter posts by
+ * @param textSearch A text search to apply to the posts
+ * @param page The page to request (depends on pageItemCound)
+ * @param pageItemCount The number of items per page (depends on page)
+ */
 export async function fetchPostsFiltered(
   toastHandler: ToastServiceMethods,
   username?: string,
@@ -69,6 +79,12 @@ export async function fetchPostsFiltered(
   return posts
 }
 
+/**
+ * Fetch a toast with the given UUID
+ *
+ * @param toastHandler the handler to display error messages to
+ * @param uuid The uuid of the post
+ */
 export async function fetchPost(
   toastHandler: ToastServiceMethods,
   uuid: string,
@@ -130,6 +146,12 @@ export async function fetchPost(
   return post
 }
 
+/**
+ * Create a new post
+ *
+ * @param toastHandler The handler to diplay error messages to
+ * @param post The post to create
+ */
 export async function createPost(toastHandler: ToastServiceMethods, post: Post) {
   const configuration = getAPIConfig(true)
   const postApi = new PostsApi(configuration)
@@ -181,6 +203,12 @@ export async function createPost(toastHandler: ToastServiceMethods, post: Post) 
   }
 }
 
+/**
+ * Update a post with new data.
+ *
+ * @param toastHandler The handler to display error messages to
+ * @param post The post to update with new data
+ */
 export async function updatePost(toastHandler: ToastServiceMethods, post: Post) {
   const configuration = getAPIConfig(true)
   const postApi = new PostsApi(configuration)
@@ -232,6 +260,12 @@ export async function updatePost(toastHandler: ToastServiceMethods, post: Post) 
   }
 }
 
+/**
+ * Delete a post
+ *
+ * @param toastHandler The handler to display error messages to
+ * @param uuid The uuid of the post to delete
+ */
 export async function deletePost(toastHandler: ToastServiceMethods, uuid: string) {
   const configuration = getAPIConfig(true)
   const postApi = new PostsApi(configuration)

@@ -5,6 +5,12 @@ import { getAPIConfig } from '@/util/api'
 import { AxiosError, type AxiosResponse } from 'axios'
 import type { ToastServiceMethods } from 'primevue'
 
+/**
+ * Edit the users profile
+ *
+ * @param toastHandler The handler to display error messages to
+ * @param user The new user profile data.
+ */
 export async function editMeUserProfile(toastHandler: ToastServiceMethods, user: Profile) {
   const userMePutRequestBody: UserPutRequestBody = {
     username: user.username,
@@ -49,6 +55,11 @@ export async function editMeUserProfile(toastHandler: ToastServiceMethods, user:
   }
 }
 
+/**
+ * Fetch the current users profile
+ *
+ * @param toastHandler The handler to display error messages to
+ */
 export async function fetchMeUserProfile(
   toastHandler: ToastServiceMethods,
 ): Promise<Profile | null> {
@@ -98,6 +109,12 @@ export async function fetchMeUserProfile(
   return user
 }
 
+/**
+ * Fetch a users profile
+ *
+ * @param toastHandler The handler to display error messages to.
+ * @param username The username to fetch the profile of
+ */
 export async function fetchUserProfile(
   toastHandler: ToastServiceMethods,
   username: string,

@@ -41,7 +41,10 @@ function onClickDelete(uuid: string) {
         <div class="post-meta">
           <h2>
             created&nbsp;by
-            <RouterLink class="post-author-link" :to="'/profile/' + encodeURIComponent(post.authorUsername)">
+            <RouterLink
+              class="post-author-link"
+              :to="'/profile/' + encodeURIComponent(post.authorUsername)"
+            >
               <span class="post-author">{{ post.authorDisplayname.replace(' ', '&nbsp;') }}</span>
             </RouterLink>
             on&nbsp;<span class="post-created">{{
@@ -50,7 +53,10 @@ function onClickDelete(uuid: string) {
             ><!-- convert timestamp in seconds to milliseconds -->
           </h2>
           <div class="post-tags">
-            <RouterLink class="post-category-link" :to="'/category/' + encodeURIComponent(post.category.uuid)">
+            <RouterLink
+              class="post-category-link"
+              :to="'/category/' + encodeURIComponent(post.category.uuid)"
+            >
               <Tag class="post-category"
                 ><span :class="post.category.icon" />{{ post.category.name }}</Tag
               >

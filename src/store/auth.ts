@@ -116,8 +116,10 @@ export const authStore = defineStore('authStore', {
       const data = authData()
       localStorage.removeItem('accessToken')
       localStorage.removeItem('expiryTimestamp')
+      localStorage.removeItem('userName')
       data.accessToken = null
       data.expiryTimestamp = null
+      data.userName = null
     },
 
     getAccessToken(): string | null {

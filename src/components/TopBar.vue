@@ -56,11 +56,6 @@ const avatarMenu = ref(<MenuItem[]>[
     route: '/myprofile',
   },
   {
-    label: 'Settings',
-    icon: PrimeIcons.COG,
-    route: '/settings',
-  },
-  {
     label: 'Create Post',
     icon: PrimeIcons.PLUS,
     route: '/post/create',

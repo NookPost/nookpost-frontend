@@ -173,7 +173,7 @@ export async function createPost(toastHandler: ToastServiceMethods, post: Post) 
     }
   }
   if (response != undefined && response.status >= 200 && response.status <= 299) {
-    router.push('/post/' + response.data.uuid)
+    router.push('/post/' + encodeURIComponent(response.data.uuid ?? ""))
   } else {
     if (response != undefined && response.status == 404) {
       toastHandler.add({
@@ -230,7 +230,7 @@ export async function updatePost(toastHandler: ToastServiceMethods, post: Post) 
     }
   }
   if (response != undefined && response.status >= 200 && response.status <= 299) {
-    router.push('/post/' + post.uuid)
+    router.push('/post/' + encodeURIComponent(post.uuid ?? ""))
   } else {
     if (response != undefined && response.status == 404) {
       toastHandler.add({

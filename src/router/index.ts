@@ -91,11 +91,6 @@ const router = createRouter({
       name: 'search',
       component: () => import('../views/SearchResultsView.vue'),
     },
-    {
-      path: '/settings',
-      name: 'settings',
-      component: () => import('../views/UserSettingsView.vue'),
-    },
   ],
 })
 

@@ -70,7 +70,7 @@ function onSubmitPost(editedPost: Post) {
 </script>
 
 <template>
-  <div v-if="post && categories" class="post-detail-view">
+  <div v-if="post" class="post-detail-view">
     <!-- When edit is false, then display  -->
     <PostDetail
       v-model:data="post"

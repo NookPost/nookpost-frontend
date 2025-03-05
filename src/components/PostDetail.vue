@@ -86,7 +86,10 @@ const resolver = ({ values }: FormResolverOptions) => {
         <div class="post-meta detail">
           <h2>
             created&nbsp;by
-            <RouterLink class="post-author-link" :to="'/profile/' + data.authorUsername">
+            <RouterLink
+              class="post-author-link"
+              :to="'/profile/' + encodeURIComponent(data.authorUsername)"
+            >
               <span class="post-author">{{ data.authorDisplayname.replace(' ', '&nbsp;') }}</span>
             </RouterLink>
             on&nbsp;<span class="post-created">{{
@@ -95,7 +98,10 @@ const resolver = ({ values }: FormResolverOptions) => {
             ><!-- convert timestamp in seconds to milliseconds -->
           </h2>
           <div class="post-tags">
-            <RouterLink class="post-category-link" :to="'/category/' + data.category.uuid">
+            <RouterLink
+              class="post-category-link"
+              :to="'/category/' + encodeURIComponent(data.category.uuid)"
+            >
               <Tag class="post-category"
                 ><span :class="data.category.icon" />{{ data.category.name }}</Tag
               >
@@ -107,7 +113,7 @@ const resolver = ({ values }: FormResolverOptions) => {
             :icon="PrimeIcons.PENCIL"
             severity="secondary"
             as="router-link"
-            :to="'/post/edit/' + data.uuid"
+            :to="'/post/edit/' + encodeURIComponent(data.uuid)"
             v-tooltip.bottom="'Edit Post'"
           />
           <!-- Add Deletion Logic here -->

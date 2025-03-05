@@ -5,7 +5,7 @@ import { RouterLink } from 'vue-router'
 </script>
 
 <template>
-  <RouterLink :to="'/category/' + category.uuid">
+  <RouterLink :to="'/category/' + encodeURIComponent(category.uuid)">
     <div class="category frame">
       <h1>
         <div>

@@ -34,14 +34,17 @@ function onClickDelete(uuid: string) {
 <style scoped src="/src/assets/post.css" />
 
 <template>
-  <RouterLink :to="'/post/' + post.uuid" class="post-preview-router">
+  <RouterLink :to="'/post/' + encodeURIComponent(post.uuid)" class="post-preview-router">
     <div class="post-border frame preview">
       <h1 class="post-title">{{ post.title }}</h1>
       <div class="post-preview-meta-bar">
         <div class="post-meta">
           <h2>
             created&nbsp;by
-            <RouterLink class="post-author-link" :to="'/profile/' + post.authorUsername">
+            <RouterLink
+              class="post-author-link"
+              :to="'/profile/' + encodeURIComponent(post.authorUsername)"
+            >
               <span class="post-author">{{ post.authorDisplayname.replace(' ', '&nbsp;') }}</span>
             </RouterLink>
             on&nbsp;<span class="post-created">{{
@@ -50,7 +53,10 @@ function onClickDelete(uuid: string) {
             ><!-- convert timestamp in seconds to milliseconds -->
           </h2>
           <div class="post-tags">
-            <RouterLink class="post-category-link" :to="'/category/' + post.category.uuid">
+            <RouterLink
+              class="post-category-link"
+              :to="'/category/' + encodeURIComponent(post.category.uuid)"
+            >
               <Tag class="post-category"
                 ><span :class="post.category.icon" />{{ post.category.name }}</Tag
               >
@@ -62,7 +68,7 @@ function onClickDelete(uuid: string) {
             :icon="PrimeIcons.PENCIL"
             severity="secondary"
             as="router-link"
-            :to="'/post/edit/' + post.uuid"
+            :to="'/post/edit/' + encodeURIComponent(post.uuid)"
             v-tooltip.bottom="'Edit Post'"
           />
           <!-- Add Deletion Logic here -->

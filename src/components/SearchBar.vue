@@ -6,7 +6,7 @@ let searchstring: string | undefined
 const router = useRouter()
 function onFormSubmit(event: KeyboardEvent) {
   if (event.key === 'Enter' && searchstring != undefined) {
-    router.push('/search?q=' + encodeURI(searchstring))
+    router.push('/search?q=' + encodeURIComponent(searchstring))
   }
 }
 </script>

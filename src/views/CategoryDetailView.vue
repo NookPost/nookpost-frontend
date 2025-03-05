@@ -53,7 +53,9 @@ onMounted(() => {
     </div>
     <PostPreviewGrid v-bind:posts="posts" />
   </div>
-  <ProgressSpinner v-else />
+  <div v-else class="horizontal-center">
+    <ProgressSpinner />
+  </div>
 </template>
 
 <style src="/src/assets/category.css" />

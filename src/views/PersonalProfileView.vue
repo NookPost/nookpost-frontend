@@ -47,13 +47,14 @@ function onProfileEdit(user: Profile) {
 
 <template>
   <UserProfile
-    v-if="profile"
+    v-if="profile && posts"
     :profile="profile"
     :posts="posts"
     :editable="true"
     @update:profile="onProfileEdit"
   >
   </UserProfile>
-  <!--TODO: Center this!-->
-  <ProgressSpinner v-else />
+  <div v-else class="horizontal-center">
+    <ProgressSpinner />
+  </div>
 </template>

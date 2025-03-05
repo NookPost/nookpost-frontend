@@ -65,7 +65,7 @@ const avatarMenu = ref(<MenuItem[]>[
     icon: PrimeIcons.SIGN_OUT,
     command: () => {
       auth.logout()
-      router.replace("/")
+      router.replace('/')
       toast.add({
         severity: 'info',
         summary: 'Info',

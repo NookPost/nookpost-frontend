@@ -23,6 +23,7 @@ div.profile-border {
   line-height: 1;
   color: var(--color-heading);
   font-weight: bold;
+  width: 100%;
 }
 
 .post-displayname {
@@ -75,6 +76,7 @@ div.profile-border {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 10px;
 }
 
 .profile-metadata .p-button {

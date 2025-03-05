@@ -70,16 +70,17 @@ function onSubmitPost(editedPost: Post) {
 </script>
 
 <template>
-  <div class="post-detail-view">
+  <div v-if="post" class="post-detail-view">
     <!-- When edit is false, then display  -->
     <PostDetail
-      v-if="post"
       v-model:data="post"
       :edit="edit"
       v-on:update:post="onSubmitPost"
       :categories="categories.categories"
     />
-    <ProgressSpinner v-else />
+  </div>
+  <div v-else class="horizontal-center">
+    <ProgressSpinner />
   </div>
 </template>
 

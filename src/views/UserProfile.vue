@@ -42,7 +42,8 @@ onMounted(() => {
 </script>
 
 <template>
-  <UserProfile v-if="profile" :profile="profile" :posts="posts"></UserProfile>
-  <!--TODO: Center this!-->
-  <ProgressSpinner v-else />
+  <UserProfile v-if="profile && posts" :profile="profile" :posts="posts" />
+  <div v-else class="horizontal-center">
+    <ProgressSpinner />
+  </div>
 </template>

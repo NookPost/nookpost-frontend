@@ -20,6 +20,6 @@ onMounted(() => {
 
 <template>
   <main>
-    <PostPreviewGrid v-bind:posts="posts" />
+    <PostPreviewGrid :posts="posts" />
   </main>
 </template>

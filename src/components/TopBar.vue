@@ -86,8 +86,8 @@ const avatarMenu = ref(<MenuItem[]>[
 
     <template #item="{ item }">
       <span class="nav-item">
-        <RouterLink v-bind:to.="item.path">
-          <i v-if="item.icon" v-bind:class="item.icon"></i>
+        <RouterLink :to.="item.path">
+          <i v-if="item.icon" :class="item.icon"></i>
           {{ item.display_name }}
         </RouterLink>
       </span>
@@ -103,7 +103,7 @@ const avatarMenu = ref(<MenuItem[]>[
             <template #item="{ item, props }">
               <RouterLink
                 v-if="item.route"
-                v-bind:to.="item.route"
+                :to.="item.route"
                 class="p-tieredmenu-item-link"
                 tabindex="-1"
               >

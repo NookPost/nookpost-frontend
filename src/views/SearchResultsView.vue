@@ -34,6 +34,6 @@ function onLoaded() {
 
 <template>
   <div>
-    <PostPreviewGrid v-bind:posts="posts" />
+    <PostPreviewGrid :posts="posts" />
   </div>
 </template>

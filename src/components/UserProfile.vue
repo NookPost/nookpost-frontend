@@ -165,7 +165,7 @@ const resolver = ({ values }: FormResolverOptions) => {
       <template v-for="post in posts.slice(0, 3)" :key="post.uuid">
         <PostPreview :post="post"></PostPreview>
       </template>
-      <h3 class="no-posts-yet" v-if="posts.length == 0">This user has not shared any posts yet</h3>
+      <h1 class="no-posts-yet" v-if="posts.length == 0">This user has not shared any posts yet</h1>
     </div>
   </span>
 </template>

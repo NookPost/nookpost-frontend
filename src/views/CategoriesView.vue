@@ -13,7 +13,7 @@ onMounted(() => {
 <template>
   <h1 class="blue">Categories</h1>
   <div class="category-list">
-    <template v-for="category in categoryStore.categories" v-bind:key="category.uuid">
+    <template v-for="category in categoryStore.categories" :key="category.uuid">
       <CategoryItem :category="category"></CategoryItem>
     </template>
   </div>

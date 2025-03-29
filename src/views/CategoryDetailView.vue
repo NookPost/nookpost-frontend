@@ -51,14 +51,14 @@ onMounted(() => {
         {{ category.name }}
       </h1>
     </div>
-    <PostPreviewGrid v-bind:posts="posts" />
+    <PostPreviewGrid :posts="posts" />
   </div>
   <div v-else class="horizontal-center">
     <ProgressSpinner />
   </div>
 </template>
 
-<style src="/src/assets/category.css" />
+<style src="/src/assets/category.css" scoped />
 
 <style scoped>
 .category {

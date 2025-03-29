@@ -281,7 +281,6 @@ export async function deletePost(toastHandler: ToastServiceMethods, uuid: string
     }
   }
   if (response != undefined && response.status >= 200 && response.status <= 299) {
-    //TODO: Check if this is really the best thing to do...
     router.push('/')
   } else {
     if (response != undefined && response.status == 404) {

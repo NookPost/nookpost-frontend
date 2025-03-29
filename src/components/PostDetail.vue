@@ -25,7 +25,6 @@ const props = defineProps({
     required: false,
     default: false,
   },
-  // TODO: research wether this can be only required when edit is set to true
   categories: {
     type: Object as PropType<Category[]>,
     required: false,
@@ -127,12 +126,12 @@ const resolver = ({ values }: FormResolverOptions) => {
       </div>
       <Image
         v-if="data.bannerImageBase64 !== ''"
-        v-bind:src="data.bannerImageBase64"
+        :src="data.bannerImageBase64"
         alt="Image"
         class="post-banner"
         preview
       />
-      <div class="post-body">
+      <div class="post-body ql-editor">
         <p>
           <span v-html="data.body"></span>
         </p>
@@ -242,15 +241,3 @@ const resolver = ({ values }: FormResolverOptions) => {
     </Form>
   </div>
 </template>
-
-<style scoped>
-/* Fix Quill Editor Bullet */
-.edit:deep(.ql-editor ol li:before) {
-  content: none;
-}
-
-.edit:deep(.post-banner-preview *) {
-  width: 100%;
-  border-radius: 6px;
-}
-</style>

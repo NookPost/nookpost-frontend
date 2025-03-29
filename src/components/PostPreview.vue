@@ -6,6 +6,7 @@ import { RouterLink } from 'vue-router'
 import type { Post } from '@/types/post'
 import { authStore } from '@/store/auth'
 import { deletePost } from '@/api-calls/posts'
+import 'quill/dist/quill.core.css'
 
 const authData = authStore()
 
@@ -80,7 +81,7 @@ function onClickDelete(uuid: string) {
           />
         </div>
       </div>
-      <div class="post-body">
+      <div class="post-body ql-editor">
         <p>
           <span v-html="getShortenedBody(post.body)"></span>
           <span v-if="readMore" class="post-readmore"> [...]</span>

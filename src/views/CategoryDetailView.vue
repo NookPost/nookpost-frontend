@@ -58,7 +58,7 @@ onMounted(() => {
   </div>
 </template>
 
-<style src="/src/assets/category.css" />
+<style src="/src/assets/category.css" scoped />
 
 <style scoped>
 .category {

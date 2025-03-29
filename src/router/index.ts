@@ -4,11 +4,6 @@ const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      path: '/',
-      name: 'home',
-      component: () => import('../views/HomeView.vue'),
-    },
-    {
       path: '/about',
       name: 'about',
       // route level code-splitting
@@ -90,6 +85,13 @@ const router = createRouter({
       path: '/search',
       name: 'search',
       component: () => import('../views/SearchResultsView.vue'),
+    },
+    {
+      // redirect everything unknown to home
+      // needs to be on the end of the routes list
+      path: '/:pathMatch(.*)*',
+      name: 'home',
+      component: () => import('../views/HomeView.vue'),
     },
   ],
 })

@@ -25,7 +25,6 @@ const props = defineProps({
     required: false,
     default: false,
   },
-  // TODO: research wether this can be only required when edit is set to true
   categories: {
     type: Object as PropType<Category[]>,
     required: false,

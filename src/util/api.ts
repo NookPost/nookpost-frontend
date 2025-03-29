@@ -5,7 +5,7 @@ export function getAPIConfig(withAPIKey: boolean = true): Configuration {
   if (withAPIKey) {
     const authData = authStore()
     return new Configuration({
-      basePath: 'http://localhost:5001',
+      basePath: 'https://nookpost-dev.jkulzer.dev',
       baseOptions: {
         headers: {
           // override to undefined as by default it is set to 'OpenAPI-Generator/typescript-axios'
@@ -16,7 +16,7 @@ export function getAPIConfig(withAPIKey: boolean = true): Configuration {
     })
   } else {
     return new Configuration({
-      basePath: 'http://localhost:5001',
+      basePath: 'https://nookpost-dev.jkulzer.dev',
       baseOptions: {
         headers: {
           // override to undefined as by default it is set to 'OpenAPI-Generator/typescript-axios'

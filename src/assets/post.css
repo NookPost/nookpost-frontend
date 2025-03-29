@@ -131,3 +131,14 @@ form.edit {
 .post-category-link:hover > .p-tag {
   opacity: 0.8;
 }
+
+/* Fix Quill Editor Bullet */
+.edit:deep(.ql-editor ol li:before),
+.post-body.ql-editor:deep(ol li:before) {
+  content: none;
+}
+
+.edit:deep(.post-banner-preview *) {
+  width: 100%;
+  border-radius: 6px;
+}

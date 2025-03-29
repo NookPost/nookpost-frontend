@@ -241,15 +241,3 @@ const resolver = ({ values }: FormResolverOptions) => {
     </Form>
   </div>
 </template>
-
-<style scoped>
-/* Fix Quill Editor Bullet */
-.edit:deep(.ql-editor ol li:before) {
-  content: none;
-}
-
-.edit:deep(.post-banner-preview *) {
-  width: 100%;
-  border-radius: 6px;
-}
-</style>

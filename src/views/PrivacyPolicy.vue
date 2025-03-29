@@ -84,9 +84,7 @@
     <li>
       <p>
         <strong>Website</strong> refers to NookPost, accessible from
-        <a href="https://nookpost-dev.jkulzer.dev" rel="external nofollow noopener" target="_blank"
-          >https://nookpost-dev.jkulzer.dev</a
-        >
+        <RouterLink :to="'/'">https://nookpost-dev.jkulzer.dev</RouterLink>
       </p>
     </li>
     <li>

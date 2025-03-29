@@ -131,7 +131,7 @@ const resolver = ({ values }: FormResolverOptions) => {
         class="post-banner"
         preview
       />
-      <div class="post-body">
+      <div class="post-body ql-editor">
         <p>
           <span v-html="data.body"></span>
         </p>

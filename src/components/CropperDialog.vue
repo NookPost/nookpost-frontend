@@ -94,14 +94,9 @@ function onRemoveImage() {
   </span>
 </template>
 
-<style scoped>
-.cropper {
-  max-height: 300px;
-}
-</style>
-
 <style scoped src="/src/assets/crop-dialog.css" />
 
+<!-- Dialog can not be scoped -->
 <style>
 .crop-dialog {
   width: 90vw;

@@ -28,8 +28,6 @@ export default {
 }
 </script>
 
-<style src="/src/assets/frame.css" />
-
 <style src="/src/assets/category.css" scoped />
 
 <style scoped>
